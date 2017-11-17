@@ -214,6 +214,48 @@ class CatalogController < ApplicationController
     config.autocomplete_path = 'suggest'
  # end
 
+  def show
+    @response, @document = search_service.fetch URI.unescape(params[:id])
+
+    # if we are showing a volume, fetch list of all works in the volume
+    if @document['cat_ssi'].starts_with? 'volume'
+      (@work_resp, @work_docs) =  search_service.search_results() do |builder|
+        if respond_to? (:blacklight_config)
+          builder = blacklight_config.search_builder_class.new([:default_solr_parameters,:part_of_volume_search],builder)
+          builder = builder.with({volumeid: @document['volume_id_ssi']})
+          builder
+        end
+      end
+    end
+
+    #if we are showing a period, fetch a list of authors
+    if @document['cat_ssi'].starts_with? 'period'
+      (@auth_resp, @auth_docs) = search_results({}) do |builder|
+        if respond_to? (:blacklight_config)
+          builder = blacklight_config.search_builder_class.new([:default_solr_parameters,:build_authors_in_period_search],builder)
+          builder = builder.with({perioid: @document['id']})
+          builder
+        end
+      end
+    end
+
+    respond_to do |format|
+      format.html { setup_next_and_previous_documents }
+      format.json { render json: { response: { document: @document } } }
+      format.pdf { send_pdf(@document, 'text') }
+      format.xml do
+        if @document['cat_ssi'] == 'volume'
+          data = FileServer.get_file("/texts/#{@document['volume_id_ssi']}.xml")
+          send_data data, type: 'application/xml'
+        end
+      end
+      additional_export_formats(@document, format)
+    end
+  end
+
+
+
+
   def is_text_search?
     ['authors','periods',"allworks"].exclude? action_name
   end
@@ -237,4 +279,5 @@ class CatalogController < ApplicationController
   def render_citation_action?
     self.class == CatalogController
   end
+
 end
