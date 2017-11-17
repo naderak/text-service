@@ -1,3 +1,13 @@
+body {
+  color: #000;
+  font-family: 'Noto Serif', serif;
+  font-weight: 400;
+  background-color: #fff;
+  background-image: url(asset-path('lion.png'));
+  background-position: center 350px;
+  background-repeat: repeat-x;
+  background-attachment: fixed;
+  -webkit-font-smoothing: antialiased;
 a, a:hover, a:visited, a:active, a:focus{
   outline: 0;
   text-decoration: none;
