@@ -1,0 +1,6 @@
+// Adding adl spesific variables before bootstrap
+@import "adl/variables";
+@import "bootstrap";
+// Adding adl specific styling files
+@import "adl/adl";
+@import 'blacklight/blacklight';
