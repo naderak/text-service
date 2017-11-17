@@ -1,0 +1,73 @@
+<div class="homeSearch box-gradient-blue fixed-top-second">
+  <div class="search-bg">
+    <div class="container">
+      <div class="row text-center">
+        <h2>
+          Velkommen til Arkiv for Dansk Litteratur
+        </h2>
+        <h3>
+          Her kan du læse og søge i værker fra den danske litteraturhistorie fra middelalderen til det 20. årh.
+        </h3>
+        <%#= render 'simple_search_form' %>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container frontpage-content">
+  <div class="row">
+
+      <div class="col-md-4">
+        <a href="<%#= authors_path %>">
+          <div class="link-block-content box-shadow">
+            <div class="image image1 img-thumbnail">
+            </div>
+            <div class="text">
+              <h3>
+                <%#= link_to  "Forfattere", authors_path, :class => "btn btn-link btn-lg"  %>
+              </h3>
+              <p>Find en forfatter i den alfabetiske oversigt og få adgang til forfatterens værker og en
+                introduktion.</p>
+            </div>
+          </div>
+        </a>
+      </div>
+
+      <div class="col-md-4 frontpage-content-box">
+        <a href="<%#= "/?q=&search_field=Alt&sort=work_title_ssi+asc" %>">
+
+          <div class="link-block-content box-shadow">
+            <div class="image3 image img-thumbnail">
+            </div>
+            <div class="text">
+              <h3>
+                <%#= link_to  "Titler", "/?q=&search_field=Alt&sort=work_title_ssi+asc", :class => "btn btn-link btn-lg"  %>
+              </h3>
+              <p>Få overblik over alle værktitler i ADL.</p>
+            </div>
+          </div>
+        </a>
+
+      </div>
+
+      <div class="col-md-4">
+        <a href="<%#= periods_path %>">
+
+          <div class="link-block-content box-shadow">
+            <div class="image2 image img-thumbnail">
+            </div>
+            <div class="text">
+              <h3>
+                <%#= link_to  "Perioder", periods_path, :class => "btn btn-link btn-lg"  %>
+              </h3>
+              <p>Læs om en bestemt periode i den danske litteraturhistorie.</p>
+            </div>
+          </div>
+        </a>
+      </div>
+
+  </div>
+</div>
+
+
+
+
