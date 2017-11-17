@@ -58,6 +58,8 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'jettywrapper'
 gem 'devise'
 gem 'devise-guests'
+# enable link to static pages
+gem 'high_voltage', '~> 2.3.0'
 group :development, :test do
   gem 'solr_wrapper', '>= 0.3'
 end

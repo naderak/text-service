@@ -1,6 +1,6 @@
-// Adding adl spesific variables before bootstrap
-@import "adl/variables";
+// Adding textservice spesific variables before bootstrap
+@import "textservice/variables";
 @import "bootstrap";
-// Adding adl specific styling files
-@import "adl/adl";
+// Adding textservice specific styling files
+@import "textservice/textservice";
 @import 'blacklight/blacklight';

@@ -1,0 +1,19 @@
+.image1 {
+  background: url(asset-path('author.jpg')) no-repeat;
+}
+
+.image2 {
+  background: url(asset-path('time-period.jpg')) no-repeat;
+}
+
+.image3 {
+  background: url(asset-path('book-title.jpg')) no-repeat;
+}
+
+.image {
+  background-position: top;
+  height: 169px;
+  width: 100%;
+  padding: 20px 15px;
+  border-radius: 25px 25px 0 0;
+}
