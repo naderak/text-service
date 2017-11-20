@@ -1,4 +1,20 @@
 $theme-colors: (
         "primary": #326100,
+
 );
 
+$beige : #f2eee2;
+$gray-600: #333 !default;
+
+//text service specific
+@import url(http://fonts.googleapis.com/css?family=Roboto|Roboto+Condensed|Roboto+Slab);
+@import url(http://fonts.googleapis.com/css?family=Noto+Serif:400,700,400italic,700italic);
+@import url(http://fonts.googleapis.com/css?family=PT+Sans);
+
+
+$font-family-sans-serif:  'Roboto', Helvetica, Arial, sans-serif !default;
+$font-family-serif:       'Roboto Slab', Times New Roman, Times, serif !default;
+//** Default monospace fonts for `<code>`, `<kbd>`, and `<pre>`.
+$font-family-monospace:   Menlo, Monaco, Consolas, "Courier New", monospace !default;
+$font-family-base:        $font-family-sans-serif !default;
+$font-family-nav:         'Noto Serif', serif;
