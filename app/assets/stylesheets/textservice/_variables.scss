@@ -1,10 +1,13 @@
 $theme-colors: (
         "primary": #326100,
+        "default": #f2eee2,
+        "danger": #ff4136,
+        "success": #f2eee2
 
 );
 
-$beige : #f2eee2;
-$gray-600: #333 !default;
+$gray-600: #000 !default;
+
 
 //text service specific
 @import url(http://fonts.googleapis.com/css?family=Roboto|Roboto+Condensed|Roboto+Slab);
