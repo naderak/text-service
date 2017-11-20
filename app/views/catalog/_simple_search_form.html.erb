@@ -1,0 +1,35 @@
+<%= form_tag search_action_url, :method => :get, :class => '' do %>
+    <%= render_hash_as_hidden_fields(search_state.params_for_search.except(:q, :search_field, :qt, :page, :utf8)) %>
+    <%= hidden_field_tag :search_field, "Alt" %>
+
+    <div class="input-group input-group-lg search-form-with-tooltips">
+      <label for="q" class="sr-only"><%= t('blacklight.search.form.search.label') %></label>
+      <%= text_field_tag :q, params[:q], :placeholder => t('blacklight.search.form.search.placeholder'), :class => "search_q q form-control", :id => "q", :autofocus => should_autofocus_on_search_box? %>
+
+      <span class="input-group-btn ">
+                <button type="submit" class="btn btn-primary btn-lg" id="search">
+                  <span class="submit-search-text"><%= t('blacklight.search.form.submit') %></span>
+                  <span class="glyphicon glyphicon-search"></span>
+                </button>
+      </span>
+
+      <span class="input-group-btn">
+        <span class="search-tooltip ">?
+         <span class="tooltiptext">
+            <div class="panel panel-default">
+              <div class="panel-heading">Søgetips</div>
+              <div class="panel-body">
+                <ul class="advanced-help">
+                  <li>Du kan bruge "OR", "AND" og "NOT" til kombinerede søgninger. </li>
+                  <li>Bemærk at systemet ikke understøtter wildcards. Trunkering udføres automatisk af systemet.</li>
+                  <li>Hvis du søger på flere ord, kan du sætte "+" før et ord hvis resultatet <i>skal</i> indeholde dette ord, og "-" foran et ord hvis resultatet ikke må indeholde det pågældende ord.</li>
+                </ul>
+              </div>
+            </div>
+         </span>
+        </span>
+      </span>
+
+    </div>
+
+<% end %>
