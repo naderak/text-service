@@ -44,4 +44,29 @@ module ApplicationHelper
     result
   end
 
+  def translate_model_names(name)
+    I18n.t("models.#{name}")
+  end
+
+  # Generic method to create glyphicon icons
+  # supply only the last component of the icon name
+  # e.g. 'off', 'cog' etc
+  def bootstrap_glyphicon(icon, classes = '')
+    content_tag(:span, nil, class: "glyphicon glyphicon-#{icon} #{classes}").html_safe
+  end
+
+  private
+
+  def get_author_name repository, id
+    begin
+      solr_docs = repository.find(id).documents
+      if solr_docs.size > 0
+        solr_docs.first['work_title_tesim'].join
+      else
+        id
+      end
+    rescue Exception => e
+      id
+    end
+  end
 end
