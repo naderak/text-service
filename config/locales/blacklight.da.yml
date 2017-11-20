@@ -285,16 +285,20 @@ da:
 
   author:
     author_potrait_written_by: 'Forfatterportræt skrevet af'
-  boxes:
-    authors:
-      title: 'Forfattere'
-      link: 'authors_path'
-      description: 'Find en forfatter i den alfabetiske oversigt og få adgang til forfatterens værker og en introduktion.'
-    titles:
-      title: 'Titler'
-      link:
-      description: 'Få overblik over alle værktitler i ADL.'
-    periods:
-      title: 'Perioder'
-      link:
-      description: 'Læs om en bestemt periode i den danske litteraturhistorie.'
+  home:
+    boxes:
+      authors:
+        title: 'Forfattere'
+        link: 'authors_path'
+        description: 'Find en forfatter i den alfabetiske oversigt og få adgang til forfatterens værker og en introduktion.'
+      titles:
+        title: 'Titler'
+        link:
+        description: 'Få overblik over alle værktitler i ADL.'
+      periods:
+        title: 'Perioder'
+        link:
+        description: 'Læs om en bestemt periode i den danske litteraturhistorie.'
+    bluebar:
+      welcome: 'Velkommen til Arkiv for Dansk Litteratur'
+      description: 'Her kan du læse og søge i værker fra den danske litteraturhistorie fra middelalderen til det 20. årh.'
