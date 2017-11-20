@@ -219,7 +219,7 @@ da:
       documents:
         counter: '%{counter}'
       facets:
-        title: '' #'Afgræns din søgning'
+        title: 'Afgræns din søgning'
         refine: 'Afgræns til'
         facet_fulltext: 'Fuldtekst'
         facet_title: 'Titel'
