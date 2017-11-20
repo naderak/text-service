@@ -72,9 +72,6 @@ class CatalogController < ApplicationController
 
     config.show.document_actions.citation.if = :render_citation_action?
 
-    end
-
-
     # If there are more than this many search results, no spelling ("did you
     # mean") suggestion is offered.
     config.spell_max = 5
@@ -82,7 +79,15 @@ class CatalogController < ApplicationController
     # Configuration for autocomplete suggestor
     config.autocomplete_enabled = true
     config.autocomplete_path = 'suggest'
- # end
+
+    def periods
+      (@response, @document_list) = search_results(params) do |builder|
+        search_builder_class.new([:default_solr_parameters,:build_all_periods_search],builder)
+      end
+      render "index"
+    end
+
+  end
 
   def is_text_search?
     ['authors','periods',"allworks"].exclude? action_name

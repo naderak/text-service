@@ -2,11 +2,12 @@
 class SearchBuilder < Blacklight::SearchBuilder
   include Blacklight::Solr::SearchBuilderBehavior
 
-  ##
-  # @example Adding a new step to the processor chain
-  #   self.default_processor_chain += [:add_custom_data_to_query]
-  #
-  #   def add_custom_data_to_query(solr_parameters)
-  #     solr_parameters[:custom] = blacklight_params[:user_value]
-  #   end
+  def build_all_periods_search solr_params = {}
+    solr_params[:fq] = []
+    solr_params[:fq] << 'cat_ssi:period AND type_ssi:work'
+    solr_params[:sort] = []
+    solr_params[:sort] << 'sort_title_ssi asc'
+    solr_params[:rows] = 10000
+  end
+
 end
