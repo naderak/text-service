@@ -8,4 +8,15 @@ body {
   background-repeat: repeat-x;
   background-attachment: fixed;
   -webkit-font-smoothing: antialiased;
+  a, a:hover, a:visited, a:active, a:focus {
+    outline: 0;
+    text-decoration: none;
+  }
+}
+.box-shadow{
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1), 0 3px 10px 0 rgba(0, 0, 0, 0.09);
+}
+.navbar-brand {
+  font-weight: 500;
+  font-size: 18px;
 }
