@@ -137,6 +137,110 @@ class CatalogController < ApplicationController
  #N   config.add_show_field 'lc_callnum_display', label: 'Call number'
  #N   config.add_show_field 'isbn_t', label: 'ISBN'
 
+
+    # Overwriting this method to enable pdf generation using WickedPDF
+    # Unfortunately the additional_export_formats method was quite difficult
+    # to use for this use case.
+
+    def show
+      @response, @document = search_service.fetch URI.unescape(params[:id])
+
+      # if we are showing a volume, fetch list of all works in the volume
+      if @document['cat_ssi'].starts_with? 'volume'
+        (@work_resp, @work_docs) =  search_service.search_results() do |builder|
+          if respond_to? (:blacklight_config)
+            builder = blacklight_config.search_builder_class.new([:default_solr_parameters,:part_of_volume_search],builder)
+            builder = builder.with({volumeid: @document['volume_id_ssi']})
+            builder
+          end
+        end
+      end
+
+      #if we are showing a period, fetch a list of authors
+      if @document['cat_ssi'].starts_with? 'period'
+        (@auth_resp, @auth_docs) = search_service.search_results() do |builder|
+          if respond_to? (:blacklight_config)
+            builder = blacklight_config.search_builder_class.new([:default_solr_parameters,:build_authors_in_period_search],builder)
+            builder = builder.with({perioid: @document['id']})
+            builder
+          end
+        end
+      end
+
+      respond_to do |format|
+        format.html { setup_next_and_previous_documents }
+        format.json { render json: { response: { document: @document } } }
+        format.pdf { send_pdf(@document, 'text') }
+        format.xml do
+          if @document['cat_ssi'] == 'volume'
+            data = FileServer.get_file("/texts/#{@document['volume_id_ssi']}.xml")
+            send_data data, type: 'application/xml'
+          end
+        end
+        additional_export_formats(@document, format)
+      end
+    end
+
+    def facsimile
+      @response, @document = search_service.fetch URI.unescape(params[:id])
+      respond_to do |format|
+        format.html { setup_next_and_previous_documents }
+        format.pdf { send_pdf(@document, 'image') }
+      end
+    end
+
+    def periods
+      (@response, @document_list) = search_service.search_results() do |builder|
+        search_builder_class.new([:default_solr_parameters,:build_all_periods_search],builder)
+      end
+      render "index"
+    end
+
+    def authors
+      (@response, @document_list) = search_service.search_results() do |builder|
+        search_builder_class.new([:default_solr_parameters,:build_all_authors_search],builder)
+      end
+      render "index"
+    end
+
+    def allworks
+      (@response, @document_list) = search_service.search_results()
+      render "index"
+    end
+
+
+    # common method for rendering pdfs based on wicked_pdf
+    # cache files in the public folder based on their id
+    # perhaps using the Solr document modified field
+    def send_pdf(document, type)
+      name = document['work_title_tesim'].first.strip rescue document.id
+      path = Rails.root.join('public', 'pdfs', "#{document.id.gsub('/', '_')}_#{type}.pdf")
+      solr_timestamp = Time.parse(document['timestamp'])
+      file_mtime = File.mtime(path) if File.exist? path.to_s
+      # display the cached pdf if solr doc timestamp is older than the file's modified date
+      if File.exist? path.to_s and ((type == 'text' and solr_timestamp < file_mtime) or type == 'image')
+        send_file path.to_s, type: 'application/pdf', disposition: :inline, filename: name+".pdf"
+      else
+        render pdf: name,
+               footer: {right: '[page] af [topage] sider'},
+               save_to_file: path,
+               header: {html: {template: 'shared/pdf_header.pdf.erb'},
+                        spacing: 5},
+               margin: {top: 15, # default 10 (mm)
+                        bottom: 15},
+               cover:  Rails.root.join('app', 'views', 'shared', 'pdf_cover.html')
+        # If dynamic information is needed, it can come either from the snippet_server or by creating a string
+        # here as:
+        # cover:  'Hentet fra ADL. Forfatter: ' + document['author_name_ssi']
+      end
+    end
+
+    # we do not want to start a new search_session for 'leaf' searches
+    # to avoid messing up previous and next links
+    def start_new_search_session?
+      action_name == "index" && params['search_field'] != 'leaf'
+    end
+
     # "fielded" search configuration. Used by pulldown among other places.
     # For supported keys in hash, see rdoc for Blacklight::SearchFields
     #
@@ -154,6 +258,80 @@ class CatalogController < ApplicationController
     # This one uses all the defaults set by the solr request handler. Which
     # solr request handler? The one set in config[:default_solr_parameters][:qt],
     # since we aren't specifying it otherwise.
+    config.add_search_field('Alt',label: I18n.t('blacklight.search.form.search.all_filters')) do |field|
+      field.solr_parameters = {
+          :fq => ['application_ssim:ADL','cat_ssi:work','type_ssi:trunk']
+      }
+      field.solr_local_parameters = {
+          :qf => 'author_name_tesim^5 work_title_tesim^5 text_tesim'
+      }
+    end
+
+    config.add_search_field('title', label: I18n.t('blacklight.search.form.search.title')) do |field|
+      # solr_parameters hash are sent to Solr as ordinary url query params.
+      field.solr_parameters = {
+          :fq => ['application_ssim:ADL','cat_ssi:work','type_ssi:trunk'],
+          :'spellcheck.dictionary' => 'title'
+      }
+      # :solr_local_parameters will be sent using Solr LocalParams
+      # syntax, as eg {! qf=$title_qf }. This is neccesary to use
+      # Solr parameter de-referencing like $title_qf.
+      # See: http://wiki.apache.org/solr/LocalParams
+      field.solr_local_parameters = {
+          :qf => 'work_title_tesim',
+      }
+    end
+
+    config.add_search_field('author', label: I18n.t('blacklight.search.form.search.author')) do |field|
+      field.solr_parameters = {
+          :fq => ['application_ssim:ADL','cat_ssi:work','type_ssi:trunk'],
+          :'spellcheck.dictionary' => 'author'
+      }
+      field.solr_local_parameters = {
+          :qf => 'author_name_tesim',
+      }
+    end
+
+    config.add_search_field('leaf') do |field|
+      field.include_in_simple_select = false
+      field.solr_parameters = { :fq => 'type_ssi:leaf' }
+      field.solr_local_parameters = {
+          :qf => 'text_tesim',
+          :pf => 'text_tesim',
+          :hl => 'true',
+      }
+    end
+
+    config.add_search_field('oai_time') do |field|
+      field.include_in_simple_select = false
+      field.solr_parameters = {
+          :fq => 'cat_ssi:work'
+      }
+      field.solr_local_parameters = {
+          :fl => 'timestamp'
+      }
+    end
+
+
+    config.add_search_field('oai_search') do |field|
+      field.include_in_simple_select = false
+      field.solr_parameters = {
+          :fq => 'cat_ssi:work'
+      }
+    end
+
+    # "sort results by" select (pulldown)
+    # label in pulldown is followed by the name of the SOLR field to sort by and
+    # whether the sort is ascending or descending (it must be asc or desc
+    # except in the relevancy case).
+    config.add_sort_field 'score desc', :label => (I18n.t'blacklight.search.form.sort.relevance')
+    config.add_sort_field 'author_name_ssi asc', :label => (I18n.t'blacklight.search.form.sort.author')
+    config.add_sort_field 'work_title_ssi asc', :label => 'Titel'
+
+    config.spell_max = 5
+
+
+
 
  #N   config.add_search_field 'all_fields', label: 'All Fields'
 
@@ -174,7 +352,6 @@ class CatalogController < ApplicationController
 #N        qf: '$title_qf',
 #N        pf: '$title_pf'
 #N      }
-    end
 
  #N   config.add_search_field('author') do |field|
  #N     field.solr_parameters = { :'spellcheck.dictionary' => 'author' }
@@ -212,7 +389,41 @@ class CatalogController < ApplicationController
     # Configuration for autocomplete suggestor
     config.autocomplete_enabled = true
     config.autocomplete_path = 'suggest'
- # end
+ end
+
+  def oai
+    options = params.delete_if { |k,v| %w{controller action}.include?(k) }
+    p = oai_provider
+    render :text => p.process_request(options), :content_type => 'text/xml'
+  end
+
+  def oai_provider
+    @oai_provider ||= ::AdlDocumentProvider.new(self)
+  end
+
+
+ # Email Action (this will render the appropriate view on GET requests and process the form and send the email on POST requests)
+  def email_action documents
+    report = params[:report].nil? ? "" : params[:report]
+    report +=  I18n.t('blacklight.email.text.from', value: current_user.email) + "\n" unless current_user.nil?
+    mail = RecordMailer.email_record(documents, {:to => params[:to], :message => report+"\n\n"+params[:message]}, url_options)
+    if mail.respond_to? :deliver_now
+      mail.deliver_now
+    else
+      mail.deliver
+    end
+  end
+
+
+  def feedback
+    @response, @document = search_service.fetch URI.unescape(params[:id])
+    @report = ""
+    @report +=  I18n.t('blacklight.email.text.from', value: current_user.email) + "\n" unless current_user.nil?
+    @report +=  I18n.t('blacklight.email.text.url', url: @document['url_ssi']) + "\n" unless @document['url_ssi'].blank?
+    @report += I18n.t('blacklight.email.text.author', value: @document['author_name'].first) + "\n" unless @document['author_name'].blank?
+    @report += I18n.t('blacklight.email.text.title', value: @document['work_title_tesim'].first.strip)+ "\n" unless @document['work_title_tesim'].blank?
+    render layout: nil
+  end
 
   def is_text_search?
     ['authors','periods',"allworks"].exclude? action_name
@@ -237,4 +448,5 @@ class CatalogController < ApplicationController
   def render_citation_action?
     self.class == CatalogController
   end
+
 end
