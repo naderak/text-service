@@ -299,3 +299,6 @@ da:
         title: 'Perioder'
         link:
         description: 'Læs om en bestemt periode i den danske litteraturhistorie.'
+    bluebar:
+      welcome: 'Velkommen til Arkiv for Dansk Litteratur'
+      description: 'Her kan du læse og søge i værker fra den danske litteraturhistorie fra middelalderen til det 20. årh.'
