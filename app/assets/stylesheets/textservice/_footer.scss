@@ -1,14 +1,16 @@
 
-footer.pageFooter{
+footer.pageFooter {
 
   background-color: "#FFFFFF";
-  /*font-family: $font-family-nav;
+  /*font-family: $font-family-nav;*/
   padding: $grid-gutter-width 0;
-  h2{
+  h2 {
     @extend .h3;
   }
-  h4{
+  h4 {
     @extend .h5;
 
-  }*/
+  }
+  padding: 0 0 10px 0 !important;
+
 }
