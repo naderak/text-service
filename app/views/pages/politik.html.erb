@@ -1,5 +1,6 @@
 <div id="content">
     <div id="politik" class="container">
-      <%= raw KbCookie::Cookie.writecookie %>
+      <%# TODO: Add the locale using configuration rather than manually sending a parameter%>
+      <%= raw KbCookie::Cookie.writecookie('da') %>
     </div>
 </div>

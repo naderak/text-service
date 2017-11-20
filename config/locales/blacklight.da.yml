@@ -305,3 +305,8 @@ da:
     bluebar:
       welcome: 'Velkommen til Arkiv for Dansk Litteratur'
       description: 'Her kan du læse og søge i værker fra den danske litteraturhistorie fra middelalderen til det 20. årh.'
+  footer:
+      dsl: 'Det Danske Sprog- og Litteraturselskab'
+      kb: 'Det Kongelige Bibliotek'
+      contact_us: 'Kontakt os'
+      about_ADL: 'Om ADL'
