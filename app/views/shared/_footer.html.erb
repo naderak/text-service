@@ -1,26 +1,28 @@
-
 <footer class="pageFooter">
-
-  <div class="container">
-
-    <div class="row">
-
-      <div class="row text-center">
-        <%= link_to 'Om ADL', page_path('about') , class:'' %>
+  <div class="row divider-space">
+    <div class="col-md-12">
+      <div class="divider clearfix">
+        <div class="left"></div>
+        <div class="midt"></div>
+        <div class="right"></div>
       </div>
-
-      <div class="row text-center footer">
-        <span>&copy; </span>
-        <a href="http://www.dsl.dk" target="_blank">Det Danske Sprog- og Litteraturselskab</a>
-        <span> & </span>
-        <a href="http://www.kb.dk" target="_blank">Det Kongelige Bibliotek</a>
-        <span> * </span>
-        <%= link_to 'Cookie- og Privatlivspolitik', page_path('politik'), class:'' %>
-        <span> * </span>
-        <a href="mailto:sekretariat@dsl.dk">Kontakt os</a>
-      </div>
-
     </div>
   </div>
-
+  <div class="container">
+    <div>
+      <div class="text-center">
+        <%= link_to t('footer.about_ADL'), page_path('about'), class: '' %>
+      </div>
+      <div class="text-center footer">
+        <span>&copy; </span>
+        <a href="http://www.dsl.dk" target="_blank"><%= t('footer.dsl')%></a>
+        <span> & </span>
+        <a href="http://www.kb.dk" target="_blank"><%= t('footer.kb')%></a>
+        <span> * </span>
+        <%= link_to 'Cookie- og Privatlivspolitik', page_path('politik'), class: '' %>
+        <span> * </span>
+        <a href="mailto:sekretariat@dsl.dk"><%= t('footer.contact_us')%></a>
+      </div>
+    </div>
+  </div>
 </footer>

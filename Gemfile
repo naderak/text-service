@@ -59,7 +59,7 @@ gem 'jettywrapper'
 gem 'devise'
 gem 'devise-guests'
 # enable link to static pages
-gem 'high_voltage', '~> 2.3.0'
+gem 'high_voltage', '~> 3.0.0'
 group :development, :test do
   gem 'solr_wrapper', '>= 0.3'
 end

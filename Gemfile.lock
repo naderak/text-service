@@ -107,7 +107,7 @@ GEM
     ffi (1.9.18)
     globalid (0.4.1)
       activesupport (>= 4.2.0)
-    high_voltage (2.3.0)
+    high_voltage (3.0.0)
     i18n (0.9.1)
       concurrent-ruby (~> 1.0)
     jbuilder (2.7.0)
@@ -274,7 +274,7 @@ DEPENDENCIES
   coffee-rails (~> 4.2)
   devise
   devise-guests
-  high_voltage (~> 2.3.0)
+  high_voltage (~> 3.0.0)
   jbuilder (~> 2.5)
   jettywrapper
   jquery-rails
