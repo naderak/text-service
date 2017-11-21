@@ -1,11 +1,14 @@
 $green: #326100;
 $beige: #dcd2ab;
-
+$brown: #422b06;
 $primary: $green;
 $secondary: $beige;
+$third-color: $brown;
 
 $gray-600: #000 !default;
 
+$link-hover-color: $brown;
+$link-hover-decoration:none;
 
 //text service specific
 @import url(http://fonts.googleapis.com/css?family=Roboto|Roboto+Condensed|Roboto+Slab);
