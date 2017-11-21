@@ -1,0 +1,36 @@
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        //dkBreve.onDocumentReady();
+    });
+</script>
+
+
+
+<% has_text = document['has_text_ssi'].present? && document['has_text_ssi'] == 'yes' %>
+<% has_facs = document['has_facs_ssi'].present? && document['has_facs_ssi'] == 'yes' %>
+
+
+<div class="row document">
+  <div class="col.sm-12">
+    <%= render 'applied_edition' %>
+  </div>
+</div>
+
+<% if has_text && has_facs %>
+    <div class="row">
+      <div class="col-sm-6"><%= render 'text' %></div>
+      <div class="col-sm-6"><%= render 'facsimile' %></div>
+    </div>
+<% elsif has_text %>
+    <div class="row">
+      <div class="col-sm-12"><%= render 'text' %></div>
+    </div>
+<% elsif has_facs %>
+    <div class="row">
+      <div class="col-sm-12"><%= render 'text' %></div>
+    </div>
+<% end %>
+</div>
+
