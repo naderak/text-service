@@ -24,7 +24,7 @@
     padding: 0 15px;
     margin-top: 10px;
     margin-bottom: 32px;
-    color: #666;
+    color: $gray-700;
     font-size: 14px;
     line-height: 20px;
     h3 {
@@ -37,7 +37,7 @@
       border: 0;
     }
     h3:hover{
-      color: #422b06 !important;
+      color: $third-color !important;
       text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
       text-decoration: none;
     }
@@ -45,7 +45,7 @@
 
   .row > div > a > div {
     height: 330px;
-    border: thin solid #f2eee2;
+    border: thin solid $gray-200;
     margin: 1em;
     border-radius: 25px;
     background-color: rgba(242, 238, 226, 0.5);
@@ -72,4 +72,7 @@
     width: 80%;
     margin: auto;
   }
+}
+#home-search input{
+  margin-right: 15px;
 }
