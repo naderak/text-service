@@ -58,6 +58,7 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'jettywrapper'
 gem 'devise'
 gem 'devise-guests'
+gem 'devise_cas_authenticatable'
 # enable link to static pages
 gem 'high_voltage', '~> 3.0.0'
 group :development, :test do

@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   
+  devise_for :users
     concern :searchable, Blacklight::Routes::Searchable.new
 
   resource :catalog, only: [:index], as: 'catalog', path: '/catalog', controller: 'catalog' do
