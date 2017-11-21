@@ -2,7 +2,7 @@
 
 <script type="text/javascript">
     $(document).ready(function () {
-        //dkBreve.onDocumentReady();
+        dkBreve.onDocumentReady();
     });
 </script>
 
@@ -12,7 +12,7 @@
 <% has_facs = document['has_facs_ssi'].present? && document['has_facs_ssi'] == 'yes' %>
 
 
-<div class="row document">
+<div class="row">
   <div class="col.sm-12">
     <%= render 'applied_edition' %>
   </div>
