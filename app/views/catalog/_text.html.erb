@@ -9,6 +9,8 @@
        query = query_params[:q] if  query_params.present?
        query = query.gsub!(/^\"|\"?$/, '') if query.present? %>
 <% end %>
+<article class="ocr">
 <%= FileServer.render_snippet(@document['volume_id_ssi'],
                               {c: 'texts', xml_id: @document['xmlid_ssi'],
                                q: query}) %>
+</article>
