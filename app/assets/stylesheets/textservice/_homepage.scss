@@ -1,12 +1,12 @@
-.image1 {
+.authors {
   background: url(asset-path('author.jpg')) no-repeat;
 }
 
-.image2 {
+.titles {
   background: url(asset-path('time-period.jpg')) no-repeat;
 }
 
-.image3 {
+.periods {
   background: url(asset-path('book-title.jpg')) no-repeat;
 }
 
@@ -16,4 +16,60 @@
   width: 100%;
   padding: 20px 15px;
   border-radius: 25px 25px 0 0;
+}
+
+.frontpage-content {
+
+  .text {
+    padding: 0 15px;
+    margin-top: 10px;
+    margin-bottom: 32px;
+    color: #666;
+    font-size: 14px;
+    line-height: 20px;
+    h3 {
+      color: #326100;
+      font-size: 18px;
+      font-weight: 400;
+      line-height: 10px;
+      margin: 5px 0;
+      padding: 0;
+      border: 0;
+    }
+    h3:hover{
+      color: #422b06 !important;
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+      text-decoration: none;
+    }
+  }
+
+  .row > div > a > div {
+    height: 330px;
+    border: thin solid #f2eee2;
+    margin: 1em;
+    border-radius: 25px;
+    background-color: rgba(242, 238, 226, 0.5);
+  }
+}
+
+.homeSearch {
+  height: 260px;
+  color: #dcd2ab;
+  font-size: 25px;
+  font-weight: normal;
+
+  h2 {
+    padding-top: 25px;
+    width: 100%;
+  }
+  h3 {
+    color: #fff;
+    font-size: 18px;
+    width: 100%;
+  }
+  form {
+    padding-top: 30px;
+    width: 80%;
+    margin: auto;
+  }
 }

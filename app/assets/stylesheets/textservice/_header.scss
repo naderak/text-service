@@ -2,3 +2,18 @@
   font-weight: 500;
   font-size: 18px;
 }
+
+.search-bg {
+  background: url(asset-path('lion-big-white.png')) no-repeat;
+  background-position: center;
+  height: inherit;
+}
+
+.box-gradient-blue {
+  background: linear-gradient(to bottom, rgba(36, 82, 112, 1) 0%, rgba(24, 55, 75, 1) 100%);
+}
+
+.fixed-top-second {
+  width: 100%;
+  z-index: 1029;
+}
