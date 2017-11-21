@@ -95,16 +95,19 @@ body {
   }
 }
 
-
-
-.document {
-  border: thin solid theme-color("default");
-  padding: 1em;
-  margin: 1em;
-  border-radius: 10px;
-  margin-top: 0;
-  background-color: theme-color("default");
-  opacity: 0.5;
-  @extend .box-shadow;
+.content-not-main {
+  .document {
+    border: thin solid theme-color("default");
+    padding: 1em;
+    margin: 1em;
+    border-radius: 10px;
+    margin-top: 0;
+    background-color: theme-color("default");
+    opacity: 0.5;
+    @extend .box-shadow;
+  }
 }
+
+
+
 

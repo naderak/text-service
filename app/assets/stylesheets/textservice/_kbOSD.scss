@@ -1,31 +1,13 @@
 
 #kbOSDInstance {
-
   height: 100% ;
-  .kbOSDViewer{
-
-  }
   canvas{
     border:none !important;
   }
   .fa {
-    color: #326100 !important;
+    color: black !important;
     &:hover {
-      color: #422b06 !important;
+      color: black !important;
     }
-  }
-  canvas{
-    border: none !important;
-  }
-
-
-  .kbOSDToolbar{
-    line-height: 2;
-    input{
-      line-height: 1.3;
-    }
-  }
-  .kbOSDViewer {
-    top: -37px;
   }
 }
