@@ -1,0 +1,13 @@
+
+#kbOSDInstance {
+  height: 100% ;
+  canvas{
+    border:none !important;
+  }
+  .fa {
+    color: black !important;
+    &:hover {
+      color: black !important;
+    }
+  }
+}
