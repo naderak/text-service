@@ -449,4 +449,13 @@ class CatalogController < ApplicationController
     self.class == CatalogController
   end
 
+  def periods
+    periods_search_service = search_service_class.new(blacklight_config, search_state.to_h)
+    (@response, deprecated_document_list) = periods_search_service.search_results do |builder|
+      periods_search_service.search_builder_class.new([:default_solr_parameters,:build_all_periods_search],builder)
+    end
+
+    render "index"
+  end
+
 end
