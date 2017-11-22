@@ -22,7 +22,7 @@
 }
 
 .textToolbar{
-  border-bottom: 1px solid theme-color("primary") !important;
+  border-bottom: 1px solid $primary !important;
   padding-top: 5px;
   padding-bottom: 10px;
   i {
@@ -31,17 +31,17 @@
 }
 
 .lpContainer{
-  border: 1px solid theme-color("primary");
+  border: 1px solid $primary;
   margin: 10px;
   padding: 10px;
   border-radius: 10px;
 }
 
 .lpTextContainer {
-  border-right: 1px solid theme-color("primary");
+  border-right: 1px solid $primary;
 }
 
 .kbOSDToolbar {
-  border-bottom: 1px solid theme-color("primary") !important;
+  border-bottom: 1px solid $primary !important;
   padding-bottom: 5px;
 }

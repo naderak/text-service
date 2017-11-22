@@ -63,9 +63,9 @@ button.btn-primary{
 }
 
 .fa {
-  color: theme-color("primary") !important;
+  color: $primary !important;
   &:hover {
-    color: theme-color("primary") !important;
+    color: $primary !important;
   }
 }
 
@@ -115,12 +115,12 @@ button.btn-primary{
 
 
   .document {
-    border: thin solid theme-color("default");
+    border: thin solid $secondary;
     padding: 1em;
     margin: 1em;
     border-radius: 10px;
     margin-top: 0;
-    background-color: rgba(theme-color("default"), 0.5);
+    background-color: rgba($secondary, 0.5);
     @extend .box-shadow;
   }
 
