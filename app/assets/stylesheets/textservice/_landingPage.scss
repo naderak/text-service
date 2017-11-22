@@ -1,4 +1,47 @@
 .ocr, .kbOSDViewer {
   height: 620px;
   overflow-y: scroll;
+  margin: 10px;
+}
+
+.kbOSDViewer {
+  top: -30px; //to align with the downlaod facsimile button
+}
+
+.openseadragon-canvas{
+  margin: 10px !important;
+}
+
+#kbOSDInstance {
+  height: 100% ;
+
+}
+
+#ocrFullscreenButton{
+  float:right;
+}
+
+.textToolbar{
+  border-bottom: 1px solid theme-color("primary") !important;
+  padding-top: 5px;
+  padding-bottom: 10px;
+  i {
+    padding-left: 10px;
+  }
+}
+
+.lpContainer{
+  border: 1px solid theme-color("primary");
+  margin: 10px;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+.lpTextContainer {
+  border-right: 1px solid theme-color("primary");
+}
+
+.kbOSDToolbar {
+  border-bottom: 1px solid theme-color("primary") !important;
+  padding-bottom: 5px;
 }

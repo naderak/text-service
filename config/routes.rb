@@ -20,7 +20,12 @@ Rails.application.routes.draw do
     end
   end
 
+
   mount Blacklight::Engine => '/'
   root to: "catalog#index"
+
+    get '/catalog/:id/facsimile' => 'catalog#facsimile', as: 'facsimile_catalog'
+
+
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
