@@ -24,11 +24,11 @@
     padding: 0 15px;
     margin-top: 10px;
     margin-bottom: 32px;
-    color: #666;
+    color: $gray-700;
     font-size: 14px;
     line-height: 20px;
     h3 {
-      color: #326100;
+      color: $primary;
       font-size: 18px;
       font-weight: 400;
       line-height: 10px;
@@ -36,16 +36,16 @@
       padding: 0;
       border: 0;
     }
-    h3:hover{
-      color: #422b06 !important;
-      text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+    h3:hover {
+      color: $third-color !important;
+      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
       text-decoration: none;
     }
   }
 
   .row > div > a > div {
     height: 330px;
-    border: thin solid #f2eee2;
+    border: thin solid $gray-200;
     margin: 1em;
     border-radius: 25px;
     background-color: rgba(242, 238, 226, 0.5);
@@ -54,7 +54,7 @@
 
 .homeSearch {
   height: 260px;
-  color: #dcd2ab;
+  color: $beige;
   font-size: 25px;
   font-weight: normal;
 
@@ -67,9 +67,25 @@
     font-size: 18px;
     width: 100%;
   }
+  h2, h3{
+    margin-top: 20px;
+    margin-bottom: 10px;
+  }
   form {
     padding-top: 30px;
     width: 80%;
     margin: auto;
   }
+}
+
+#home-search {
+  input {
+    margin-right: 15px;
+  }
+}
+.form-control:focus {
+  border-color: #66afe9;
+  outline: 0;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,0.075), 0 0 8px rgba(102,175,233,0.6);
+  box-shadow: inset 0 1px 1px rgba(0,0,0,0.075), 0 0 8px rgba(102,175,233,0.6);
 }
