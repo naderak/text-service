@@ -13,22 +13,22 @@
 
 
 <div class="row">
-  <div class="col.sm-12">
+  <div class="col-sm-12">
     <%= render 'applied_edition' %>
   </div>
 </div>
 
 <% if has_text && has_facs %>
-    <div class="row">
-      <div class="col-sm-6"><%= render 'text' %></div>
-      <div class="col-sm-6"><%= render 'facsimile' %></div>
+    <div class="row lpContainer">
+      <div class="col-sm-6 lpTextContainer"><%= render 'text' %></div>
+      <div class="col-sm-6 lpFacsContainer"><%= render 'facsimile' %></div>
     </div>
 <% elsif has_text %>
-    <div class="row">
+    <div class="row textContainer">
       <div class="col-sm-12"><%= render 'text' %></div>
     </div>
 <% elsif has_facs %>
-    <div class="row">
+    <div class="row facsContainer">
       <div class="col-sm-12"><%= render 'text' %></div>
     </div>
 <% end %>

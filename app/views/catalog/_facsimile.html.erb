@@ -1,3 +1,9 @@
+<div class="downloadLinkContainer">
+  <%= link_to(facsimile_catalog_path(@document.id, format: :pdf,), :target => "_blank", :target => "_blank") do %>
+      <i class="fa fa-lg fa-download" aria-hidden="true"></i> <%= I18n.t('blacklight.search.index.facsimile') %>
+  <% end %>
+</div>
+
 <div id="kbOSDInstance">
   <div class="kbOSDViewer">
     <div class="kbOSDToolbar"></div>
@@ -29,8 +35,9 @@
             }
         });
     }
+    //The index is a bit buggy so disabled it completely for now.
+    delete kbOSDconfig[0].indexPage;
 
-    console.log(kbOSDconfig[0]);
 
 </script>
 <script src="http://static.kb.dk/kbOpenSeadragon/2.3.0/js/KbOSD_bundle_min.js"></script>

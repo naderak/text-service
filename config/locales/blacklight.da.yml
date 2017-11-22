@@ -25,6 +25,11 @@ da:
     entry_name:
       default: 'post'
 
+    text_toolbar:
+      fullscreen: 'Se tekst i fuld skærm'
+      text : 'Tekst'
+      highlight: 'Tilføj/fjern markering'
+
     header_links:
       login: 'Log ind'
       logout: 'Log ud'
