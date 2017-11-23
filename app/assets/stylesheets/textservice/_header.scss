@@ -1,15 +1,17 @@
-#main-container{
+#main-container {
   padding: 0;
 }
-#header-navbar{
+
+#header-navbar {
   @extend .box-shadow;
 }
+
 .navbar-brand {
   font-weight: 500;
   font-size: 18px;
-  text-indent: 0!important;
-  background: none!important;
-  overflow: visible!important;
+  text-indent: 0 !important;
+  background: none !important;
+  overflow: visible !important;
   padding: 12px;
   margin: auto;
 }
@@ -19,6 +21,7 @@
   background-position: center;
   height: inherit;
 }
+
 .search_q {
   border-radius: 10px !important;
   width: 98% !important;
@@ -38,3 +41,79 @@ button#search {
   z-index: 1029;
 }
 
+// Styling headers in about and politik pages
+#content {
+  min-height: 500px;
+  //margin-top: 94px;
+  margin-top: 94px;
+  .header-container {
+    position: relative;
+  }
+  .page-heading {
+    margin-top: 0;
+    line-height: 94px;
+  }
+  article.container {
+    @extend .document;
+    @extend .text;
+
+    margin-top: 48px;
+    margin-right: 0;
+    margin-left: 0;
+    padding-left: 59px !important;
+    padding-right: 59px !important;
+    width: 100% !important;
+  }
+  article.ocr {
+    width: 100%;
+  }
+  #om-adl {
+    margin-top: 48px;
+  }
+  #politik {
+    h3 {
+      margin-top: 20px;
+      margin-bottom: 10px;
+      font-weight: 500;
+      line-height: 1.1;
+      font-size: 30px;
+      color: #666;
+    }
+  }
+  h1[itemprop="headline"] {
+    @extend .container;
+    @extend .search-bg;
+    margin-top: 0px !important;
+    font-size: 30px;
+    line-height: 94px;
+  }
+  header {
+    @extend .box-gradient-blue;
+    position: absolute;
+    width: 100%;
+    top: 68px;
+    margin: 0;
+    left: 0;
+    height: 94px;
+    color: #dcd2ab;
+    font-size: 25px;
+    font-weight: normal;
+    z-index: 1029;
+    dl {
+      font-size: 14px;
+    }
+  }
+  #document header {
+    top: -94px;
+  }
+  .page-header-in-pages-with-searchbox {
+    height: 100px;
+    h3 {
+      @extend .pull-left;
+      width: 70%;
+    }
+    .btn {
+      margin-top: 20px;
+    }
+  }
+}
