@@ -17,11 +17,23 @@ body {
 .box-shadow{
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1), 0 3px 10px 0 rgba(0, 0, 0, 0.09);
 }
-
-
-.navbar-brand {
-  font-weight: 500;
-  font-size: 18px;
+a:hover{
+  color: $third-color !important;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+  text-decoration: none;
+}
+button.btn-primary{
+  background: linear-gradient(to bottom, lighten($primary, 10%) 0%, $primary 100%);
+  color:white;
+}
+.btn-primary:hover, .btn-primary:active, .btn-primary:visited {
+  color: $third-color;
+  background-color: $primary;
+  border-color:$gray-500;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.3);;
+}
+.btn:hover{
+  cursor: pointer;
 }
 
 .btn-secondary {
@@ -44,11 +56,20 @@ body {
   padding-left: 15px;
 }
 
-// Secondary search box
+
 .box-gradient-blue {
   //padding:20px;
   background: linear-gradient(to bottom, rgba(36, 82, 112, 1) 0%, rgba(24, 55, 75, 1) 100%);
 }
+
+.fa {
+  color: $primary !important;
+  &:hover {
+    color: $primary !important;
+  }
+}
+
+// Secondary search box
 .search-secondary {
     height: 90px;
   margin-bottom: 15px;
@@ -93,15 +114,17 @@ body {
 }
 
 
+  .document {
+    border: thin solid $secondary;
+    padding: 1em;
+    margin: 1em;
+    border-radius: 10px;
+    margin-top: 0;
+    background-color: rgba($secondary, 0.5);
+    @extend .box-shadow;
+  }
 
-.document {
-  border: thin solid theme-color("default");
-  padding: 1em;
-  margin: 1em;
-  border-radius: 10px;
-  margin-top: 0;
-  background-color: theme-color("default");
-  opacity: 0.5;
-  @extend .box-shadow;
-}
+
+
+
 
