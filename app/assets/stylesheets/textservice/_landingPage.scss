@@ -21,6 +21,15 @@
   float:right;
 }
 
+.textToolbar, .kbOSDToolbar, .downloadLinkContainer{
+  .fa {
+    color: $primary !important;
+    &:hover {
+      color: $primary !important;
+    }
+  }
+}
+
 .textToolbar{
   border-bottom: 1px solid $primary !important;
   padding-top: 5px;
