@@ -283,7 +283,6 @@ DEPENDENCIES
   devise-guests
   devise_cas_authenticatable
   font-awesome-rails
-
   high_voltage (~> 3.0.0)
   jbuilder (~> 2.5)
   jettywrapper
