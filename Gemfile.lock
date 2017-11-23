@@ -100,6 +100,9 @@ GEM
       warden (~> 1.2.3)
     devise-guests (0.6.0)
       devise
+    devise_cas_authenticatable (1.10.0)
+      devise (>= 1.2.0)
+      rubycas-client (>= 2.2.1)
     erubi (1.7.0)
     execjs (2.7.0)
     faraday (0.13.1)
@@ -201,6 +204,8 @@ GEM
       faraday
     ruby-progressbar (1.9.0)
     ruby_dep (1.5.0)
+    rubycas-client (2.3.9)
+      activesupport
     rubyzip (1.2.1)
     sass (3.5.3)
       sass-listen (~> 4.0.0)
@@ -276,7 +281,9 @@ DEPENDENCIES
   coffee-rails (~> 4.2)
   devise
   devise-guests
+  devise_cas_authenticatable
   font-awesome-rails
+
   high_voltage (~> 3.0.0)
   jbuilder (~> 2.5)
   jettywrapper
