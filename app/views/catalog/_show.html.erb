@@ -9,12 +9,21 @@
 <% has_text = document['has_text_ssi'].present? && document['has_text_ssi'] == 'yes' %>
 <% has_facs = document['has_facs_ssi'].present? && document['has_facs_ssi'] == 'yes' %>
 
+<% if current_search_session %>
+    <div id="appliedParams" class="clearfix constraints-container">
+      <%= link_to t('blacklight.search.start_over'), start_over_path, class: "catalog_startOverLink btn" %>
+      <%= link_back_to_catalog class: 'btn' %>
+    </div>
+<% end %>
+
 <div class="document">
   <div class="row ">
     <div class="col-sm-12">
       <%= render 'applied_edition' %>
     </div>
   </div>
+
+
 
   <% if has_text && has_facs %>
       <div class="row lpContainer">
@@ -31,5 +40,8 @@
       </div>
   <% end %>
 </div>
+
+
+
 
 
