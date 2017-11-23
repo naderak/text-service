@@ -116,10 +116,8 @@ class CatalogController < ApplicationController
     #config.add_show_field 'place_published_tesim', :label => 'Udgivelsessted'
     #config.add_show_field 'date_published_ssi', :label => 'Udgivelsesdato'
 
- #NKH We need to add user to db before adding these tools
- #NKH   add_show_tools_partial(:feedback, callback: :email_action, if: :render_feedback_action?)
- #NKH   config.show.document_actions.email.if = :render_email_action?
-
+    #add_show_tools_partial(:feedback, callback: :email_action, if: :render_feedback_action?)
+    #config.show.document_actions.email.if = :render_email_action?
     config.show.document_actions.citation.if = :render_citation_action?
 
  #N  config.add_show_field 'title_display', label: 'Title'
