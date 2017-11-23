@@ -1,0 +1,32 @@
+<ul class="navbar-nav">
+  <%= render_nav_actions do |config, action|%>
+    <li class="nav-item"><%= action %></li>
+  <% end %>
+
+  <% if has_user_authentication_provider? %>
+    <% if current_user %>
+    <li class="nav-item">
+      <%= link_to t('blacklight.header_links.logout'), destroy_user_session_path, class: 'nav-link' %>
+    </li>
+    <% unless current_user.to_s.blank? -%>
+    <li class="nav-item">
+      <%= link_to current_user, edit_user_registration_path, class: 'nav-link' %>
+    </li>
+    <% end %>
+    <% else %>
+    <li id="login-link" class="nav-item">
+      <%= link_to t('blacklight.header_links.login'), new_user_session_path, class: 'nav-link' %>
+      <!--<span class="text-tooltip login-tooltip ">?-->
+         <!--<span class="text-tooltiptext login-tooltiptext">-->
+            <!--<div class="card">-->
+              <!--<div class="card-body">-->
+                <!--Log ind hvis du vil benytte bogmærke-funktionen-->
+              <!--</div>-->
+            <!--</div>-->
+         <!--</span>-->
+        <!--</span>-->
+      <%= render :partial => 'catalog/tooltips', locals: {document: 'login', header: false} %>
+    </li>
+    <% end %>
+  <% end %>
+</ul>

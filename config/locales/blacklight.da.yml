@@ -202,10 +202,6 @@ da:
           all_filters: 'Fritekst'
           title: 'Titel'
           author: 'Forfatter'
-          search_tips: 'Søgetips'
-          tooltips1: 'Du kan bruge "OR", "AND" og "NOT" til kombinerede søgninger. '
-          tooltips2: 'Bemærk at systemet ikke understøtter wildcards. Trunkering udføres automatisk af systemet.'
-          tooltips3: 'Hvis du søger på flere ord, kan du sætte "+" før et ord hvis resultatet skal indeholde dette ord, og "-" foran et ord hvis resultatet ikke må indeholde det pågældende ord.'
         sort:
           relevance: 'Standard'
           author: 'Forfatter'
@@ -316,3 +312,11 @@ da:
       kb: 'Det Kongelige Bibliotek'
       contact_us: 'Kontakt os'
       about_ADL: 'Om ADL'
+  tooltip:
+    search:
+      header: 'Søgetips'
+      tooltip1: 'Du kan bruge "OR", "AND" og "NOT" til kombinerede søgninger. '
+      tooltip2: 'Bemærk at systemet ikke understøtter wildcards. Trunkering udføres automatisk af systemet.'
+      tooltip3: 'Hvis du søger på flere ord, kan du sætte "+" før et ord hvis resultatet skal indeholde dette ord, og "-" foran et ord hvis resultatet ikke må indeholde det pågældende ord.'
+    login:
+      tooltip: 'Log ind hvis du vil benytte bogmærke-funktionen'
