@@ -1,17 +1,13 @@
-#search-tooltip {
+#search-tooltip, #login-link {
   vertical-align: top;
-  .search-tooltip {
-    height: 46px;
-    line-height: 26px;
-    padding: 10px;
-    vertical-align: middle;
-    text-align: center;
+  a{
+    display: inline-block;
+    padding-right: 0;
   }
-
-  .search-tooltip, .login-tooltip {
+  .text-tooltip {
+    padding: 10px;
     cursor: pointer;
     color: $beige;
-    font-size: 25px;
     font-weight: normal;
     position: relative;
     display: inline-block;
@@ -22,21 +18,17 @@
     .card-header {
       text-align: center;
     }
-    .tooltiptext, .login-tooltiptext {
+    .text-tooltiptext {
       font-size: small;
       visibility: hidden;
       white-space: normal;
-      width: 420px;
       background-color: $gray-200;
       color: $black;
       text-align: left;
       border-radius: 6px;
       padding: 0;
       position: absolute;
-      z-index: 1;
-
-      top: 130%;
-      left: -1115%;
+      z-index: 1030;
       opacity: 0;
       transition: opacity 1s;
 
@@ -44,22 +36,42 @@
         padding-left: 10px;
       }
     }
-    .tooltiptext::after, .login-tooltiptext::after {
+    .search-tooltiptext{
+      left: -363px;
+      top: 130%;
+      width: 420px;
+    }
+    .login-tooltiptext{
+      left: -307px;;
+      top: 90%;
+      width: 345px;
+    }
+    .text-tooltiptext::after {
       content: "";
       position: absolute;
       bottom: 100%;
       left: 90%;
-
       margin-left: -5px;
-
       border-width: 5px;
       border-style: solid;
       border-color: transparent transparent #f5f5f5 transparent;
     }
-    &:hover .tooltiptext, &:hover .login-tooltiptext {
+    &:hover .text-tooltiptext {
       visibility: visible;
       opacity: 1;
 
     }
+  }
+  .search-tooltip {
+    height: 46px;
+    line-height: 26px;
+    vertical-align: middle;
+    text-align: center;
+    font-size: 25px;
+  }
+  .login-tooltip {
+    font-size: 14px;
+    line-height: 20px;
+    padding-left: 0;
   }
 }
