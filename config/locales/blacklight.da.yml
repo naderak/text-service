@@ -25,6 +25,11 @@ da:
     entry_name:
       default: 'post'
 
+    text_toolbar:
+      fullscreen: 'Se tekst i fuld skærm'
+      text : 'Tekst'
+      highlight: 'Tilføj/fjern markering'
+
     header_links:
       login: 'Log ind'
       logout: 'Log ud'
@@ -197,6 +202,7 @@ da:
           all_filters: 'Fritekst'
           title: 'Titel'
           author: 'Forfatter'
+          search_tips: 'Søgetips'
           tooltips1: 'Du kan bruge "OR", "AND" og "NOT" til kombinerede søgninger. '
           tooltips2: 'Bemærk at systemet ikke understøtter wildcards. Trunkering udføres automatisk af systemet.'
           tooltips3: 'Hvis du søger på flere ord, kan du sætte "+" før et ord hvis resultatet skal indeholde dette ord, og "-" foran et ord hvis resultatet ikke må indeholde det pågældende ord.'

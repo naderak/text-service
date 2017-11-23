@@ -1,12 +1,29 @@
+#header-navbar{
+  @extend .box-shadow;
+}
 .navbar-brand {
   font-weight: 500;
   font-size: 18px;
+  text-indent: 0!important;
+  background: none!important;
+  overflow: visible!important;
+  padding: 12px;
+  margin: auto;
 }
 
 .search-bg {
   background: url(asset-path('lion-big-white.png')) no-repeat;
   background-position: center;
   height: inherit;
+}
+.search_q {
+  border-radius: 10px !important;
+  width: 98% !important;
+}
+
+button#search {
+  border-radius: 6px !important;
+  border: none;
 }
 
 .box-gradient-blue {
