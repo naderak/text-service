@@ -22,12 +22,12 @@
         <div class="col-sm-6 lpFacsContainer"><%= render 'facsimile' %></div>
       </div>
   <% elsif has_text %>
-      <div class="row textContainer">
+      <div class="row lpContainer">
         <div class="col-sm-12"><%= render 'text' %></div>
       </div>
   <% elsif has_facs %>
-      <div class="row facsContainer">
-        <div class="col-sm-12"><%= render 'text' %></div>
+      <div class="row lpContainer">
+        <div class="col-sm-12"><%= render 'facsimile' %></div>
       </div>
   <% end %>
 </div>
