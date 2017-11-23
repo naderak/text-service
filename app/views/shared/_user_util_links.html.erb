@@ -14,8 +14,18 @@
     </li>
     <% end %>
     <% else %>
-    <li class="nav-item">
+    <li id="login-link" class="nav-item">
       <%= link_to t('blacklight.header_links.login'), new_user_session_path, class: 'nav-link' %>
+      <!--<span class="text-tooltip login-tooltip ">?-->
+         <!--<span class="text-tooltiptext login-tooltiptext">-->
+            <!--<div class="card">-->
+              <!--<div class="card-body">-->
+                <!--Log ind hvis du vil benytte bogmærke-funktionen-->
+              <!--</div>-->
+            <!--</div>-->
+         <!--</span>-->
+        <!--</span>-->
+      <%= render :partial => 'catalog/tooltips', locals: {document: 'login', header: false} %>
     </li>
     <% end %>
   <% end %>
