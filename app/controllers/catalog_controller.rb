@@ -197,7 +197,18 @@ class CatalogController < ApplicationController
     def authors
       (@response, @document_list) = search_service.search_results() do |builder|
         search_builder_class.new([:default_solr_parameters,:build_all_authors_search],builder)
-      end
+      end#N    config.add_search_field('title') do |field|
+      # solr_parameters hash are sent to Solr as ordinary url query params.
+#N      field.solr_parameters = { :'spellcheck.dictionary' => 'title' }
+
+      # :solr_local_parameters will be sent using Solr LocalParams
+      # syntax, as eg {! qf=$title_qf }. This is neccesary to use
+      # Solr parameter de-referencing like $title_qf.
+      # See: http://wiki.apache.org/solr/LocalParams
+#N      field.solr_local_parameters = {
+#N        qf: '$title_qf',
+#N        pf: '$title_pf'
+#N      }
       render "index"
     end
 
