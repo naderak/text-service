@@ -338,26 +338,9 @@ class CatalogController < ApplicationController
     # case for a BL "search field", which is really a dismax aggregate
     # of Solr search fields.
 
-#N    config.add_search_field('title') do |field|
-      # solr_parameters hash are sent to Solr as ordinary url query params.
-#N      field.solr_parameters = { :'spellcheck.dictionary' => 'title' }
 
-      # :solr_local_parameters will be sent using Solr LocalParams
-      # syntax, as eg {! qf=$title_qf }. This is neccesary to use
-      # Solr parameter de-referencing like $title_qf.
-      # See: http://wiki.apache.org/solr/LocalParams
-#N      field.solr_local_parameters = {
-#N        qf: '$title_qf',
-#N        pf: '$title_pf'
-#N      }
 
- #N   config.add_search_field('author') do |field|
- #N     field.solr_parameters = { :'spellcheck.dictionary' => 'author' }
- #N     field.solr_local_parameters = {
- #N       qf: '$author_qf',
- #N       pf: '$author_pf'
- #N     }
- #N   end
+
 
     # Specifying a :qt only to show it's possible, and so our internal automated
     # tests can test it. In this case it's the same as
