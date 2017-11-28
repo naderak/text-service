@@ -1,7 +1,6 @@
 # Class to centralise inteface with FileServer
 class FileServer
   def self.render_snippet(id, opts={})
-
     uri = "#{Rails.application.config_for(:text_service)["snippet_server_url"]}?path=#{id}"
     #uri += "&id=#{opts[:xml_id]}" if opts[:xml_id].present?
     uri += "&op=#{opts[:op]}" if opts[:op].present?
