@@ -8,6 +8,11 @@
   margin: 10px;
 }
 
+
+.ocr {
+  padding: 10px;
+}
+
 .kbOSDViewer {
   top: -30px; //to align with the downlaod facsimile button
 }
@@ -33,6 +38,12 @@
     }
   }
 }
+
+
+.transparentBackground{
+  background-color: transparent !important;
+}
+
 
 .textToolbar{
   border-bottom: 1px solid $primary !important;
