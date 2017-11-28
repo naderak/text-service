@@ -251,6 +251,9 @@ da:
         text: 'Tekst'
         facsimile: 'Faksimile'
         show_more: 'Vis mere'
+        table_of_content: 'Inhold'
+        all_instances: 'Alle forekomster'
+        close: 'Luk'
       show:
         title: '%{document_title} - %{application_name}'
         label: '%{label}:'
@@ -271,9 +274,7 @@ da:
 
     retrieve: 'hentet fra '
     from: 'fra '
-  catalog:
-    show_work:
-      no_text: "Der findes ikke en ren tekstversion af dette værk. Klik på ”Faksimile” for at se de indskannede sider."
+
 
   people:
     show_person:

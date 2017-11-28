@@ -1,0 +1,79 @@
+<% document ||= @document %>
+<% # bookmark/folder functions -%>
+
+<!--Retrieve the query-->
+<% query_params = current_search_session.try(:query_params)%>
+<% search_field = query_params[:search_field] %>
+<%  query = query_params[:q] if  query_params.present?
+   query = query.gsub!(/^\"|\"?$/, '') if query.present? %>
+
+<!-- Button trigger table of content -->
+
+<button type="button" class="btn btn-secondary tableOfContent" data-toggle="modal" data-target="#toc">
+  <i class="fa fa-bars" aria-hidden="true"></i>
+  <%= t('blacklight.search.index.table_of_content') %>
+</button>
+
+
+<!-- Button trigger all matches modal -->
+<!-- Check if the search field is fritekst and if there is a query -->
+<% if search_field == "Alt" and query.present? %>
+    <button type="button" class="btn btn-secondary contentSearch" data-toggle="modal" data-target="#searchFullText">
+      <i class="fa fa-search" aria-hidden="true"></i>
+      <%= t('blacklight.search.index.all_instances') %>
+    </button>
+<% end %>
+
+<!-- Modal Table of content  -->
+<div class="modal fade" id="toc" tabindex="-1" role="dialog" aria-labelledby="tableOfContent">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" id="tableOfContent">
+          <i class="fa fa-bars" aria-hidden="true"></i>
+          <%= t('blacklight.search.index.table_of_content') %>
+        </h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      </div>
+      <div class="modal-body">
+        <% if document['cat_ssi'] == 'portrait' %>
+            <%= FileServer.toc(document.id,{c: 'authors'}) %>
+        <% else %>
+            <%= FileServer.toc(@document['volume_id_ssi'], {xml_id: @document['xmlid_ssi']}) %>
+           <% end %>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">   <%= t('blacklight.search.index.close') %></button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Show all matches -->
+<div class="modal fade" id="searchFullText" tabindex="-1" role="dialog" aria-labelledby="searchFullText">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="textMatches">
+          <%= t('blacklight.search.index.all_instances') %>
+        </h4>
+      </div>
+      <div class="modal-body" id="matchesModalBody">
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Luk</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<%= javascript_tag do %>
+    <% if search_field == 'Alt' %>
+      $(document).ready(
+        function () {
+          show_work_search("<%= document['id'] %>", $('#matchesModalBody'), "<%= query %>");
+        });
+    <% end %>
+<% end %>
