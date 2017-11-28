@@ -73,7 +73,7 @@
     <% if search_field == 'Alt' %>
       $(document).ready(
         function () {
-          show_work_search("<%= document['id'] %>", $('#matchesModalBody'), "<%= query %>");
+          show_work_search("<%= @document['id'] %>", $('#matchesModalBody'), "<%= query %>");
         });
     <% end %>
 <% end %>
