@@ -38,18 +38,18 @@ module ApplicationHelper
 
   def citation args
     # Construct the first part and add the anvendt udgave and the page number
-    cite = []
-    cite << args[:document]['author_name_ssi'] + ": " if args[:document]['author_name_ssi'].present?
-    cite << ">>"+args[:document]['work_title_tesim'].first+"<<, i" if args[:document]['work_title_tesim'].present?
-    cite << construct_citation(args)
-    cite << "s. "+args[:document]['page_ssi']
-    citation = cite.to_sentence(last_word_connector: ", ")+". "
+    cite = ""
+    cite += args[:document]['author_name_ssi'] + ": " if args[:document]['author_name_ssi'].present?
+    cite += ">>"+args[:document]['work_title_tesim'].first+"<<, i " if args[:document]['work_title_tesim'].present?
+    cite += construct_citation(args)
+    cite += ", s. "+args[:document]['page_ssi'] if args[:document]['page_ssi'].present?
+    cite += ". "
     # Add the URL and the date in the string
-    citation += 'Online udgave fra "Arkiv for Dansk Litteratur (ADL)": ' + request.original_url
+    cite += 'Online udgave fra "Arkiv for Dansk Litteratur (ADL)": ' + request.original_url
     # There must be a smarter way to get the months translated
-    citation += " (tilgået " + Time.now.strftime("%d. ")
-    citation += I18n.t(Time.now.strftime('%B'))
-    citation += Time.now.strftime(' %Y') +")"
+    cite += " (tilgået " + Time.now.strftime("%d. ")
+    cite += I18n.t(Time.now.strftime('%B'))
+    cite += Time.now.strftime(' %Y') +")"
   end
 
   def author_link args
