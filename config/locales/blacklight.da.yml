@@ -1,4 +1,16 @@
 da:
+  January: jan.
+  February: feb.
+  March: mar.
+  April: apr.
+  May: mai
+  June: jun.
+  July: jul.
+  August: aug.
+  September: sep.
+  October: okt.
+  November: nov.
+  December: dec.
   active_record:
     models:
       feedback: 'Feedback'

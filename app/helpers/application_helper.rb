@@ -15,12 +15,41 @@ module ApplicationHelper
     res
   end
 
+  def construct_citation args
+    label = []
+    author = args[:document]['author_name_ssi'] + ": " if args[:document]['author_name_ssi'].present?
+    title = args[:document]['volume_title_tesim'].try(:first).to_s
+    # Add author and value as one string so they don't get separated by comma
+    label << author + title
+    label << "udg. af <RESP name to be added in Solr>"
+    label << "#{args[:document]['publisher_tesim'].join(', ')}" if args[:document]['publisher_tesim'].present?
+    label << "#{args[:document]['date_published_ssi']}" if args[:document]['date_published_ssi'].present?
+    # Remove empty string from the array
+    label = label.reject { |c| c.empty? }
+    return label.to_sentence(last_word_connector: ", ")
+  end
+
   def show_volume args
     id = args[:document]['volume_id_ssi']
-    label = args[:document]['volume_title_tesim'].try(:first).to_s
-    label += " (#{args[:document]['date_published_ssi']})" if args[:document]['date_published_ssi'].present?
     return unless id.present?
-    link_to label, solr_document_path(id)
+    udgave = construct_citation(args)+"."
+    link_to udgave, solr_document_path(id)
+  end
+
+  def citation args
+    # Construct the first part and add the anvendt udgave and the page number
+    cite = ""
+    cite += args[:document]['author_name_ssi'] + ": " if args[:document]['author_name_ssi'].present?
+    cite += ">>"+args[:document]['work_title_tesim'].first+"<<, i " if args[:document]['work_title_tesim'].present?
+    cite += construct_citation(args)
+    cite += ", s. "+args[:document]['page_ssi'] if args[:document]['page_ssi'].present?
+    cite += ". "
+    # Add the URL and the date in the string
+    cite += 'Online udgave fra "Arkiv for Dansk Litteratur (ADL)": ' + request.original_url
+    # There must be a smarter way to get the months translated
+    cite += " (tilgået " + Time.now.strftime("%d. ")
+    cite += I18n.t(Time.now.strftime('%B'))
+    cite += Time.now.strftime(' %Y') +")"
   end
 
   def author_link args
