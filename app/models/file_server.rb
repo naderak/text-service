@@ -1,12 +1,7 @@
 # Class to centralise inteface with FileServer
 class FileServer
   def self.render_snippet(id, opts={})
-    # only try to split id when we are requesting a text
-    # if !opts.has_key? :c
-    #   a =id.split("-")
-    # else
-    #   a = [id]
-    # end
+
     uri = "#{Rails.application.config_for(:text_service)["snippet_server_url"]}?path=#{id}"
     #uri += "&id=#{opts[:xml_id]}" if opts[:xml_id].present?
     uri += "&op=#{opts[:op]}" if opts[:op].present?
@@ -69,8 +64,6 @@ class FileServer
     FileServer.render_snippet(id, params)
   end
 
-  ######################## COPY PASTE FROM SNIPPET_SERVER #############################
-
   def self.get(uri)
     Rails.logger.debug "SNIPPET SERVER GET #{uri}"
     uri = URI.parse(uri)
@@ -94,7 +87,6 @@ class FileServer
   end
 
   def self.snippet_server_url
-    ################### changed the yaml to adl ######################################
     "#{Rails.application.config_for(:text_service)["temp_snippet_server_url"]}"
   end
 
