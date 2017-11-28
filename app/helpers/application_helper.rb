@@ -17,11 +17,15 @@ module ApplicationHelper
 
   def construct_citation args
     label = []
-    label << args[:document]['author_name_ssi'] + ": " if args[:document]['author_name_ssi'].present?
-    label << args[:document]['volume_title_tesim'].try(:first).to_s
+    author = args[:document]['author_name_ssi'] + ": " if args[:document]['author_name_ssi'].present?
+    title = args[:document]['volume_title_tesim'].try(:first).to_s
+    # Add author and value as one string so they don't get separated by comma
+    label << author + title
     label << "udg. af <RESP name to be added in Solr>"
     label << "#{args[:document]['publisher_tesim'].join(', ')}" if args[:document]['publisher_tesim'].present?
     label << "#{args[:document]['date_published_ssi']}" if args[:document]['date_published_ssi'].present?
+    # Remove empty string from the array
+    label = label.reject { |c| c.empty? }
     return label.to_sentence(last_word_connector: ", ")
   end
 
@@ -39,7 +43,7 @@ module ApplicationHelper
     cite << ">>"+args[:document]['work_title_tesim'].first+"<<, i" if args[:document]['work_title_tesim'].present?
     cite << construct_citation(args)
     cite << "s. "+args[:document]['page_ssi']
-    citation = cite.to_sentence(two_words_connector:" ", last_word_connector: ", ")+". "
+    citation = cite.to_sentence(last_word_connector: ", ")+". "
     # Add the URL and the date in the string
     citation += 'Online udgave fra "Arkiv for Dansk Litteratur (ADL)": ' + request.original_url
     # There must be a smarter way to get the months translated
