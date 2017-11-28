@@ -321,3 +321,8 @@ da:
       tooltip3: 'Hvis du søger på flere ord, kan du sætte "+" før et ord hvis resultatet skal indeholde dette ord, og "-" foran et ord hvis resultatet ikke må indeholde det pågældende ord.'
     login:
       tooltip: 'Log ind hvis du vil benytte bogmærke-funktionen'
+  static_pages:
+    about:
+      title: 'Om ADL'
+    politik:
+      title: 'Cookie- og Privatlivspolitik'
