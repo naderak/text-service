@@ -1,5 +1,5 @@
 #main-container {
-  padding: 0;
+  padding: $top-header-size 0 0 0 ;
 }
 
 #header-navbar {
@@ -45,13 +45,13 @@ button#search {
 #content {
   min-height: 500px;
   //margin-top: 94px;
-  margin-top: 94px;
+  margin-top: $top-header-size + $blue-bar-height;
   .header-container {
     position: relative;
   }
   .page-heading {
     margin-top: 0;
-    line-height: 94px;
+    line-height: $blue-bar-height;
   }
   article.container {
     @extend .document;
@@ -72,7 +72,7 @@ button#search {
   }
   #politik {
     h3 {
-      margin-top: 20px;
+      margin-top: $top-space;
       margin-bottom: 10px;
       font-weight: 500;
       line-height: 1.1;
@@ -85,16 +85,16 @@ button#search {
     @extend .search-bg;
     margin-top: 0px !important;
     font-size: 30px;
-    line-height: 94px;
+    line-height: $blue-bar-height;
   }
   header {
     @extend .box-gradient-blue;
     position: absolute;
     width: 100%;
-    top: 68px;
+    top: $top-header-size;
     margin: 0;
     left: 0;
-    height: 94px;
+    height: $blue-bar-height;
     color: #dcd2ab;
     font-size: 25px;
     font-weight: normal;
@@ -104,7 +104,7 @@ button#search {
     }
   }
   #document header {
-    top: -94px;
+    top: -$blue-bar-height;
   }
   .page-header-in-pages-with-searchbox {
     height: 100px;
@@ -113,7 +113,7 @@ button#search {
       width: 70%;
     }
     .btn {
-      margin-top: 20px;
+      margin-top: $top-space;
     }
   }
 }
