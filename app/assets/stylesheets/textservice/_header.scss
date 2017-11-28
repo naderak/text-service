@@ -42,10 +42,10 @@ button#search {
 }
 
 // Styling headers in about and politik pages
-#content {
+#main-content {
   min-height: 500px;
   //margin-top: 94px;
-  margin-top: $top-header-size + $blue-bar-height;
+  margin-top: $top-header-size + $blue-bar-height+$top-space;
   .header-container {
     position: relative;
   }
@@ -57,27 +57,42 @@ button#search {
     @extend .document;
     @extend .text;
 
-    margin-top: 48px;
-    margin-right: 0;
-    margin-left: 0;
-    padding-left: 59px !important;
-    padding-right: 59px !important;
-    width: 100% !important;
+    padding: 20px 59px !important;
+    color: #666;
+    font-size: 14px;
+    line-height: 20px;
+    margin-bottom: 32px;
   }
   article.ocr {
     width: 100%;
   }
-  #om-adl {
-    margin-top: 48px;
-  }
-  #politik {
-    h3 {
-      margin-top: $top-space;
-      margin-bottom: 10px;
-      font-weight: 500;
-      line-height: 1.1;
-      font-size: 30px;
-      color: #666;
+
+  #politik, #about {
+    .text-content {
+      padding-left: $grid-gutter-width;
+      padding-right: $grid-gutter-width;
+      padding-bottom: $grid-gutter-width;
+    }
+    .text {
+      padding: 20px 15px;
+    }
+    color: #666;
+
+    header {
+      @extend .box-gradient-blue;
+      position: absolute;
+      width: 100%;
+      top: $top-header-size;
+      margin: 0;
+      left: 0;
+      height: $blue-bar-height;
+      color: #dcd2ab;
+      font-size: 25px;
+      font-weight: normal;
+      z-index: 1029;
+      dl {
+        font-size: 14px;
+      }
     }
   }
   h1[itemprop="headline"] {
@@ -87,22 +102,7 @@ button#search {
     font-size: 30px;
     line-height: $blue-bar-height;
   }
-  header {
-    @extend .box-gradient-blue;
-    position: absolute;
-    width: 100%;
-    top: $top-header-size;
-    margin: 0;
-    left: 0;
-    height: $blue-bar-height;
-    color: #dcd2ab;
-    font-size: 25px;
-    font-weight: normal;
-    z-index: 1029;
-    dl {
-      font-size: 14px;
-    }
-  }
+
   #document header {
     top: -$blue-bar-height;
   }
@@ -116,4 +116,12 @@ button#search {
       margin-top: $top-space;
     }
   }
+}
+#about blockquote {
+  display: block;
+  margin-top: 1em;
+  margin-bottom: 1em;
+  margin-left: 40px;
+  margin-right: 40px;
+  font-size: 13px;
 }
