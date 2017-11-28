@@ -15,12 +15,25 @@ module ApplicationHelper
     res
   end
 
+  def construct_citation args
+    label = []
+    label << args[:document]['author_name_ssi'] + ": " if args[:document]['author_name_ssi'].present?
+    label << args[:document]['volume_title_tesim'].try(:first).to_s
+    label << "udg. af <RESP name to be added in Solr>"
+    label << "#{args[:document]['publisher_tesim'].join(', ')}" if args[:document]['publisher_tesim'].present?
+    label << "#{args[:document]['date_published_ssi']}" if args[:document]['date_published_ssi'].present?
+    return label.to_sentence(last_word_connector: ", ")
+  end
+
   def show_volume args
     id = args[:document]['volume_id_ssi']
-    label = args[:document]['volume_title_tesim'].try(:first).to_s
-    label += " (#{args[:document]['date_published_ssi']})" if args[:document]['date_published_ssi'].present?
     return unless id.present?
-    link_to label, solr_document_path(id)
+    udgave = construct_citation(args)+"."
+    link_to udgave, solr_document_path(id)
+  end
+
+  def citation args
+
   end
 
   def author_link args
