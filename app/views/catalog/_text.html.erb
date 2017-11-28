@@ -19,9 +19,8 @@
   <i id="ocrFullscreenButton" class="fa fa-expand fa-lg" title="<%= t('blacklight.text_toolbar.fullscreen') %>"></i>
 </div>
 <article class="ocr">
-  <%= FileServer.render_snippet(@document['volume_id_ssi'],
-                                {c: 'texts', xml_id: @document['xmlid_ssi'],
-                                 q: query}) %>
+  <%= FileServer.render_snippet(@document['id'],
+                                {q: query}) %>
 </article>
 
 

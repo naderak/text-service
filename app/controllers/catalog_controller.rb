@@ -269,7 +269,7 @@ class CatalogController < ApplicationController
       # solr_parameters hash are sent to Solr as ordinary url query params.
       field.solr_parameters = {
           :fq => ['application_ssim:ADL','cat_ssi:work','type_ssi:trunk'],
-          :'spellcheck.dictionary' => 'title'
+          #:'spellcheck.dictionary' => 'title'
       }
       # :solr_local_parameters will be sent using Solr LocalParams
       # syntax, as eg {! qf=$title_qf }. This is neccesary to use
@@ -283,7 +283,7 @@ class CatalogController < ApplicationController
     config.add_search_field('author', label: I18n.t('blacklight.search.form.search.author')) do |field|
       field.solr_parameters = {
           :fq => ['application_ssim:ADL','cat_ssi:work','type_ssi:trunk'],
-          :'spellcheck.dictionary' => 'author'
+          #:'spellcheck.dictionary' => 'author'
       }
       field.solr_local_parameters = {
           :qf => 'author_name_tesim',

@@ -1,16 +1,16 @@
 # Class to centralise inteface with FileServer
 class FileServer
-  def self.render_snippet(volume_id, opts={})
+  def self.render_snippet(id, opts={})
     # only try to split id when we are requesting a text
     # if !opts.has_key? :c
     #   a =id.split("-")
     # else
     #   a = [id]
     # end
-    uri = "#{Rails.application.config_for(:text_service)["snippet_server_url"]}?doc=#{volume_id}.xml"
-    uri += "&id=#{opts[:xml_id]}" if opts[:xml_id].present?
+    uri = "#{Rails.application.config_for(:text_service)["snippet_server_url"]}?path=#{id}"
+    #uri += "&id=#{opts[:xml_id]}" if opts[:xml_id].present?
     uri += "&op=#{opts[:op]}" if opts[:op].present?
-    uri += "&c=#{opts[:c]}" if opts[:c].present?
+    #uri += "&c=#{opts[:c]}" if opts[:c].present?
     uri += "&prefix=#{opts[:prefix]}" if opts[:prefix].present?
     uri += "&q=#{URI.escape(opts[:q])}" if opts[:q].present?
     Rails.logger.debug("snippet url #{uri}")
