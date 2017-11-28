@@ -1,0 +1,14 @@
+
+<div class="row content-body">
+<div class="container">
+  <h2><%= t('views.volume.content')%></h2>
+
+  <dl>
+
+
+<% @work_docs.each do |doc| %>
+   <dd><%= link_to doc['work_title_tesim'].join, solr_document_path(doc['id']) %></dd>
+<% end %>
+</dl>
+</div>
+</div>

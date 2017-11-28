@@ -447,4 +447,29 @@ class CatalogController < ApplicationController
     self.class == CatalogController
   end
 
+
+  # actions for generating the list of authorportraits and period descriptions
+
+  def periods
+    periods_search_service = search_service_class.new(blacklight_config, search_state.to_h)
+    # Search for period descriptions
+    # Use a search builder with special processing chain
+    (@response, deprecated_document_list) = periods_search_service.search_results do |builder|
+      periods_search_service.search_builder_class.new([:default_solr_parameters,:build_all_periods_search],builder)
+    end
+    render "index"
+  end
+
+  def authors
+    authors_search_service = search_service_class.new(blacklight_config, search_state.to_h)
+    # Search for period descriptions
+    # Use a search builder with special processing chain
+    (@response, deprecated_document_list) = authors_search_service.search_results do |builder|
+      authors_search_service.search_builder_class.new([:default_solr_parameters,:build_all_authors_search],builder)
+    end
+    render "index"
+  end
+
+
+
 end

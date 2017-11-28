@@ -13,8 +13,6 @@
                   <span class="glyphicon glyphicon-search"></span>
                 </button>
       </span>
-      <%= render 'tooltips' %>
-
+        <%= render :partial => 'tooltips', locals: {document: 'search', header: true} %>
     </div>
-
 <% end %>

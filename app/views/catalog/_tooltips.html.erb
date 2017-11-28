@@ -1,16 +1,14 @@
-<span id="search-tooltip">
-        <span class="search-tooltip ">?
-         <span class="tooltiptext">
-            <div class="card">
-              <div class="card-header"><%= t('blacklight.search.form.search.search_tips') %></div>
-              <div class="card-body">
-                <ul class="advanced-help">
-                  <li><%= t('blacklight.search.form.search.tooltips1') %></li>
-                  <li><%= t('blacklight.search.form.search.tooltips2') %></li>
-                  <li><%= t('blacklight.search.form.search.tooltips3') %></li>
-                </ul>
-              </div>
-            </div>
-         </span>
-        </span>
-      </span>
+<span id="<%= document %>-tooltip">
+<span class="text-tooltip <%= document %>-tooltip ">?
+  <span class="text-tooltiptext <%= document %>-tooltiptext">
+    <div class="card">
+      <% if header %>
+          <div class="card-header"><%= t('tooltip.search.header') %></div>
+      <% end%>
+      <div class="card-body">
+        <%= render :partial => "#{document}_tips" %>
+      </div>
+    </div>
+  </span>
+</span>
+</span>

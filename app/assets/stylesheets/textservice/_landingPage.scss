@@ -1,3 +1,7 @@
+.lpContainer {
+  min-height: 620px;
+}
+
 .ocr, .kbOSDViewer {
   height: 620px;
   overflow-y: scroll;
@@ -19,6 +23,15 @@
 
 #ocrFullscreenButton{
   float:right;
+}
+
+.textToolbar, .kbOSDToolbar, .downloadLinkContainer{
+  .fa {
+    color: $primary !important;
+    &:hover {
+      color: $primary !important;
+    }
+  }
 }
 
 .textToolbar{
@@ -44,4 +57,8 @@
 .kbOSDToolbar {
   border-bottom: 1px solid $primary !important;
   padding-bottom: 5px;
+}
+
+.document-metadata{
+  padding-left:15px;
 }
