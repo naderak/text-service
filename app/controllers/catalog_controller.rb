@@ -370,21 +370,15 @@ class CatalogController < ApplicationController
   # actions for generating the list of authorportraits and period descriptions
 
   def periods
-    periods_search_service = search_service_class.new(blacklight_config, search_state.to_h)
-    # Search for period descriptions
-    # Use a search builder with special processing chain
-    (@response, deprecated_document_list) = periods_search_service.search_results do |builder|
-      periods_search_service.search_builder_class.new([:default_solr_parameters,:build_all_periods_search],builder)
+    (@response,@deprecated_document_list) = search_service.searc_results do |builder|
+      builder = blacklight_config.default_solr_params.merge({rows: 10000, fq:['cat_ssi:period','type_ssi:work']})
     end
     render "index"
   end
 
   def authors
-    authors_search_service = search_service_class.new(blacklight_config, search_state.to_h)
-    # Search for period descriptions
-    # Use a search builder with special processing chain
-    (@response, deprecated_document_list) = authors_search_service.search_results do |builder|
-      authors_search_service.search_builder_class.new([:default_solr_parameters,:build_all_authors_search],builder)
+    (@response,@deprecated_document_list) = search_service.searc_results do |builder|
+      builder = blacklight_config.default_solr_params.merge({rows: 10000, fq:['cat_ssi:author','type_ssi:work']})
     end
     render "index"
   end
