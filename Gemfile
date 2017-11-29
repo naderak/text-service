@@ -71,4 +71,4 @@ end
 
 gem 'jquery-rails'
 gem 'font-awesome-rails'
-gem 'kbcookie', '>=0.0.0', :git => 'https://github.com/Det-Kongelige-Bibliotek/kbcookie.git'
+gem 'kbcookie', '=0.0.2', :git => 'https://github.com/Det-Kongelige-Bibliotek/kbcookie.git'
