@@ -34,6 +34,11 @@ class FileServer
     result.html_safe.force_encoding('UTF-8')
   end
 
+  ## dummy toc function returns emtpy toc
+  def self.toc(arg1,arg2={})
+    ""
+  end
+
   # This function is only used for sending  xml-(TEI) files directly to the user
   # TODO: do we need this!!
   def self.get_file(path)
