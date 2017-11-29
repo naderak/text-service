@@ -9,6 +9,8 @@
   </head>
 
   <body>
-    <%= yield %>
+  <%= render :partial => 'shared/header_navbar' %>
+  <%= yield %>
+  <%= render :partial => 'shared/footer' %>
   </body>
 </html>
