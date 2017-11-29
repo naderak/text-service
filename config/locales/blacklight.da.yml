@@ -57,7 +57,7 @@ da:
       collection:
         add:
           button: 'Tilføj til bogmærker'
-      title: 'Bogmærker'
+      page_title: 'Bogmærker- %{application_name}'
       no_bookmarks: 'Du har ingen bogmærker'
       add:
         button: 'Tilføj til bogmærker'
