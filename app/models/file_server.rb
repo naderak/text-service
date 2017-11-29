@@ -1,12 +1,21 @@
 # Class to centralise inteface with FileServer
 class FileServer
   def self.render_snippet(id, opts={})
-    uri = "#{Rails.application.config_for(:text_service)["snippet_server_url"]}?path=#{id}"
+    uri = "#{Rails.application.config_for(:text_service)["snippet_server_path"]}"
+    if(opts[:op] == "osd")
+      uri +="#{Rails.application.config_for(:text_service)["openSeadragon_script"]}"
+    else
+      uri +="#{Rails.application.config_for(:text_service)["snippet_script"]}"
+    end
+    uri +="?path=#{id}"
     #uri += "&id=#{opts[:xml_id]}" if opts[:xml_id].present?
     uri += "&op=#{opts[:op]}" if opts[:op].present?
     #uri += "&c=#{opts[:c]}" if opts[:c].present?
     uri += "&prefix=#{opts[:prefix]}" if opts[:prefix].present?
     uri += "&q=#{URI.escape(opts[:q])}" if opts[:q].present?
+
+    Rails.logger.debug(opts)
+
     Rails.logger.debug("snippet url #{uri}")
 
     uri = URI.parse(uri)
@@ -93,15 +102,16 @@ class FileServer
     "#{Rails.application.config_for(:text_service)["openSeadragon_script"]}"
   end
 
-  def self.openSeadragon_snippet(opts={})
-    opts[:op] = 'json'
+  def self.openSeadragon_snippet(id,opts={})
+    opts[:op] = 'osd'
     opts[:prefix] = Rails.application.config_for(:text_service)["image_server_prefix"]
     ################### remove the collection #########################################
     # opts[:c] = 'adl'
-    base = snippet_server_url
-    base += "#{opts[:project]}" if opts[:project].present?
+    # base = snippet_server_url
+    # base += "#{opts[:project]}" if opts[:project].present?
     ################### changed the SnippetServer to SileServer #######################
-    uri = FileServer.contruct_url(base, get_openSeadragon_script, opts)
+    # uri = FileServer.construct_url(base, get_openSeadragon_script, opts)
+    uri = FileServer.render_snippet(id,opts)
     self.get(uri)
   end
 
@@ -127,10 +137,12 @@ class FileServer
 
   private
 
-  def self.contruct_url(base, script, opts={})
+  def self.construct_url(base, script, opts={})
     uri = base
     uri += "/"+script
-    uri += "?doc=#{opts[:doc]}" if opts[:doc].present?
+    uri += "?"
+    uri += "&doc=#{opts[:doc]}" if opts[:doc].present?
+    uri += "&doc=#{opts[:doc]}" if opts[:doc].present?
     uri += "&id=#{URI.escape(opts[:id])}" if opts[:id].present?
     uri += "&mode=#{URI.escape(opts[:mode])}" if opts[:mode].present?
     uri += "&op=#{URI.escape(opts[:op])}" if opts[:op].present?

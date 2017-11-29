@@ -20,7 +20,7 @@
 </div>
 <article class="ocr">
   <%= FileServer.render_snippet(@document['id'],
-                                {q: query}) %>
+                                {q: query,op: "render"}) %>
 </article>
 
 
