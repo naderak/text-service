@@ -35,6 +35,7 @@ class FileServer
   end
 
   ## dummy toc function returns emtpy toc
+  # Please reimplemnt dont copy
   def self.toc(arg1,arg2={})
     ""
   end
