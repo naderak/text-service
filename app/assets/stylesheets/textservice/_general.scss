@@ -66,11 +66,14 @@ button.btn-primary {
 .search-secondary {
   height: 90px;
   margin-bottom: 15px;
-
   h1 {
     padding-left: 15px;
     color: $secondary;
     font-size: 30px;
+    line-height: 94px;
+    @extend .search-bg;
+    padding-top: unset!important;
+
   }
 
   .search-bg {
@@ -112,7 +115,7 @@ button.btn-primary {
 }
 
 .document {
-  border: thin solid $secondary;
+  border: thin solid #f2eee2;
   padding: 1em;
   margin: 1em;
   border-radius: 10px;
