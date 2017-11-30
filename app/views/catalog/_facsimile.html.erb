@@ -12,7 +12,7 @@
 </div>
 
 <script type="text/javascript">
-    var kbOSDconfig = [<%= FileServer.openSeadragon_snippet({doc: @document['volume_id_ssi']+'.xml', id: @document['xmlid_ssi']}) %>];
+    var kbOSDconfig = [<%= FileServer.render_snippet(@document['id'],{op: "osd"}) %>];
 
 
     //Hide the rotation and flip option
