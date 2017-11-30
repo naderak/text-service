@@ -36,8 +36,8 @@ class FileServer
 
   ## dummy toc function returns emtpy toc
   # Please reimplemnt dont copy
-  def self.toc(arg1,arg2={})
-    ""
+  def self.toc(id)
+    self.render_snippet(id,{op:'toc'})
   end
 
   # This function is only used for sending  xml-(TEI) files directly to the user
