@@ -34,8 +34,6 @@ class FileServer
     result.html_safe.force_encoding('UTF-8')
   end
 
-  ## dummy toc function returns emtpy toc
-  # Please reimplemnt dont copy
   def self.toc(id)
     self.render_snippet(id,{op:'toc'})
   end
