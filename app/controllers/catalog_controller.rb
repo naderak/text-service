@@ -94,95 +94,7 @@ class CatalogController < ApplicationController
 
     config.show.document_actions.citation.if = :render_citation_action?
 
-    # Overwriting this method to enable pdf generation using WickedPDF
-    # Unfortunately the additional_export_formats method was quite difficult
-    # to use for this use case.
-    def show
-      @response, @document = search_service.fetch URI.unescape(params[:id])
 
-      # if we are showing a volume, fetch list of all works in the volume
-      if @document['cat_ssi'].starts_with? 'volume'
-        (@work_resp, @work_docs) =  search_service.search_results() do |builder|
-          if respond_to? (:blacklight_config)
-            builder = blacklight_config.search_builder_class.new([:default_solr_parameters,:part_of_volume_search],builder)
-            builder = builder.with({volumeid: @document['volume_id_ssi']})
-            builder
-          end
-        end
-      end
-
-      #if we are showing a period, fetch a list of authors
-      if @document['cat_ssi'].starts_with? 'period'
-        (@auth_resp, @auth_docs) = search_service.search_results() do |builder|
-          if respond_to? (:blacklight_config)
-            builder = blacklight_config.search_builder_class.new([:default_solr_parameters,:build_authors_in_period_search],builder)
-            builder = builder.with({perioid: @document['id']})
-            builder
-          end
-        end
-      end
-
-      respond_to do |format|
-        format.html { setup_next_and_previous_documents }
-        format.json { render json: { response: { document: @document } } }
-        format.pdf { send_pdf(@document, 'text') }
-        format.xml do
-          if @document['cat_ssi'] == 'volume'
-            data = FileServer.get_file("/texts/#{@document['volume_id_ssi']}.xml")
-            send_data data, type: 'application/xml'
-          end
-        end
-        additional_export_formats(@document, format)
-      end
-    end
-
-    def facsimile
-      @response, @document = search_service.fetch URI.unescape(params[:id])
-      respond_to do |format|
-        format.html { setup_next_and_previous_documents }
-        format.pdf { send_pdf(@document, 'image') }
-      end
-    end
-
-    def periods
-      (@response, @document_list) = search_service.search_results() do |builder|
-        search_builder_class.new([:default_solr_parameters,:build_all_periods_search],builder)
-      end
-      render "index"
-    end
-
-    def authors
-      (@response, @document_list) = search_service.search_results() do |builder|
-        search_builder_class.new([:default_solr_parameters,:build_all_authors_search],builder)
-      end
-      render "index"
-    end
-
-    # common method for rendering pdfs based on wicked_pdf
-    # cache files in the public folder based on their id
-    # perhaps using the Solr document modified field
-    def send_pdf(document, type)
-      name = document['work_title_tesim'].first.strip rescue document.id
-      path = Rails.root.join('public', 'pdfs', "#{document.id.gsub('/', '_')}_#{type}.pdf")
-      solr_timestamp = Time.parse(document['timestamp'])
-      file_mtime = File.mtime(path) if File.exist? path.to_s
-      # display the cached pdf if solr doc timestamp is older than the file's modified date
-      if File.exist? path.to_s and ((type == 'text' and solr_timestamp < file_mtime) or type == 'image')
-        send_file path.to_s, type: 'application/pdf', disposition: :inline, filename: name+".pdf"
-      else
-        render pdf: name,
-               footer: {right: '[page] af [topage] sider'},
-               save_to_file: path,
-               header: {html: {template: 'shared/pdf_header.pdf.erb'},
-                        spacing: 5},
-               margin: {top: 15, # default 10 (mm)
-                        bottom: 15},
-               cover:  Rails.root.join('app', 'views', 'shared', 'pdf_cover.html')
-        # If dynamic information is needed, it can come either from the snippet_server or by creating a string
-        # here as:
-        # cover:  'Hentet fra ADL. Forfatter: ' + document['author_name_ssi']
-      end
-    end
 
     # we do not want to start a new search_session for 'leaf' searches
     # to avoid messing up previous and next links
@@ -343,7 +255,7 @@ class CatalogController < ApplicationController
   end
 
   def is_text_search?
-    ['authors','periods',"allworks"].exclude? action_name
+    ['authors','periods'].exclude? action_name
   end
 
   def has_search_parameters?
@@ -366,18 +278,49 @@ class CatalogController < ApplicationController
     self.class == CatalogController
   end
 
+ # Overwriting this method to enable pdf generation using WickedPDF
+ # Unfortunately the additional_export_formats method was quite difficult
+ # to use for this use case.
+  def show
+    deprecated_response, @document = search_service.fetch(params[:id])
+    @response = ActiveSupport::Deprecation::DeprecatedObjectProxy.new(deprecated_response, 'The @response instance variable is deprecated; use @document.response instead.')
+
+    respond_to do |format|
+      format.html { @search_context = setup_next_and_previous_documents }
+      format.json { render json: { response: { document: @document } } }
+      format.pdf {send_pdf(@document,'text')}
+      additional_export_formats(@document, format)
+    end
+  end
+
+ # common method for rendering pdfs based on wicked_pdf
+ # cache files in the public folder based on their id
+ # perhaps using the Solr document modified field
+  def send_pdf(document, type)
+    name = document['work_title_tesim'].first.strip rescue document.id
+    path = Rails.root.join('public', 'pdfs', "#{document.id.gsub('/', '_')}_#{type}.pdf")
+    solr_timestamp = Time.parse(document['timestamp'])
+    file_mtime = File.mtime(path) if File.exist? path.to_s
+    render pdf: name,
+           footer: {right: '[page] af [topage] sider'},
+           header: {html: {template: 'shared/pdf_header.pdf.erb'},
+                    spacing: 5},
+           margin: {top: 15, # default 10 (mm)
+                    bottom: 15},
+           cover:  Rails.root.join('app', 'views', 'shared', 'pdf_cover.html')
+  end
 
   # actions for generating the list of authorportraits and period descriptions
 
   def periods
-    (@response,@deprecated_document_list) = search_service.searc_results do |builder|
+    (@response,@deprecated_document_list) = search_service.search_results do |builder|
       builder = blacklight_config.default_solr_params.merge({rows: 10000, fq:['cat_ssi:period','type_ssi:work']})
     end
     render "index"
   end
 
   def authors
-    (@response,@deprecated_document_list) = search_service.searc_results do |builder|
+    (@response,@deprecated_document_list) = search_service.search_results do |builder|
       builder = blacklight_config.default_solr_params.merge({rows: 10000, fq:['cat_ssi:author','type_ssi:work']})
     end
     render "index"
