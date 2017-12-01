@@ -3,7 +3,7 @@ body {
   font-family: 'Noto Serif', serif;
   font-weight: 400;
   font-size: 14px;
-  background-color: #fff;
+  background-color: white;
   background-image: url(asset-path('lion.png'));
   background-position: center 350px;
   background-repeat: repeat-x;
@@ -43,7 +43,7 @@ button.btn-primary {
 
 .btn-secondary {
   color: #333;
-  background-color: #fff;
+  background-color: white;
   border-color: #ccc;
 }
 
