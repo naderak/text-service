@@ -150,7 +150,7 @@ da:
           post_label: 'for'
         search:
          label: 'Søg efter'
-          placeholder: 'Forfatter, titel eller søgeord'
+         placeholder: 'Forfatter, titel eller søgeord'
         submit: 'Søg'
       pagination:
         title: 'Results navigation'
