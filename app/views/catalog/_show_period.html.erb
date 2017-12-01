@@ -1,0 +1,50 @@
+<%# default partial to display solr document fields in catalog show view -%>
+<% doc_presenter = show_presenter(document) %>
+
+    <div class="text-content">
+      <div class="text">
+
+      <div class="period-writers-list">
+
+        <dl>
+          <dt class="blacklight-author_name_tesim">Forfattere i ADL</dt>
+        </dl>
+
+        <ul>
+        <% @auth_docs.each do |doc| %>
+            <li><%= link_to doc['work_title_tesim'].join, solr_document_path(doc['id']) %></li>
+        <% end %>
+        </ul>
+
+      </div>
+
+      <div class="row divider-space">
+        <div class="col-md-1"></div>
+        <div class="col-md-10">
+          <div class="divider clearfix">
+            <div class="left"></div>
+            <div class="midt"></div>
+            <div class="right"></div>
+          </div>
+        </div>
+        <div class="col-md-1"></div>
+      </div>
+
+        <dl class="dl-horizontal  dl-invert pull-left">
+          <dt class="blacklight-author_name_tesim">Periodebeskrivelse af</dt>
+          <dd class="blacklight-author_name_tesim"><%= doc_presenter.field_value "author_name_tesim" %></dd>
+        </dl>
+        <div class="pull-right text-right">
+          <a target="_blank" href="">
+            <span class="glyphicon glyphicon-save"></span> <%= link_to "Tekst", solr_document_path(document.id, format: 'pdf') %>
+          </a>
+        </div>
+
+        <div><br/></div>
+
+        <% text ||= FileServer.render_snippet(document.id,{c: 'periods'}) %>
+        <%= text.html_safe %>
+      </div>
+    </div>
+
+

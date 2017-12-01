@@ -36,11 +36,7 @@
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
       </div>
       <div class="modal-body">
-        <% if document['cat_ssi'] == 'portrait' %>
-            <%= FileServer.toc(document.id,{c: 'authors'}) %>
-        <% else %>
-            <%= FileServer.toc(@document['volume_id_ssi'], {xml_id: @document['xmlid_ssi']}) %>
-           <% end %>
+        <%= FileServer.toc(document.id) %>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">   <%= t('text_service.landing_page.close') %></button>

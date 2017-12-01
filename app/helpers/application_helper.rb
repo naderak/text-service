@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 module ApplicationHelper
 
   def get_period_name value
@@ -21,7 +22,7 @@ module ApplicationHelper
     title = args[:document]['volume_title_tesim'].try(:first).to_s
     # Add author and value as one string so they don't get separated by comma
     label << author + title
-    label << "udg. af <RESP name to be added in Solr>"
+    label << "udg. af #{args[:document]['editor_ssi']}" if args[:document]['editor_ssi'].present?
     label << "#{args[:document]['publisher_tesim'].join(', ')}" if args[:document]['publisher_tesim'].present?
     label << "#{args[:document]['date_published_ssi']}" if args[:document]['date_published_ssi'].present?
     # Remove empty string from the array
@@ -82,6 +83,10 @@ module ApplicationHelper
   # e.g. 'off', 'cog' etc
   def bootstrap_glyphicon(icon, classes = '')
     content_tag(:span, nil, class: "glyphicon glyphicon-#{icon} #{classes}").html_safe
+  end
+
+  def get_author_image(id)
+    "authors/#{id.gsub('adl-authors-','').gsub('-root','')}.jpg"
   end
 
   private
