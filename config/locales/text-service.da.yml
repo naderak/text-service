@@ -17,11 +17,9 @@ da:
       boxes:
         authors:
           title: 'Forfattere'
-          link: 'authors_path'
           description: 'Find en forfatter i den alfabetiske oversigt og få adgang til forfatterens værker og en introduktion.'
         titles:
           title: 'Titler'
-          link:
           description: 'Få overblik over alle værktitler i ADL.'
         periods:
           title: 'Perioder'
