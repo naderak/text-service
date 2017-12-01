@@ -70,7 +70,7 @@ function show_work_search(id, target_selector, q){
     });
 }
 
-
+///////// Cookie popup in the home page
 function cookieTerms(cname, cvalue, exdays) {
     var d = new Date();
     d.setTime(d.getTime() + (exdays*24*60*60*1000));
@@ -90,17 +90,22 @@ function getCookie(cname) {
 }
 
 function checkCookie() {
-    var cookie = getCookie("terms");
-    if (cookie != "") {
-//        ADL.console.log("cookie: "+ cookie);
-//        document.getElementById("cookie-button").style.display="none";
-    } else {
-        document.getElementById("cookie-button").style.display="block";
-        if (cookie != "" && cookie != null) {
-            cookieTerms("terms", cookie, 60);
+    var cookie_button = document.getElementById("cookie-button");
+    console.log(cookie_button);
+    if (cookie_button) {
+        var cookie = getCookie("terms");
+        if (cookie != "") {
+        } else {
+            cookie_button.style.display = "block";
+            if (cookie != "" && cookie != null) {
+                cookieTerms("terms", cookie, 60);
+            }
         }
     }
 }
+$( document ).ready(function() {
+    checkCookie();
+});
 /////////
 function toggleHighlight() {
     var el = document.getElementsByClassName('hit');
