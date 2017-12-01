@@ -3,6 +3,9 @@ class CatalogController < ApplicationController
 
   include Blacklight::Catalog
 
+  #get the list of all authors in a period when we are showing af period
+  before_action :get_authors_in_period, only: [:show], if: :showing_period?
+
   configure_blacklight do |config|
     ## Class for sending and receiving requests from a search index
     # config.repository_class = Blacklight::Solr::Repository
@@ -323,6 +326,17 @@ class CatalogController < ApplicationController
     render "index"
   end
 
+  private
 
+  def showing_period?
+    params['id'].present? && params['id'].starts_with?('adl-periods')
+  end
 
+  def get_authors_in_period
+    (@auth_resp, @auth_docs) = search_service.search_results do |builder|
+      if respond_to? (:blacklight_config)
+        builder = blacklight_config.default_solr_params.merge({rows: 10000, fq:['cat_ssi:author',"perioid_ssi:#{params[:id]}"]})
+      end
+    end
+  end
 end

@@ -85,6 +85,10 @@ module ApplicationHelper
     content_tag(:span, nil, class: "glyphicon glyphicon-#{icon} #{classes}").html_safe
   end
 
+  def get_author_image(id)
+    "authors/#{id.gsub('adl-authors-','').gsub('-root','')}.jpg"
+  end
+
   private
 
   def get_author_name repository, id
