@@ -1,24 +1,4 @@
 da:
-  January: jan.
-  February: feb.
-  March: mar.
-  April: apr.
-  May: mai
-  June: jun.
-  July: jul.
-  August: aug.
-  September: sep.
-  October: okt.
-  November: nov.
-  December: dec.
-  active_record:
-    models:
-      feedback: 'Feedback'
-    attributes:
-      feedback:
-        name: 'Your Name'
-        email: 'Your Email'
-        message: 'Your Message'
   views:
     pagination:
       first: '&laquo; Første'
@@ -34,35 +14,25 @@ da:
   blacklight:
     application_name: 'Arkiv for Dansk Litteratur'
 
-    entry_name:
-      default: 'post'
-
-    text_toolbar:
-      fullscreen: 'Se tekst i fuld skærm'
-      text : 'Tekst'
-      highlight: 'Tilføj/fjern markering'
-
     header_links:
       login: 'Log ind'
       logout: 'Log ud'
       bookmarks: 'Bogmærker'
-      saved_searches: 'Gemte søgninger'
       search_history: 'Søgehistorik'
 
     welcome: 'Welcome!'
     and: 'og'
     or: 'eller'
 
+    modal:
+      close: "Luk"
+
     bookmarks:
-      collection:
-        add:
-          button: 'Tilføj til bogmærker'
+      title: 'Bogmærker'
       page_title: 'Bogmærker- %{application_name}'
       no_bookmarks: 'Du har ingen bogmærker'
       add:
         button: 'Tilføj til bogmærker'
-        title: 'Bogmærker'
-
         success:
           one: 'Dit bogmærke er blevet gemt.'
           other: 'Dine bogmærker er blevet gemt.'
@@ -81,34 +51,6 @@ da:
       list_title: 'Dine bogmærker'
       delete: 'Slet'
 
-    feedback:
-      valid_name: 'A valid name is required'
-      valid_email: 'A valid email address is required'
-      need_message: 'A message is required'
-      submit: 'Send!'
-      errors:
-        title: 'Please fix the following form errors:'
-      complete:
-        title: 'Thank-you for your feedback'
-
-    saved_searches:
-      add:
-        success: 'Din søgning er blevet gemt.'
-        failure: 'Din søgning kunne ikke gemmes.'
-      remove:
-        success: 'Din gemte søgning blev slettet.'
-        failure: 'Din gemte søgning kunne ikke slettes.'
-      clear:
-        action_title: 'Slet alle'
-        action_confirm: 'Slet alle?'
-        success: 'Dine gemte søgninger er blevet slettet'
-        failure: 'Dine gemte søgninger kunne ikke slettes.'
-      title: 'Gemte søgninger'
-      need_login: 'Log venligst ind for at se dine gemte søgninger.'
-      no_searches: 'Du har ikke nogen gemte søgninger'
-      list_title: 'Dine gemte søgninger'
-      delete: 'Slet'
-
     search_history:
       clear:
         action_title: 'Slet alle'
@@ -116,6 +58,7 @@ da:
         success: 'Søgehistorik ryddet.'
         failure: 'Din søgehistorik kunne ikke slettes.'
       title: 'Søgehistorik'
+      page_title: 'Søgehistorik - %{application_name}'
       no_history: 'Du har ikke nogen søgehistorik'
       recent: 'Dine seneste søgninger'
       forget: 'Slet'
@@ -124,106 +67,96 @@ da:
     tools:
       title: 'Værktøjer'
       citation: 'Citér dette værk'
-      endnote: 'Eksporter til EndNote'
-      refworks: 'Eksporter til Refworks'
-      email: 'E-mail'
-      sms: 'SMS This'
-      librarian_view: 'Librarian View'
-      clear: 'Clear'
-      feedback: "Fejlrapportering"
+      email: 'Send som E-mail'
+      sms: 'Send som SMS'
+      clear: 'Nulstil'
 
     citation:
-      apa: ''
+      mla: 'MLA'
+      apa: 'APA'
+      chicago: 'Chicago'
 
     email:
-      success: "Din besked er blevet sendt."
       form:
-        title: 'E-mail'
+        title: 'Send som E-mail'
         to: 'E-mail:'
-        work_title: 'Titel:'
-        volume_title: 'Bind:'
-        author: 'Forfatter:'
         message: 'Besked:'
-        wrong_words: 'Ord med fejl i:'
         submit: 'Send'
       text:
-        from: 'Fra: %{value}'
-        title: 'Titel: %{value}'
-        author: 'Forfatter: %{value}'
+        default_title: 'N/A'
+        title: 'Title: %{value}'
+        author: 'Author: %{value}'
         format: 'Format: %{value}'
-        language: 'Sprog: %{value}'
+        language: 'Language: %{value}'
         subject:
-          one: 'Mail fra ADL: %{title}'
-          other: 'Mail fra ADL'
+          one: 'Item Record: %{title}'
+          other: 'Item records'
         url: 'URL: %{url}'
-        message: 'Besked: %{message}'
+        message: 'Message: %{message}'
+
       success: "E-mail sendt"
+
       errors:
         to:
           invalid: 'Du skal indtaste en korrekt e-mailadresse'
           blank: 'Du skal indtaste en modtager for at sende beskeden'
     sms:
       form:
-        title: 'SMS This'
-        to: 'Phone Number:'
-        carrier: 'Carrier'
-        carrier_prompt: 'Please select your carrier'
+        title: 'Send som SMS'
+        to: 'Telefonnummer:'
+        carrier: 'Udbyder'
+        carrier_prompt: 'Vælg udbyder:'
         submit: 'Send'
       text:
         title: '%{value}'
         author: ' af %{value}'
         url: 'Link: %{url}'
+      success: "SMS afsendt"
       errors:
         to:
-          invalid: 'You must enter a valid 10 digit phone number'
-          blank: "You must enter a recipient's phone number in order to send this message"
+          invalid: 'Indtast gyldigt telefonnummer'
+          blank: "Du skal indtaste en modtagers telefonnummer for at sende beskeden"
         carrier:
-          blank: 'You must select a carrier'
+          blank: 'Du skal indtaste en udbyder'
+          invalid: "Du skal indtaste en gyldig udbyder"
 
     back_to_search: 'Tilbage til søgeresultat'
     back_to_bookmarks: 'Tilbage til bogmærker'
 
     search:
-      bookmarks:
-          present: "I bogmærker"
-          absent: "Tilføj til bogmærker"
-          inprogress: "Gemmer..."
+      # i18n key 'title' is deprecated and will be removed in Blacklight 6.0
       title: '%{application_name} søgeresultater'
+      page_title:
+        title: '%{constraints} - %{application_name} søgeresultater'
+        constraint: '%{label}: %{value}'
+        many_constraint_values: '%{values} Valgt'
       search_results_header: 'Søg'
       search_results: 'Søgeresultater'
       errors:
-        request_error: "Sorry, I don't understand your search."
-        invalid_solr_id: "Sorry, you have requested a record that doesn't exist."
+        request_error: "Beklager, søgningen er ikke forstået."
+        invalid_solr_id: "Beklager, du har søgt efter en post, der ikke findes."
       per_page:
-        label: '%{count}<span class="hide-text"> per side</span>'
+        label: '%{count}<span class="sr-only"> per side</span>'
         button_label: '%{count} per side'
-        title: 'Number of results to display per page'
+        title: 'Antalt resultater per side'
         submit: 'Update'
       sort:
-        label: 'Sorter efter: %{field}'
-        submit: 'sort results'
+        label: 'Sorter efter %{field}'
+        submit: 'Sortér resultater'
       form:
         search_field:
           label: 'Søg'
           title: 'Afgrænsning'
           post_label: 'for'
-        q: 'Søg...'
-        submit: 'Søg'
         search:
-          placeholder: 'Forfatter, titel eller søgeord'
-          all_filters: 'Fritekst'
-          title: 'Titel'
-          author: 'Forfatter'
-        sort:
-          relevance: 'Standard'
-          author: 'Forfatter'
-      page_title:
-       title: 'Arkiv for Dansk Litteratur'
+         label: 'Søg efter'
+         placeholder: 'Forfatter, titel eller søgeord'
+        submit: 'Søg'
       pagination:
         title: 'Results navigation'
       pagination_info:
-        no_items_found: '<span class="lead">Din søgning gav desværre ingen resultater</span>'
-        single_item_found: '<strong>1</strong> to <strong>1</strong> af <strong>1</strong>'
+        no_items_found: 'Ingen %{entry_name} fundet'
+        single_item_found: '<strong>1</strong> %{entry_name} fundet'
         pages:
           one: '<strong>%{start_num}</strong> - <strong>%{end_num}</strong> af <strong>%{total_num}</strong>'
           other: '<strong>%{start_num}</strong> - <strong>%{end_num}</strong> af <strong>%{total_num}</strong>'
@@ -234,107 +167,46 @@ da:
         counter: '%{counter}'
       facets:
         title: 'Afgræns din søgning'
-        refine: 'Afgræns til'
-        facet_fulltext: 'Fuldtekst'
-        facet_title: 'Titel'
+        clear: 'Nulstil filter'
         sort:
           count: 'Antal hits'
           index: 'Alfabetisk'
         count: '%{number}'
-        more: 'mere »'
+        more_html: 'mere <span class="sr-only">%{field_name}</span> »'
         selected:
           remove: '[remove]'
-        more_html: 'Vis alle'
-
+        missing: "[Missing]"
+      group:
+        more: 'mere »'
       filters:
         title: 'Afgrænset til:'
         label: '%{label}:'
         remove:
-          value: 'Remove constraint %{value}'
-          label_value: 'Remove constraint %{label}: %{value}'
-      librarian_view:
-        title: 'Librarian View'
-        leader: 'LEADER %{leader}'
+          value: 'Fjern begrænsning %{value}'
+          label_value: 'Fjern begrænsning %{label}: %{value}'
       start_over: 'Ny søgning'
       index:
         label: '%{label}:'
-        in_text: 'I tekst:'
-        format: 'Formater:'
-        text: 'Tekst'
-        facsimile: 'Faksimile'
-        show_more: 'Vis mere'
-        table_of_content: 'Inhold'
-        all_instances: 'Alle forekomster'
-        close: 'Luk'
       show:
         title: '%{document_title} - %{application_name}'
         label: '%{label}:'
       rss_feed: 'RSS for resultater'
       atom_feed: 'Atom for resultater'
-      fields:
-        default: 'Nøgleord'
+      bookmarks:
+          present: "I bogmærker"
+          absent: "Tilføj til bogmærker"
+          inprogress: "Gemmer..."
       zero_results:
-        modify_search: 'Tilpas søgning'
-        use_fewer_keywords: 'Brug færre søgeord'
-        search_fields: 'Søge felter'
-        search_everything: 'Søg Alt'
-        title: 'Titel'
+        title: "Ingen resultater fundet"
+        modify_search: "Prøv at ændre din søgning"
+        use_fewer_keywords: "Brug færre nøgleord og prøv de links der står til venstre til at forfine din sgøning."
+        search_fields: "Du har søgt inden for %{search_fields}"
+        search_everything: "Prøv at søge i alt"
+      view_title: "Se resultater som: "
+      view:
+        list: "List"
 
-    page_entries: 'hh'
+    entry_name:
+      default: 'entry'
 
     did_you_mean: 'Mente du: %{options}?'
-
-    retrieve: 'hentet fra '
-    from: 'fra '
-
-
-  people:
-    show_person:
-      born: "Født:"
-      died: "Død:"
-      links: "Relateret:"
-      potrait: "Forfatterportræt"
-      similar_works:  "Værker i ADL"
-
-  models:
-    work: 'Værk'
-    person: 'Person'
-    portrait: 'Portræt'
-
-  author:
-    author_potrait_written_by: 'Forfatterportræt skrevet af'
-  home:
-    boxes:
-      authors:
-        title: 'Forfattere'
-        link: 'authors_path'
-        description: 'Find en forfatter i den alfabetiske oversigt og få adgang til forfatterens værker og en introduktion.'
-      titles:
-        title: 'Titler'
-        link:
-        description: 'Få overblik over alle værktitler i ADL.'
-      periods:
-        title: 'Perioder'
-        link:
-        description: 'Læs om en bestemt periode i den danske litteraturhistorie.'
-    bluebar:
-      welcome: 'Velkommen til Arkiv for Dansk Litteratur'
-      description: 'Her kan du læse og søge i værker fra den danske litteraturhistorie fra middelalderen til det 20. årh.'
-  footer:
-      dsl: 'Det Danske Sprog- og Litteraturselskab'
-      kb: 'Det Kongelige Bibliotek'
-      contact_us: 'Kontakt os'
-      about_ADL: 'Om ADL'
-  tooltip:
-    search:
-      header: 'Søgetips'
-      tooltip1: 'Du kan bruge "OR", "AND" og "NOT" til kombinerede søgninger. '
-      tooltip2: 'Bemærk at systemet ikke understøtter wildcards. Trunkering udføres automatisk af systemet.'
-      tooltip3: 'Hvis du søger på flere ord, kan du sætte "+" før et ord hvis resultatet skal indeholde dette ord, og "-" foran et ord hvis resultatet ikke må indeholde det pågældende ord.'
-    login:
-      tooltip: 'Log ind hvis du vil benytte bogmærke-funktionen'
-  static_pages:
-    about:
-      title: 'Om ADL'
-    politik:
-      title: 'Cookie- og Privatlivspolitik'
