@@ -1,0 +1,44 @@
+<%# default partial to display solr document fields in catalog show view -%>
+<% doc_presenter = show_presenter(document) %>
+<div class="text-content">
+
+  <div class="period-writers-list text-left">
+     <a class="icon-list" href="<%= "/?utf8=✓&search_field=author&q=#{document['work_title_tesim'].try(:join)}" %>">
+      <span class="glyphicon glyphicon-list"></span> Værkliste i ADL
+     </a>
+
+    <a class="icon-list" href="<%= solr_document_path(document.id, format:'pdf')%>" target="_blank">
+      <span class="glyphicon glyphicon-save"></span> Download forfatterportræt (PDF)
+    </a>
+  </div>
+
+<div class="row divider-space">
+  <div class="col-md-1"></div>
+  <div class="col-md-10">
+    <div class="divider clearfix">
+      <div class="left"></div>
+      <div class="midt"></div>
+      <div class="right"></div>
+    </div>
+  </div>
+  <div class="col-md-1"></div>
+</div>
+
+    <div class="text">
+      <% unless doc_presenter.field_value("author_name_tesim").empty? %>
+        <div class="dl-horizontal  dl-invert pull-left">
+          <strong><span class="blacklight-author_name_tesim text-left-important"><%= t('author.author_potrait_written_by') %> </span></strong>
+          <span class="blacklight-author_name_tesim">&nbsp;<%= doc_presenter.field_value "author_name_tesim" %></span>
+        </div>
+      <% end %>
+
+        <div class="pull-right thumbnail">
+          <%= image_tag get_author_image(document.id)%>
+        </div>
+        <div><br/><br/><br/></div>
+        <% text ||= FileServer.render_snippet(document.id,{c: 'authors'}) %>
+        <%= text.html_safe %>
+      </div>
+    </div>
+
+
