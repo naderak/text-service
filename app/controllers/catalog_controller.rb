@@ -257,7 +257,7 @@ class CatalogController < ApplicationController
     # This one uses all the defaults set by the solr request handler. Which
     # solr request handler? The one set in config[:default_solr_parameters][:qt],
     # since we aren't specifying it otherwise.
-    config.add_search_field('Alt',label: I18n.t('blacklight.search.form.search.all_filters')) do |field|
+    config.add_search_field('Alt',label: I18n.t('text_service.config.search.all_filters')) do |field|
       field.solr_parameters = {
           :fq => ['application_ssim:ADL','cat_ssi:work','type_ssi:trunk']
       }
@@ -266,7 +266,7 @@ class CatalogController < ApplicationController
       }
     end
 
-    config.add_search_field('title', label: I18n.t('blacklight.search.form.search.title')) do |field|
+    config.add_search_field('title', label: I18n.t('text_service.config.search.title')) do |field|
       # solr_parameters hash are sent to Solr as ordinary url query params.
       field.solr_parameters = {
           :fq => ['application_ssim:ADL','cat_ssi:work','type_ssi:trunk'],
@@ -281,7 +281,7 @@ class CatalogController < ApplicationController
       }
     end
 
-    config.add_search_field('author', label: I18n.t('blacklight.search.form.search.author')) do |field|
+    config.add_search_field('author', label: I18n.t('text_service.config.search.author')) do |field|
       field.solr_parameters = {
           :fq => ['application_ssim:ADL','cat_ssi:work','type_ssi:trunk'],
           :'spellcheck.dictionary' => 'author'
@@ -323,8 +323,8 @@ class CatalogController < ApplicationController
     # label in pulldown is followed by the name of the SOLR field to sort by and
     # whether the sort is ascending or descending (it must be asc or desc
     # except in the relevancy case).
-    config.add_sort_field 'score desc', :label => (I18n.t'blacklight.search.form.sort.relevance')
-    config.add_sort_field 'author_name_ssi asc', :label => (I18n.t'blacklight.search.form.sort.author')
+    config.add_sort_field 'score desc', :label => (I18n.t'text_service.config.sort.relevance')
+    config.add_sort_field 'author_name_ssi asc', :label => (I18n.t'text_service.config.sort.author')
     config.add_sort_field 'work_title_ssi asc', :label => 'Titel'
 
     config.spell_max = 5
@@ -404,7 +404,7 @@ class CatalogController < ApplicationController
  # Email Action (this will render the appropriate view on GET requests and process the form and send the email on POST requests)
   def email_action documents
     report = params[:report].nil? ? "" : params[:report]
-    report +=  I18n.t('blacklight.email.text.from', value: current_user.email) + "\n" unless current_user.nil?
+    report +=  I18n.t('text_service.config.email.text.from', value: current_user.email) + "\n" unless current_user.nil?
     mail = RecordMailer.email_record(documents, {:to => params[:to], :message => report+"\n\n"+params[:message]}, url_options)
     if mail.respond_to? :deliver_now
       mail.deliver_now
@@ -417,10 +417,10 @@ class CatalogController < ApplicationController
   def feedback
     @response, @document = search_service.fetch URI.unescape(params[:id])
     @report = ""
-    @report +=  I18n.t('blacklight.email.text.from', value: current_user.email) + "\n" unless current_user.nil?
-    @report +=  I18n.t('blacklight.email.text.url', url: @document['url_ssi']) + "\n" unless @document['url_ssi'].blank?
-    @report += I18n.t('blacklight.email.text.author', value: @document['author_name'].first) + "\n" unless @document['author_name'].blank?
-    @report += I18n.t('blacklight.email.text.title', value: @document['work_title_tesim'].first.strip)+ "\n" unless @document['work_title_tesim'].blank?
+    @report +=  I18n.t('text_service.config.email.text.from', value: current_user.email) + "\n" unless current_user.nil?
+    @report +=  I18n.t('text_service.config.email.text.url', url: @document['url_ssi']) + "\n" unless @document['url_ssi'].blank?
+    @report += I18n.t('text_service.config.email.text.author', value: @document['author_name'].first) + "\n" unless @document['author_name'].blank?
+    @report += I18n.t('text_service.config.email.text.title', value: @document['work_title_tesim'].first.strip)+ "\n" unless @document['work_title_tesim'].blank?
     render layout: nil
   end
 

@@ -48,4 +48,18 @@ da:
          title: 'Om ADL'
       politik:
          title: 'Cookie- og Privatlivspolitik'
-
+# Keys that are used in catalog_controller
+    config:
+      search:
+        all_filters: 'Fritekst'
+        title: 'Titel'
+        author: 'Forfatter'
+      sort:
+        relevance: 'Standard'
+        author: 'Forfatter'
+      email:
+        text:
+          from: 'Fra: %{value}'
+          title: 'Titel: %{value}'
+          author: 'Forfatter: %{value}'
+          url: 'URL: %{url}'
