@@ -46,6 +46,8 @@ da:
          title: 'Om ADL'
       politik:
          title: 'Cookie- og Privatlivspolitik'
+    author:
+      author_potrait_written_by: 'Forfatterportræt skrevet af'
 # Keys that are used in catalog_controller
     config:
       search:
