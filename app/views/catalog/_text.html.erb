@@ -19,6 +19,13 @@
   <i id="ocrFullscreenButton" class="fa fa-expand fa-lg" title="<%= t('text_service.text_toolbar.fullscreen') %>"></i>
 </div>
 <article class="ocr">
+  <button onclick="javascript:toggleHighlight()" class="showOnFullscreen btn btn-default" title="<%= t('text_service.text_toolbar.highlight')  %>">
+    <i class="fa fa-paint-brush"></i>
+    </a>
+  </button>
+  <button class="escFullScreenButton btn btn-default" title="Tilbage til normal visning">
+    <i class="fa fa-times" aria-hidden="true"></i>
+  </button>
   <%= FileServer.render_snippet(@document['id'],
                                 {q: query,op: "render"}) %>
 </article>
