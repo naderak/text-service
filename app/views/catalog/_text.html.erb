@@ -1,6 +1,7 @@
 <!--Retrieve the query-->
 <% query_params = current_search_session.try(:query_params) %>
 <% search_field = query_params[:search_field] %>
+<% doc_presenter = show_presenter(@document) %>
 
 <%# If the search field is fritekst, get the last query and remove " %>
 <%# If not, the the q parameter will be left empty and the render_snippet will not highlight the text %>
@@ -17,15 +18,28 @@
     <i class="fa fa-paint-brush"></i> <%= t('text_service.text_toolbar.highlight') %>
   </a>
   <i id="ocrFullscreenButton" class="fa fa-expand fa-lg" title="<%= t('text_service.text_toolbar.fullscreen') %>"></i>
+
+  <a class="icon-list" href="<%= "/?utf8=✓&search_field=author&q=#{@document['work_title_tesim'].try(:join)}" %>">
+    <i class="fa fa-list" aria-hidden="true"></i> Værkliste i ADL
+  </a>
+
 </div>
 <article class="ocr">
-  <button onclick="javascript:toggleHighlight()" class="showOnFullscreen btn btn-default" title="<%= t('text_service.text_toolbar.highlight')  %>">
-    <i class="fa fa-paint-brush"></i>
-    </a>
-  </button>
-  <button class="escFullScreenButton btn btn-default" title="Tilbage til normal visning">
-    <i class="fa fa-times" aria-hidden="true"></i>
-  </button>
+<%= render partial: 'fullscreen_buttons'%>
+
+  <% if @document['cat_ssi'] == 'author' %>
+  <% unless doc_presenter.field_value("author_name_tesim").empty? %>
+      <div class="dl-horizontal  dl-invert pull-left">
+        <strong><span class="blacklight-author_name_tesim text-left-important"><%= t('text_service.author.author_potrait_written_by') %> </span></strong>
+        <span class="blacklight-author_name_tesim">&nbsp;<%= doc_presenter.field_value "author_name_tesim" %></span>
+      </div>
+  <% end %>
+  <div class="pull-right thumbnail">
+    <%= image_tag get_author_image(@document.id) %>
+  </div>
+  <div><br/><br/><br/></div>
+      <% end %>
+
   <%= FileServer.render_snippet(@document['id'],
                                 {q: query,op: "render"}) %>
 </article>

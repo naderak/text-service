@@ -29,7 +29,7 @@
 
   <% if has_text && has_facs %>
       <div class="row lpContainer">
-        <div class="col-sm-6 lpTextContainer"><%= render 'text' %></div>
+        <div class="col-sm-6 lpTextContainer"><%= render :partial => 'text'%></div>
         <div class="col-sm-6 lpFacsContainer"><%= render 'facsimile' %></div>
       </div>
   <% elsif has_text %>
