@@ -18,30 +18,32 @@
     <i class="fa fa-paint-brush"></i> <%= t('text_service.text_toolbar.highlight') %>
   </a>
   <i id="ocrFullscreenButton" class="fa fa-expand fa-lg" title="<%= t('text_service.text_toolbar.fullscreen') %>"></i>
+  <% if @document['cat_ssi'] == 'author' %>
 
-  <a class="icon-list" href="<%= "/?utf8=✓&search_field=author&q=#{@document['work_title_tesim'].try(:join)}" %>">
-    <i class="fa fa-list" aria-hidden="true"></i> Værkliste i ADL
-  </a>
+      <a class="icon-list" href="<%= "/?utf8=✓&search_field=author&q=#{@document['work_title_tesim'].try(:join)}" %>">
+        <i class="fa fa-list" aria-hidden="true"></i> Værkliste i ADL
+      </a>
+  <% end %>
 
 </div>
 <article class="ocr">
-<%= render partial: 'fullscreen_buttons'%>
+  <%= render partial: 'fullscreen_buttons' %>
 
   <% if @document['cat_ssi'] == 'author' %>
-  <% unless doc_presenter.field_value("author_name_tesim").empty? %>
-      <div class="dl-horizontal  dl-invert pull-left">
-        <strong><span class="blacklight-author_name_tesim text-left-important"><%= t('text_service.author.author_potrait_written_by') %> </span></strong>
-        <span class="blacklight-author_name_tesim">&nbsp;<%= doc_presenter.field_value "author_name_tesim" %></span>
-      </div>
-  <% end %>
-  <div class="pull-right thumbnail">
-    <%= image_tag get_author_image(@document.id) %>
-  </div>
-  <div><br/><br/><br/></div>
+      <% unless doc_presenter.field_value("author_name_tesim").empty? %>
+          <div class="dl-horizontal  dl-invert pull-left">
+            <strong><span class="blacklight-author_name_tesim text-left-important"><%= t('text_service.author.author_potrait_written_by') %> </span></strong>
+            <span class="blacklight-author_name_tesim">&nbsp;<%= doc_presenter.field_value "author_name_tesim" %></span>
+          </div>
       <% end %>
+      <div class="pull-right thumbnail">
+        <%= image_tag get_author_image(@document.id) %>
+      </div>
+      <div><br/><br/><br/></div>
+  <% end %>
 
   <%= FileServer.render_snippet(@document['id'],
-                                {q: query,op: "render"}) %>
+                                {q: query, op: "render"}) %>
 </article>
 
 
