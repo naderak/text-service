@@ -1,13 +1,23 @@
+<% has_text = document['has_text_ssi'].present? && document['has_text_ssi'] == 'yes' %>
+<% has_facs = document['has_facs_ssi'].present? && document['has_facs_ssi'] == 'yes' %>
+
 <script type="text/javascript">
+
+<% if has_facs %>
     $(document).ready(function () {
         dkBreve.onDocumentReady();
     });
+<% else%>
+    var target = window.location.hash;
+    $( window ).load(function(){
+      if (target) {
+        $('article.ocr').animate({
+          scrollTop: $("#" + target).offset().top-$('article.ocr').offset().top
+        }, 500, 'swing', function () {});
+      }
+    });
+<% end %>
 </script>
-
-
-
-<% has_text = document['has_text_ssi'].present? && document['has_text_ssi'] == 'yes' %>
-<% has_facs = document['has_facs_ssi'].present? && document['has_facs_ssi'] == 'yes' %>
 
 <% if current_search_session %>
     <div id="appliedParams" class="clearfix constraints-container">
@@ -42,8 +52,3 @@
       </div>
   <% end %>
 </div>
-
-
-
-
-
