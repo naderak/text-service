@@ -54,6 +54,7 @@ da:
         all_filters: 'Fritekst'
         title: 'Titel'
         author: 'Forfatter'
+        phrase: 'Phrase Search'
       sort:
         relevance: 'Standard'
         author: 'Forfatter'
