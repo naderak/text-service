@@ -25,6 +25,19 @@
       </a>
   <% end %>
 
+  <% if @document[:id].match(/sks-/) %>
+    <%
+       txt_id = @document['id'].gsub(/(txt)|(txr)|(kom)/,'txt-root').gsub(/-root.*$/,'-root')
+       txr_id = @document['id'].gsub(/(txt)|(txr)|(kom)/,'txr-root').gsub(/-root.*$/,'-root')
+       kom_id = @document['id'].gsub(/(txt)|(txr)|(kom)/,'kom-root').gsub(/-root.*$/,'-root')
+    %>
+
+    <%= link_to "Tekst",           "/text/" + txt_id %>
+    <%= link_to "Kommentar",       "/text/" + kom_id %>
+    <%= link_to "Tekstredegørelse","/text/" + txr_id %>
+
+  <% end %>
+
 </div>
 <article class="ocr">
   <%= render partial: 'fullscreen_buttons' %>
