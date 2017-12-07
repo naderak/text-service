@@ -20,7 +20,7 @@ class CatalogController < ApplicationController
     config.default_solr_params = {
         :qt => 'search',
         :rows => 10,
-        :fq => ['application_ssim:ADL'],
+        #:fq => ['application_ssim:ADL'],
         :hl => 'true',
         :'hl.snippets' => '3',
         :'hl.simple.pre' => '<em class="highlight" >',
@@ -124,35 +124,48 @@ class CatalogController < ApplicationController
     # since we aren't specifying it otherwise.
     config.add_search_field('Alt',label: I18n.t('text_service.config.search.all_filters')) do |field|
       field.solr_parameters = {
-          :fq => ['application_ssim:ADL','cat_ssi:work','type_ssi:trunk']
+          :fq => ['cat_ssi:work'],
+          :qf => 'author_name_tesim^5 work_title_tesim^5 text_tesim',
+          :pf => 'text_tesim'
       }
       field.solr_local_parameters = {
-          :qf => 'author_name_tesim^5 work_title_tesim^5 text_tesim'
       }
     end
 
     config.add_search_field('title', label: I18n.t('text_service.config.search.title')) do |field|
       # solr_parameters hash are sent to Solr as ordinary url query params.
       field.solr_parameters = {
-          :fq => ['application_ssim:ADL','cat_ssi:work','type_ssi:trunk'],
-          #:'spellcheck.dictionary' => 'title'
+          :fq => ['cat_ssi:work'],
+          :qf => 'work_title_tesim',
+          :pf => 'work_title_tesim',
       }
       # :solr_local_parameters will be sent using Solr LocalParams
       # syntax, as eg {! qf=$title_qf }. This is neccesary to use
       # Solr parameter de-referencing like $title_qf.
       # See: http://wiki.apache.org/solr/LocalParams
       field.solr_local_parameters = {
-          :qf => 'work_title_tesim',
       }
     end
 
     config.add_search_field('author', label: I18n.t('text_service.config.search.author')) do |field|
       field.solr_parameters = {
-          :fq => ['application_ssim:ADL','cat_ssi:work','type_ssi:trunk'],
-          #:'spellcheck.dictionary' => 'author'
+          :fq => ['cat_ssi:work'],
+          :qf => 'author_name_tesim',
+          :pf => 'author_name_tesim'
       }
       field.solr_local_parameters = {
-          :qf => 'author_name_tesim',
+      }
+    end
+
+    config.add_search_field('phrase',label: I18n.t('text_service.config.search.phrase')) do |field|
+      field.solr_parameters = {
+          :fq => ['cat_ssi:work'],
+          :qf => 'text_tsim',
+          :pf => 'text_tsim',
+          :ps => 0,
+          :qs => 0,
+      }
+      field.solr_local_parameters = {
       }
     end
 
