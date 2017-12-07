@@ -13,10 +13,10 @@
     <div id="appliedParams" class="clearfix constraints-container">
       <%= link_to t('blacklight.search.start_over'), start_over_path, class: "catalog_startOverLink btn btn-secondary" %>
       <%= link_back_to_catalog class: 'btn btn-secondary' %>
+      <%= render :partial => 'show_tools_work' %>
     </div>
 <% end %>
 
-<%= render :partial => 'show_tools_work' %>
 
 <div class="document">
   <div class="row ">
@@ -29,7 +29,7 @@
 
   <% if has_text && has_facs %>
       <div class="row lpContainer">
-        <div class="col-sm-6 lpTextContainer"><%= render 'text' %></div>
+        <div class="col-sm-6 lpTextContainer"><%= render :partial => 'text'%></div>
         <div class="col-sm-6 lpFacsContainer"><%= render 'facsimile' %></div>
       </div>
   <% elsif has_text %>

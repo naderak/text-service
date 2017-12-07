@@ -1,0 +1,66 @@
+da:
+  text_service:
+    text_toolbar:
+      fullscreen: 'Se tekst i fuld skærm'
+      text: 'Tekst'
+      highlight: 'Tilføj/fjern markering'
+    landing_page:
+      facsimile: 'Faksimile'
+      table_of_content: 'Inhold'
+      all_instances: 'Alle forekomster'
+      close: 'Luk'
+    models:
+      work: 'Værk'
+      person: 'Person'
+      portrait: 'Portræt'
+    home:
+      boxes:
+        authors:
+          title: 'Forfattere'
+          description: 'Find en forfatter i den alfabetiske oversigt og få adgang til forfatterens værker og en introduktion.'
+        titles:
+          title: 'Titler'
+          description: 'Få overblik over alle værktitler i ADL.'
+        periods:
+          title: 'Perioder'
+          link:
+          description: 'Læs om en bestemt periode i den danske litteraturhistorie.'
+      bluebar:
+        welcome: 'Velkommen til Arkiv for Dansk Litteratur'
+        description: 'Her kan du læse og søge i værker fra den danske litteraturhistorie fra middelalderen til det 20. årh.'
+    footer:
+       dsl: 'Det Danske Sprog- og Litteraturselskab'
+       kb: 'Det Kongelige Bibliotek'
+       contact_us: 'Kontakt os'
+       about_ADL: 'Om ADL'
+    tooltip:
+       search:
+         header: 'Søgetips'
+         tooltip1: 'Du kan bruge "OR", "AND" og "NOT" til kombinerede søgninger. '
+         tooltip2: 'Bemærk at systemet ikke understøtter wildcards. Trunkering udføres automatisk af systemet.'
+         tooltip3: 'Hvis du søger på flere ord, kan du sætte "+" før et ord hvis resultatet skal indeholde dette ord, og "-" foran et ord hvis resultatet ikke må indeholde det pågældende ord.'
+    login:
+       tooltip: 'Log ind hvis du vil benytte bogmærke-funktionen'
+    static_pages:
+      about:
+         title: 'Om ADL'
+      politik:
+         title: 'Cookie- og Privatlivspolitik'
+    author:
+      author_potrait_written_by: 'Forfatterportræt skrevet af'
+# Keys that are used in catalog_controller
+    config:
+      search:
+        all_filters: 'Fritekst'
+        title: 'Titel'
+        author: 'Forfatter'
+        phrase: 'Phrase Search'
+      sort:
+        relevance: 'Standard'
+        author: 'Forfatter'
+      email:
+        text:
+          from: 'Fra: %{value}'
+          title: 'Titel: %{value}'
+          author: 'Forfatter: %{value}'
+          url: 'URL: %{url}'
