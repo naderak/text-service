@@ -32,9 +32,18 @@
        kom_id = @document['id'].gsub(/(txt)|(txr)|(kom)/,'kom-root').gsub(/-root.*$/,'-root')
     %>
 
-    <%= link_to "Tekst",           "/text/" + txt_id      %>
-    <%= link_to "Kommentar",       "/text/" + kom_id      %>
-    <%= link_to "Tekstredegørelse","/text/" + txr_id      %>
+    <%= link_to("/text/" + txt_id) do %>
+      <i class="fa fa-file-text" aria-hidden="true"></i>
+      Tekst
+    <% end%>
+    <%= link_to ("/text/" + kom_id ) do%>
+      <i class="fa fa-comment" aria-hidden="true"></i>
+      Kommentar
+    <% end%>
+    <%= link_to ("/text/" + txr_id) do %>
+      <i class="fa fa-file-text-o" aria-hidden="true"></i>
+      Tekstredegørelse
+      <% end%>
 
   <% end %>
 
