@@ -24,7 +24,7 @@
         <i class="fa fa-list" aria-hidden="true"></i> Værkliste i ADL
       </a>
   <% end %>
-
+  <!-- <%= @document[:id] %> -->
   <% if @document[:id].match(/sks-/) %>
     <%
        txt_id = @document['id'].gsub(/(txt)|(txr)|(kom)/,'txt-root').gsub(/-root.*$/,'-root')
@@ -32,9 +32,9 @@
        kom_id = @document['id'].gsub(/(txt)|(txr)|(kom)/,'kom-root').gsub(/-root.*$/,'-root')
     %>
 
-    <%= link_to "Tekst",           "/text/" + txt_id %>
-    <%= link_to "Kommentar",       "/text/" + kom_id %>
-    <%= link_to "Tekstredegørelse","/text/" + txr_id %>
+    <%= link_to "Tekst",           "/text/" + txt_id      %>
+    <%= link_to "Kommentar",       "/text/" + kom_id      %>
+    <%= link_to "Tekstredegørelse","/text/" + txr_id      %>
 
   <% end %>
 
