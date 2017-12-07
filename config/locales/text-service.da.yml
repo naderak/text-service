@@ -6,7 +6,7 @@ da:
       highlight: 'Tilføj/fjern markering'
     landing_page:
       facsimile: 'Faksimile'
-      table_of_content: 'Inhold'
+      table_of_content: 'Indhold'
       all_instances: 'Alle forekomster'
       close: 'Luk'
     models:
