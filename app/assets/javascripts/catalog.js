@@ -91,7 +91,6 @@ function getCookie(cname) {
 
 function checkCookie() {
     var cookie_button = document.getElementById("cookie-button");
-    console.log(cookie_button);
     if (cookie_button) {
         var cookie = getCookie("terms");
         if (cookie != "") {
