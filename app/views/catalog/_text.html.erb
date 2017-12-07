@@ -24,6 +24,28 @@
         <i class="fa fa-list" aria-hidden="true"></i> Værkliste i ADL
       </a>
   <% end %>
+  <!-- <%= @document[:id] %> -->
+  <% if @document[:id].match(/sks-/) %>
+    <%
+       txt_id = @document['id'].gsub(/(txt)|(txr)|(kom)/,'txt-root').gsub(/-root.*$/,'-root')
+       txr_id = @document['id'].gsub(/(txt)|(txr)|(kom)/,'txr-root').gsub(/-root.*$/,'-root')
+       kom_id = @document['id'].gsub(/(txt)|(txr)|(kom)/,'kom-root').gsub(/-root.*$/,'-root')
+    %>
+
+    <%= link_to("/text/" + txt_id) do %>
+      <i class="fa fa-file-text" aria-hidden="true"></i>
+      Tekst
+    <% end%>
+    <%= link_to ("/text/" + kom_id ) do%>
+      <i class="fa fa-comment" aria-hidden="true"></i>
+      Kommentar
+    <% end%>
+    <%= link_to ("/text/" + txr_id) do %>
+      <i class="fa fa-file-text-o" aria-hidden="true"></i>
+      Tekstredegørelse
+      <% end%>
+
+  <% end %>
 
 </div>
 <article class="ocr">
