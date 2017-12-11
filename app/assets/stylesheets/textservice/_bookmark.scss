@@ -4,17 +4,13 @@
     &:before {
       content: "\f097";
       font-family: FontAwesome;
-
       position: relative;
       padding-left: 80px;
       padding-top: 2px;
       color: #326100;
     }
 
-    input{
-      display:none;
-    }
-    span {
+    input, span{
       display:none;
     }
   }
