@@ -64,12 +64,13 @@ button.btn-primary {
 }
 // Secondary search box
 .search-secondary {
+  overflow: hidden;
   height: 90px;
   margin-bottom: 15px;
   h1 {
     padding-left: 15px;
     color: $secondary;
-    font-size: 30px;
+    font-size: 25px;
     line-height: 94px;
     @extend .search-bg;
     padding-top: unset!important;

@@ -17,6 +17,7 @@
   <a href="javascript:toggleHighlight()">
     <i class="fa fa-paint-brush"></i> <%= t('text_service.text_toolbar.highlight') %>
   </a>
+  <%= render :partial => 'show_tools_work' %>
   <i id="ocrFullscreenButton" class="fa fa-expand fa-lg" title="<%= t('text_service.text_toolbar.fullscreen') %>"></i>
   <% if @document['cat_ssi'] == 'author' %>
 
