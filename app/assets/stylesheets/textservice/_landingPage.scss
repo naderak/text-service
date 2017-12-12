@@ -170,10 +170,17 @@ a[name]{
   visibility: hidden;
 }
 
-  .sort-pagination, .pagination-search-widgets{
-    //margin-bottom: 0!important;
-    padding-left: 1em;
-  }
-  .tableOfContent:hover{
-    cursor: pointer;
-  }
+.sort-pagination, .pagination-search-widgets {
+  //margin-bottom: 0!important;
+  padding-left: 1em;
+}
+
+.tableOfContent:hover {
+  cursor: pointer;
+}
+
+.downloadLinkContainer{
+  position: relative;
+  z-index: 9999;
+  width: 100px;
+}
