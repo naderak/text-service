@@ -170,16 +170,11 @@ a[name]{
   visibility: hidden;
 }
 
-#appliedParams{
-  float: right;
-  margin-top: -52px;
-  padding-right: 1em;
-}
-.sort-pagination, .pagination-search-widgets{
-  margin-bottom: 0!important;
-  border-bottom: 0!important;
-  padding-left: 1em;
-}
-.tableOfContent:hover{
-  cursor: pointer;
-}
+  .sort-pagination, .pagination-search-widgets{
+    margin-bottom: 0!important;
+    border-bottom: 0!important;
+    padding-left: 1em;
+  }
+  .tableOfContent:hover{
+    cursor: pointer;
+  }
