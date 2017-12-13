@@ -93,7 +93,7 @@
   float:right;
 }
 
-.textToolbar, .kbOSDToolbar, .downloadLinkContainer{
+.textToolbar, .kbOSDToolbar, .downloadLinkContainer, .ocr{
   a:not([href]):not([tabindex]){
     color: $primary !important;
   }
@@ -183,4 +183,9 @@ a[name]{
   position: relative;
   z-index: 9999;
   width: 100px;
+}
+.ocr{
+  .fa-link{
+    padding-left: 10px;
+  }
 }
