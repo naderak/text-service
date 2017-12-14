@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 # frozen_string_literal: true
 class CatalogController < ApplicationController
 
@@ -329,7 +330,7 @@ class CatalogController < ApplicationController
 
   def periods
     (@response,@deprecated_document_list) = search_service.search_results do |builder|
-      builder = blacklight_config.default_solr_params.merge({rows: 10000, fq:['cat_ssi:period','type_ssi:work']})
+      builder = blacklight_config.default_solr_params.merge({rows: 10000, fq:['cat_ssi:period','type_ssi:work'], sort: 'sort_title_ssi asc'})
     end
     render "index"
   end
