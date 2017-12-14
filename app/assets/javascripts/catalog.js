@@ -1,42 +1,35 @@
 // Called in the _index_default.html to populate the index partial with links of text searches
 // If the matxhes are more than 3, it creates a button that triggers a modal with all the matches/links
-function index_work_search(id, target_selector, text_label_id){
+function index_work_search(id, modal_selector, modal_body_selector,target_selector, text_label_id, q){
     id = encodeURIComponent(id);
-    qselector = $('#q.search_q.q.form-control');
-    q = encodeURIComponent($(qselector).val());
     if (!q.trim()){
         $(text_label_id).hide();
     }else{
         $.ajax({
             type: 'GET',
-            url: '/catalog.json?search_field=leaf&rows=200&sort=position_isi+asc&q='+q+'&workid='+id,
+            url: '/text.json?search_field=leaf&rows=200&sort=position_isi+asc&q='+q+'&workid='+id,
             datatype: 'json',
             success: function(data) {
                 $(target_selector).empty();
-                docs = data.response.docs;
-                highlighting = data.response.highlighting;
-                matches_num = data.response.pages.total_count;
+                docs = data.data;
+                matches_num = data.meta.pages.total_count;
                 if (matches_num>0) {
                     $(target_selector).append('<div id="results-header"><p>'+matches_num+' match</p></div>');
                     for (var i= 0; i in docs && i<3; i++) {
-                        if (highlighting[docs[i].id].text_tesim != null) {
-                            $(target_selector).append('<p><a href="/solr_documents/' + id + '#' + docs[i].page_id_ssi + '">' + highlighting[docs[i].id].text_tesim.join("...") + '</a></br>Side: ' + docs[i].page_ssi + '</p>');                        // }
-                        }
+                        $(target_selector).append('<p><a href="/text/' + id + '#' + docs[i].attributes.xmlid_ssi + '">' + docs[i].highlighting[docs[i].id].text_tesim.join("...") + '</a></br>Side: ' + docs[i].attributes.page_ssi + '</p>');                        // }
                     }
                 }if (matches_num>3){
                     var btn = document.createElement("BUTTON");
                     var t = document.createTextNode("Alle forekomster");
                     btn.appendChild(t);
-                    btn.setAttribute("id","matches-button-"+id);
+                    btn.setAttribute("id","modal-button-"+id);
                     btn.setAttribute("class","all-matches");
                     $(target_selector).append(btn);
-                    $("#matches-button-"+id).click(function(){
-                        $("#matches-"+id).modal();
+                    $("#modal-button-"+id).click(function(){
+                        $(modal_selector).modal();
                     });
                     for (var i= 0; i in docs ; i++) {
-                        if (highlighting[docs[i].id].text_tesim != null) {
-                            $("#matchesModalBody-"+id).append('<p><a href="/solr_documents/' + id + '#' + docs[i].page_id_ssi + '">' + highlighting[docs[i].id].text_tesim.join("...") + '</a></br>Side: ' + docs[i].page_ssi + '</p>');
-                        }
+                        $(modal_body_selector).append('<p><a href="/text/' + id + '#' + docs[i].attributes.xmlid_ssi + '">' + docs[i].highlighting[docs[i].id].text_tesim.join("...") + '</a></br>Side: ' + docs[i].attributes.page_ssi + '</p>');                        // }
                         }
                 }if(matches_num==0){$(text_label_id).hide();} // If the number of matches is 0, hide the label
             }
