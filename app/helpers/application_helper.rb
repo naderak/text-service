@@ -1,17 +1,12 @@
 # -*- coding: utf-8 -*-
 module ApplicationHelper
 
-  def get_period_name value
-    res = value
-    if controller.present?
-      begin
-        resp, doc = controller.fetch(value)
-        if doc['work_title_tesim'].present?
-          res = doc['work_title_tesim'].join(' ')
-        end
-      rescue Exception => e
-        logger.error("Could not get period name #{value} #{e.message}")
-      end
+  def get_period_name args
+    res = args
+    repository = blacklight_config.repository_class.new(blacklight_config)  
+    doc = repository.find(args)
+    if(doc['response']['docs'].first['work_title_tesim'].present?)
+      res=doc['response']['docs'].first['work_title_tesim'].join(' ')
     end
     res
   end
@@ -41,7 +36,7 @@ module ApplicationHelper
     # Construct the first part and add the anvendt udgave and the page number
     cite = ""
     cite += args[:document]['author_name_ssi'] + ": " if args[:document]['author_name_ssi'].present?
-    cite += ">>"+args[:document]['work_title_tesim'].first+"<<, i " if args[:document]['work_title_tesim'].present?
+    cite += "<q>"+args[:document]['work_title_tesim'].first+"</q>, i " if args[:document]['work_title_tesim'].present?
     cite += construct_citation(args)
     cite += ", s. "+args[:document]['page_ssi'] if args[:document]['page_ssi'].present?
     cite += ". "
