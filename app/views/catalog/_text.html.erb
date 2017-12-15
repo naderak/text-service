@@ -8,7 +8,8 @@
 <% if ["Alt","phrase"].include? search_field %>
     <% query_params = current_search_session.try(:query_params)
        query = query_params[:q] if query_params.present?
-       query = query.gsub!(/^\"|\"?$/, '') if query.present? %>
+       query = query.gsub!(/^\"|\"?$/, '').strip if query.present?
+    %>
 <% end %>
 <div class="textToolbar">
   <%= link_to(solr_document_path(@document, format: :pdf), :target => "_blank") do %>
