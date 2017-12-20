@@ -171,7 +171,6 @@ a[name]{
 }
 
 .sort-pagination, .pagination-search-widgets {
-  //margin-bottom: 0!important;
   padding-left: 1em;
 }
 
@@ -181,8 +180,8 @@ a[name]{
 
 .downloadLinkContainer{
   position: relative;
-  z-index: 9999;
-  width: 100px;
+  z-index: 1029;
+  width: 150px;
 }
 .ocr{
   .fa-link{
