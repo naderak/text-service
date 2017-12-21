@@ -19,10 +19,10 @@
           <label for="q" class="sr-only"><%= t('blacklight.search.form.search.label') %></label>
           <%= text_field_tag :q, params[:q], :placeholder => t('blacklight.search.form.search.placeholder'), :class => "search_q q form-control", :id => "q", :autofocus => should_autofocus_on_search_box? %>
 
-          <%= t('text_service.search.form.match.one') %> <%= radio_button_tag 'match', 'one', params[:match] == 'one' || !params[:match].present? %>
-          <%= t('text_service.search.form.match.all') %> <%= radio_button_tag 'match', 'all', params[:match] == 'all' %>
-          <%= t('text_service.search.form.match.phrase') %> <%= radio_button_tag 'match', 'phrase', params[:match] == 'phrase' %>
-
+          <span class="input-group-addon for-search-match">
+            <label for="search_field" class="sr-only"><%= t('blacklight.search.form.search.submit') %></label>
+            <%= select_tag("search-match", options_for_select([[t('text_service.search.form.match.one'),'one'],[t('text_service.search.form.match.all'),'all'],[t('text_service.search.form.match.phrase'),'phrase']]),{:class => 'search-match'}) %>
+          </span>
           <span class="input-group-btn">
       <button type="submit" class="btn btn-primary search-btn" id="search">
         <span class="submit-search-text"><%= t('blacklight.search.form.submit') %></span>

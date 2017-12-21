@@ -92,11 +92,11 @@ button.btn-primary {
     padding: 15px 16px 10px 16px;
     font-size: 18px;
     border: none;
-    border-radius: 10px;
+    border-radius: 10px!important;
     background-color: white;
   }
 
-  .search-field {
+  .search-field, .search-match {
     min-height: 25px;
     border: none;
   }
