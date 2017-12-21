@@ -12,7 +12,7 @@
   <h4 class="index_title document-title-heading <%= document_actions.present? ? "col-sm-9 col-lg-10" : "col-md-12" %>">
     <a href="<%= solr_document_url(document.id) %>">
       <span class="author-img-thumbnail">
-        <%= image_tag "authors/#{document.id}.jpg" %>
+        <%= image_tag get_author_image(document.id)  %>
       </span>
     </a>
     <%= link_to_document document %>

@@ -3,10 +3,10 @@
   <span class="text-tooltiptext <%= document %>-tooltiptext">
     <div class="card">
       <% if header %>
-          <div class="card-header"><%= t('tooltip.search.header') %></div>
+          <div class="card-header"><%= t('text_service.tooltip.search.header') %></div>
       <% end%>
       <div class="card-body">
-        <%= render :partial => "#{document}_tips" %>
+        <%= render :partial => "catalog/#{document}_tips" %>
       </div>
     </div>
   </span>

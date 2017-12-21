@@ -1,0 +1,80 @@
+// Styling about and politik pages
+#main-content {
+  min-height: 500px;
+  margin-top: $top-header-size + $blue-bar-height+$top-space;
+  .header-container {
+    position: relative;
+  }
+  .page-heading {
+    margin-top: 0;
+    line-height: $blue-bar-height;
+  }
+  article.container {
+    @extend .document;
+    @extend .text;
+
+    padding: 20px 59px !important;
+    color: #666;
+    font-size: 14px;
+    line-height: 20px;
+    margin-bottom: 32px;
+  }
+
+  #politik, #about {
+    .text-content {
+      padding-left: $grid-gutter-width;
+      padding-right: $grid-gutter-width;
+      padding-bottom: $grid-gutter-width;
+    }
+    .text {
+      padding: 20px 15px;
+    }
+    color: #666;
+
+    header {
+      @extend .box-gradient-blue;
+      position: absolute;
+      width: 100%;
+      top: $top-header-size;
+      margin: 0;
+      left: 0;
+      height: $blue-bar-height;
+      color: #dcd2ab;
+      font-size: 25px;
+      font-weight: normal;
+      z-index: 1029;
+      dl {
+        font-size: 14px;
+      }
+    }
+  }
+  h1[itemprop="headline"] {
+    @extend .container;
+    @extend .search-bg;
+    margin-top: 0 !important;
+    font-size: 30px;
+    line-height: $blue-bar-height;
+  }
+
+  #document header {
+    top: -$blue-bar-height;
+  }
+  .page-header-in-pages-with-searchbox {
+    height: 100px;
+    h3 {
+      @extend .pull-left;
+      width: 70%;
+    }
+    .btn {
+      margin-top: $top-space;
+    }
+  }
+  blockquote {
+    display: block;
+    margin-top: 1em;
+    margin-bottom: 1em;
+    margin-left: 40px;
+    margin-right: 40px;
+    font-size: 13px;
+  }
+}

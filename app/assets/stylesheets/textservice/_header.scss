@@ -1,12 +1,17 @@
-#header-navbar{
+#main-container {
+  padding: $top-header-size 0 0 0 ;
+}
+
+#header-navbar {
   @extend .box-shadow;
 }
+
 .navbar-brand {
   font-weight: 500;
   font-size: 18px;
-  text-indent: 0!important;
-  background: none!important;
-  overflow: visible!important;
+  text-indent: 0 !important;
+  background: none !important;
+  overflow: visible !important;
   padding: 12px;
   margin: auto;
 }
@@ -16,16 +21,22 @@
   background-position: center;
   height: inherit;
 }
+
 .search_q {
   border-radius: 10px !important;
   width: 98% !important;
 }
 
-button#search {
+button#search, #read-more {
   border-radius: 6px !important;
   border: none;
 }
-
+#cookie-button{
+  margin-bottom: 0;
+  #read-more{
+    color:white;
+  }
+}
 .box-gradient-blue {
   background: linear-gradient(to bottom, rgba(36, 82, 112, 1) 0%, rgba(24, 55, 75, 1) 100%);
 }
@@ -34,4 +45,3 @@ button#search {
   width: 100%;
   z-index: 1029;
 }
-
