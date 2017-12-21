@@ -1,7 +1,7 @@
 <div class="search-secondary box-gradient-blue fixed-top-second">
   <div class="container search-bg">
     <%= form_tag search_action_url, method: :get, class: 'search-query-form', role: 'search' do %>
-        <%= render_hash_as_hidden_fields(search_state.params_for_search.except(:q, :search_field, :qt, :page, :utf8)) %>
+        <%= render_hash_as_hidden_fields(search_state.params_for_search.except(:q, :search_field, :qt, :page, :utf8, :match)) %>
         <div class="input-group">
           <% if search_fields.length > 1 %>
       <span class="input-group-addon for-search-field">
@@ -21,7 +21,7 @@
 
           <span class="input-group-addon for-match">
             <label for="match" class="sr-only"><%= t('blacklight.search.form.search.submit') %></label>
-            <%= select_tag("match", options_for_select([[t('text_service.search.form.match.one'),'one'],[t('text_service.search.form.match.all'),'all'],[t('text_service.search.form.match.phrase'),'phrase']]),{:class => 'search-match'}) %>
+            <%= select_tag("match", options_for_select([[t('text_service.search.form.match.one'),'one'],[t('text_service.search.form.match.all'),'all'],[t('text_service.search.form.match.phrase'),'phrase']],params[:match]),{:class => 'search-match'}) %>
           </span>
           <span class="input-group-btn">
       <button type="submit" class="btn btn-primary search-btn" id="search">
