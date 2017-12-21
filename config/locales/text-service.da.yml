@@ -67,6 +67,6 @@ da:
     search:
       form:
         match:
-          one: mindst et ord
-          all: alle ord
-          phrase: sætning
+          one: 'mindst et ord'
+          all: 'alle ord'
+          phrase: 'sætning'
