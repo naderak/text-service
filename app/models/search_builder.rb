@@ -10,7 +10,7 @@ class SearchBuilder < Blacklight::SearchBuilder
   #     solr_parameters[:custom] = blacklight_params[:user_value]
   #   end
 
-  self.default_processor_chain += [:restrict_to_author_id, :add_work_id, :add_timestamp_interval]
+  self.default_processor_chain += [:restrict_to_author_id, :add_work_id, :add_timestamp_interval, :more_search_params]
 
   def add_work_id solr_params
     if blacklight_params[:search_field] == 'leaf' && blacklight_params[:workid].present?
@@ -52,5 +52,20 @@ class SearchBuilder < Blacklight::SearchBuilder
     timeinterval_string += (blacklight_params[:until].present? ? blacklight_params[:until] : '*') +']'
     solr_params[:fq] ||= []
     solr_params[:fq] << "timestamp:#{timeinterval_string}"
+  end
+
+  def more_search_params solr_params
+    # this is not the optimal way of doing phrase search, but i have not find the right solr params
+    if blacklight_params['match'] == 'phrase'
+      solr_params['q'] = "\"#{solr_params['q']}\""
+      solr_params['qf'] = solr_params['qf'].gsub('text_tesim','text_tsim')
+    end
+    if blacklight_params['match'] == 'all'
+      solr_params[:mm] = '100%'
+    end
+    if blacklight_params['match'] == 'one'
+      solr_params[:mm] = 1
+    end
+    solr_params
   end
 end

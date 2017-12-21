@@ -64,3 +64,9 @@ da:
           title: 'Titel: %{value}'
           author: 'Forfatter: %{value}'
           url: 'URL: %{url}'
+    search:
+      form:
+        match:
+          one: mindst et ord
+          all: alle ord
+          phrase: sætning
