@@ -46,6 +46,10 @@
     width: 100%;
     height: 100%;
     margin-top: 60px;
+    div.text.snippetRoot {
+      width: 60em;
+      margin: auto;
+    }
     .escFullScreenButton,.showOnFullscreen{
       display:block;
     }
@@ -57,6 +61,7 @@
     font-family:$font-family-serif;
     width: 100%;
     height: 100%;
+    margin:auto;
     margin-top: 60px;
     .escFullScreenButton,.showOnFullscreen{
       display:block;
@@ -171,7 +176,6 @@ a[name]{
 }
 
 .sort-pagination, .pagination-search-widgets {
-  //margin-bottom: 0!important;
   padding-left: 1em;
 }
 
@@ -181,8 +185,8 @@ a[name]{
 
 .downloadLinkContainer{
   position: relative;
-  z-index: 9999;
-  width: 100px;
+  z-index: 1029;
+  width: 150px;
 }
 .ocr{
   .fa-link{

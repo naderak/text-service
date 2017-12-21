@@ -2,10 +2,10 @@ da:
   text_service:
     text_toolbar:
       fullscreen: 'Se tekst i fuld skærm'
-      text: 'Tekst'
+      text: 'Hent tekst'
       highlight: 'Tilføj/fjern markering'
     landing_page:
-      facsimile: 'Faksimile'
+      facsimile: 'Hent faksimile'
       table_of_content: 'Indhold'
       all_instances: 'Alle forekomster'
       close: 'Luk'
