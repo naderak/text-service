@@ -13,6 +13,12 @@ body {
     outline: 0;
     text-decoration: none;
   }
+  .fa{
+    color: inherit;
+    &:hover{
+      color:inherit;
+    }
+  }
 }
 
 .box-shadow {
@@ -82,7 +88,7 @@ button.btn-primary {
   }
 
   .input-group-addon {
-    margin-right: 30px;
+    margin-right: 10px;
     padding: 15px 16px 10px 16px;
     font-size: 18px;
     border: none;
@@ -102,7 +108,7 @@ button.btn-primary {
 
   .search_q {
     border-radius: 10px !important;
-    margin-right: 30px;
+    margin-right: 10px;
 
   }
 
