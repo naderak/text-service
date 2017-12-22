@@ -174,11 +174,13 @@ class CatalogController < ApplicationController
 
     config.add_search_field('leaf') do |field|
       field.include_in_simple_select = false
-      field.solr_parameters = { :fq => 'type_ssi:leaf' }
-      field.solr_local_parameters = {
+      field.solr_parameters = {
+          :fq => 'type_ssi:leaf',
           :qf => 'text_tesim',
           :pf => 'text_tesim',
           :hl => 'true',
+      }
+      field.solr_local_parameters = {
       }
     end
 

@@ -63,7 +63,7 @@ class SearchBuilder < Blacklight::SearchBuilder
     if blacklight_params['match'] == 'all'
       solr_params[:mm] = '100%'
     end
-    if blacklight_params['match'] == 'one'
+    if blacklight_params['match'] == 'one' || !blacklight_params['match'].present?
       solr_params[:mm] = 1
     end
     solr_params
