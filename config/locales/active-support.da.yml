@@ -1,20 +1,19 @@
-# TODO: Translate this page
 da:
   date:
     formats:
       # Use the strftime parameters for formats.
       # When no format has been given, it uses default.
       # You can provide other formats here if you like!
-      default: "%d-%m-%Y"
-      short: "%b %d"
-      long: "%B %d, %Y"
+      default: "%Y-%m-%d"
+      short: "%-d. %b."
+      long: "%-d. %B, %Y"
 
-    day_names: [Søndag, Mandag, Tirsdag, Onsdag, Torsdag, Fredag, Lørdag]
-    abbr_day_names: [Søn, Man, Tir, Ons, Tor, Fre, Lør]
+    day_names: [søndag, mandag, tirsdag, onsdag, torsdag, fredag, lørdag]
+    abbr_day_names: [søn, man, tir, ons, tor, fre, lør]
 
     # Don't forget the nil at the beginning; there's no such thing as a 0th month
-    month_names: [~, January, February, March, April, May, June, July, August, September, October, November, December]
-    abbr_month_names: [~, Jan, Feb, Mar, Apr, May, Jun, Jul, Aug, Sep, Oct, Nov, Dec]
+    month_names: [~, januar, februar, marts, april, maj, juni, juli, august, september, oktober, november, december]
+    abbr_month_names: [~, jan, feb, mar, apr, may, jun, jul, aug, sep, okt, nov, dec]
     # Used in date_select and datetime_select.
     order:
       - year
@@ -23,9 +22,9 @@ da:
 
   time:
     formats:
-      default: "%a, %d %b %Y %H:%M:%S %z"
-      short: "%d %b %H:%M"
-      long: "%B %d, %Y %H:%M"
+      default: "%a., %-d. %b. %Y %H:%M:%S %z"
+      short: "%-d. %b. %H:%M"
+      long: "%-d. %B, %Y %H:%M"
     am: "am"
     pm: "pm"
 
@@ -33,16 +32,16 @@ da:
   support:
     array:
       words_connector: ", "
-      two_words_connector: " and "
-      last_word_connector: ", and "
+      two_words_connector: " og "
+      last_word_connector: ", og "
   number:
     # Used in NumberHelper.number_to_delimited()
     # These are also the defaults for 'currency', 'percentage', 'precision', and 'human'
     format:
       # Sets the separator between the units, for more precision (e.g. 1.0 / 2.0 == 0.5)
-      separator: "."
+      separator: ","
       # Delimits thousands (e.g. 1,000,000 is a million) (always in groups of three)
-      delimiter: ","
+      delimiter: "."
       # Number of decimals, behind the separator (the number 1 with a precision of 2 gives: 1.00)
       precision: 3
       # If set to true, precision will mean the number of significant digits instead
@@ -55,11 +54,11 @@ da:
     currency:
       format:
         # Where is the currency sign? %u is the currency unit, %n the number (default: $5.00)
-        format: "%u%n"
-        unit: "$"
+        format: "%n %u"
+        unit: "kr."
         # These five are to override number.format and are optional
-        separator: "."
-        delimiter: ","
+        separator: ","
+        delimiter: "."
         precision: 2
         significant: false
         strip_insignificant_zeros: false
@@ -101,8 +100,8 @@ da:
         format: "%n %u"
         units:
           byte:
-            one:   "Byte"
-            other: "Bytes"
+            one:   "byte"
+            other: "bytes"
           kb: "KB"
           mb: "MB"
           gb: "GB"
@@ -129,8 +128,8 @@ da:
           #   one: Ten
           #   other: Tens
           # hundred: Hundred
-          thousand: Thousand
-          million: Million
-          billion: Billion
-          trillion: Trillion
-          quadrillion: Quadrillion
+          thousand: tusinde
+          million: million
+          billion: milliard
+          trillion: billion
+          quadrillion: quadrillion

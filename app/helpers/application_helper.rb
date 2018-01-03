@@ -42,10 +42,8 @@ module ApplicationHelper
     cite += ". "
     # Add the URL and the date in the string
     cite += 'Online udgave fra "Arkiv for Dansk Litteratur (ADL)": ' + request.original_url
-    # There must be a smarter way to get the months translated
-    cite += " (tilgået " + Time.now.strftime("%d. ")
-    cite += I18n.t(Time.now.strftime('%B'))
-    cite += Time.now.strftime(' %Y') +")"
+    # Add the translated current date
+    cite += " (tilgået " + I18n.l(Time.now, format: "%d. %B %Y") +")"
   end
 
   def author_link args
