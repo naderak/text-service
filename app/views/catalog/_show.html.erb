@@ -1,8 +1,8 @@
 <% has_text = document['has_text_ssi'].present? && document['has_text_ssi'] == 'yes' %>
 <% has_facs = document['has_facs_ssi'].present? && document['has_facs_ssi'] == 'yes' %>
 
+<script src="FullScreen.js"></script>
 <script type="text/javascript">
-
 <% if has_facs %>
     $(document).ready(function () {
         dkBreve.onDocumentReady();
