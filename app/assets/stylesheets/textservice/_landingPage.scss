@@ -203,6 +203,7 @@ h2.head-in-text{
 #ocrFullscreenButton{
   cursor: pointer;
 }
+
 #period {
   .dl-horizontal dt {
     float: left;
@@ -219,4 +220,11 @@ h2.head-in-text{
   .text{
     padding: 30px;
   }
+
+#om-adl{
+  width: 100%;
+}
+article>div, #om-adl>div{
+  max-width: 50em;
+  margin: auto;
 }
