@@ -160,17 +160,20 @@ class CatalogController < ApplicationController
       }
     end
 
-    config.add_search_field('phrase',label: I18n.t('text_service.config.search.phrase')) do |field|
-      field.solr_parameters = {
-          :fq => ['cat_ssi:work'],
-          :qf => 'text_tsim',
-          :pf => 'text_tsim',
-          :ps => 0,
-          :qs => 0,
-      }
-      field.solr_local_parameters = {
-      }
-    end
+#
+# We can leave some sediment here
+# 
+#    config.add_search_field('phrase',label: I18n.t('text_service.config.search.phrase')) do |field|
+#      field.solr_parameters = {
+#          :fq => ['cat_ssi:work'],
+#          :qf => 'text_tsim',
+#          :pf => 'text_tsim',
+#          :ps => 0,
+#          :qs => 0,
+#      }
+#      field.solr_local_parameters = {
+#      }
+#    end
 
     config.add_search_field('leaf') do |field|
       field.include_in_simple_select = false
