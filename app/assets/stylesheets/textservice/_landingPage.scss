@@ -217,14 +217,15 @@ h2.head-in-text{
   .dl-horizontal dd {
     margin-left: 180px;
   }
-  .text{
+  .text {
     padding: 30px;
   }
+}
 
-#om-adl{
+#om-adl {
   width: 100%;
 }
-article>div, #om-adl>div{
+article > div, #om-adl > div, #period .text {
   max-width: 50em;
   margin: auto;
 }
