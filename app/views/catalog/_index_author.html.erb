@@ -1,0 +1,25 @@
+<% doc_presenter = index_presenter(document) %>
+<% has_text  = document['has_text_ssi'].present? && document['has_text_ssi'] == 'yes' %>
+<%# default partial to display solr document fields in catalog index view -%>
+<dl class="document-metadata dl-invert row">
+
+
+  <% if document['author_name_tesim'].present? %>
+    <dt class="blacklight-author_name_tesim col-md-3"><%= "Forfatterportræt af" %></dt>
+    <dd class="blacklight-author_name_tesim col-md-9"><%= doc_presenter.field_value 'author_name_tesim' %></dd>
+  <% end %>
+  <% if document['editor_ssi'].present? %>
+      <dt class="blacklight-editor_ssi col-md-3"><%= "Redigeret af" %></dt>
+      <dd class="blacklight-editor_ssi col-md-9"><%= doc_presenter.field_value 'editor_ssi' %></dd>
+  <% end %>
+
+  <dt class="col-md-3"><%= t('text_service.search.list.format') %></dt>
+  <dd class="col-md-9">
+    <% if has_text %>
+        <i class="fa fa-file-text-o" aria-hidden="true"></i>
+        <span class="dlTxt"><%= t('text_service.search.list.text') %></span>
+    <% end %>
+
+  </dd>
+
+</dl>
