@@ -35,7 +35,7 @@ module ApplicationHelper
   def citation args
     # Construct the first part and add the anvendt udgave and the page number
     cite = ""
-    cite += args[:document]['author_name_ssi'] + ": " if args[:document]['author_name_ssi'].present?
+    cite += args[:document]['author_name_ssi'] + ": " if(args[:document]['author_name_ssi'].present?  && args[:document][:id] != args[:document]['volume_id_ssi'])
     cite += "”"+args[:document]['work_title_tesim'].first+"”, i " if(args[:document]['work_title_tesim'].present? && args[:document][:id] != args[:document]['volume_id_ssi'])
     cite += construct_citation(args)
     cite += ", s. "+args[:document]['page_ssi'] if args[:document]['page_ssi'].present?
