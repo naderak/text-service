@@ -322,6 +322,7 @@ class CatalogController < ApplicationController
  # perhaps using the Solr document modified field
   def send_pdf(document, type)
     name = document['work_title_tesim'].first.strip rescue document.id
+
     render pdf: name,
            footer: {right: '[page] af [topage] sider'},
            header: {html: {template: 'shared/pdf_header.pdf.erb'},
@@ -331,8 +332,16 @@ class CatalogController < ApplicationController
            cover:  Rails.root.join('app', 'views', 'shared', 'pdf_cover.html')
   end
 
-  # actions for generating the list of authorportraits and period descriptions
 
+  def facsimile
+    @response, @document = search_service.fetch(params[:id])
+    respond_to do |format|
+      format.html { setup_next_and_previous_documents }
+      format.pdf { send_pdf(@document, 'image') }
+    end
+  end
+
+  # actions for generating the list of authorportraits and period descriptions
   def periods
     (@response,@deprecated_document_list) = search_service.search_results do |builder|
       builder = blacklight_config.default_solr_params.merge({rows: 10000, fq:['cat_ssi:period','type_ssi:work'], sort: 'sort_title_ssi asc'})
