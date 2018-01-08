@@ -38,6 +38,23 @@ class FileServer
     self.render_snippet(id,{op:'toc'})
   end
 
+  # return all image links for use in facsimile pdf view
+  def self.image_links(id, opts={})
+    html = FileServer.facsimile(id, opts)
+    xml = Nokogiri::HTML(html)
+    links = []
+    xml.css('img').each do |img|
+      links << img['src']
+    end
+    links
+  end
+
+  def self.facsimile(id, opts={})
+    params = {op: 'facsimile', prefix: Rails.application.config_for(:text_service)["image_server_prefix"]}
+    params = opts.merge(params)
+    FileServer.render_snippet(id, params)
+  end
+
   # This function is only used for sending  xml-(TEI) files directly to the user
   # TODO: do we need this!!
   def self.get_file(path)
