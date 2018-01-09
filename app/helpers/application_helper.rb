@@ -13,8 +13,14 @@ module ApplicationHelper
 
   def construct_citation args
     label = []
-    author = args[:document]['author_name_ssi'] + ": " if args[:document]['author_name_ssi'].present?
-    title = args[:document]['volume_title_tesim'].try(:first).to_s
+    author = ""
+    if args[:document]['author_name_ssi'].present?
+      author = args[:document]['author_name_ssi'] + ": " if args[:document]['author_name_ssi'].present?
+    end
+    title = ""
+    if args[:document]['volume_title_tesim'].present?
+      title = args[:document]['volume_title_tesim'].try(:first).to_s
+    end
     # Add author and value as one string so they don't get separated by comma
     label << author + title
     label << "udg. af #{args[:document]['editor_ssi']}" if args[:document]['editor_ssi'].present?
