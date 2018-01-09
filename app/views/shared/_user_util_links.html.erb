@@ -10,7 +10,7 @@
     </li>
     <% unless current_user.to_s.blank? -%>
     <li class="nav-item">
-      <%= link_to current_user, edit_user_registration_path, class: 'nav-link' %>
+      <%= link_to current_user.to_s, 'https://user.kb.dk/user/edit', class: 'nav-link' %>
     </li>
     <% end %>
     <% else %>
