@@ -2,8 +2,8 @@
 <html>
   <head>
     <meta charset='utf-8'/>
-    <% wicked_pdf_stylesheet_link_tag "pdf" %>
-    <% wicked_pdf_javascript_include_tag "number_pages" %>
+    <%# wicked_pdf_stylesheet_link_tag "pdf" %>
+    <%# wicked_pdf_javascript_include_tag "number_pages" %>
 
     <% if @document['cat_ssi'] == 'author' %>
         <i><%= @document['volume_title_tesim'].first unless @document['volume_title_tesim'].blank? %></i>
