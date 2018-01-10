@@ -16,6 +16,6 @@ production:
   snippet_server_path: http://xstorage-test-01.kb.dk:8080/exist/rest/db/text-retriever/
   snippet_script: present.xq
   openSeadragon_script: open-seadragon-config.xq
-  adl_hostport: www.adl.dk
+  adl_hostport: bifrost-test-01.kb.dk
   image_server_prefix: http://kb-images.kb.dk/public/
   feedback_mail: fejlrapportering@adl.dk
