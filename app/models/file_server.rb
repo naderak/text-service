@@ -11,6 +11,7 @@ class FileServer
     uri += "&op=#{opts[:op]}" if opts[:op].present?
     uri += "&prefix=#{opts[:prefix]}" if opts[:prefix].present?
     uri += "&q=#{URI.escape(opts[:q])}" if opts[:q].present?
+    uri += "&hostport=#{URI.escape(opts[:adl_hostport])}" if opts[:adl_hostport].present?
 
     Rails.logger.debug("snippet url #{uri}")
 
