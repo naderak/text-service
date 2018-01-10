@@ -1,6 +1,7 @@
 # Class to centralise inteface with FileServer
 class FileServer
   def self.render_snippet(id, opts={})
+    adl_hostport = "#{Rails.application.config_for(:text_service)["adl_hostport"]}"
     uri = "#{Rails.application.config_for(:text_service)["snippet_server_path"]}"
     if(opts[:op] == "osd")
       uri +="#{Rails.application.config_for(:text_service)["openSeadragon_script"]}"
@@ -11,7 +12,7 @@ class FileServer
     uri += "&op=#{opts[:op]}" if opts[:op].present?
     uri += "&prefix=#{opts[:prefix]}" if opts[:prefix].present?
     uri += "&q=#{URI.escape(opts[:q])}" if opts[:q].present?
-    uri += "&hostport=#{URI.escape(opts[:adl_hostport])}" if opts[:adl_hostport].present?
+    uri += "&hostport=#{URI.escape(adl_hostport)}" 
 
     Rails.logger.debug("snippet url #{uri}")
 
