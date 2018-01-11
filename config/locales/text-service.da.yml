@@ -4,6 +4,8 @@ da:
       fullscreen: 'Se tekst i fuld skærm'
       text: 'Hent tekst'
       highlight: 'Tilføj/fjern markering'
+      show_facsimile: 'Vis faksimile'
+      hide_facsimile: 'Luk faksimile'
     landing_page:
       facsimile: 'Hent faksimile'
       table_of_content: 'Indhold'
