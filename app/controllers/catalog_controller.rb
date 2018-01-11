@@ -377,4 +377,6 @@ class CatalogController < ApplicationController
   def search_present?
     params['q'].present?
   end
+  helper_method :search_present?
+
 end
