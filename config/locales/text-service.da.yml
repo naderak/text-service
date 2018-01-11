@@ -58,6 +58,7 @@ da:
         format: 'Formater:'
         text: 'Tekst'
         facsimile: 'Faksimile'
+        in_text: 'I tekst:'
 # Keys that are used in catalog_controller
     config:
       search:
