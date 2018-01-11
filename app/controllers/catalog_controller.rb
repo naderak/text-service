@@ -329,6 +329,7 @@ class CatalogController < ApplicationController
                     spacing: 5},
            margin: {top: 15, # default 10 (mm)
                     bottom: 15},
+           encoding: 'utf8', # needed here to encode danish characters
            cover: 'Tekst fra Arkiv for Dansk Litteratur (adl.dk) <br /> <hr> <br /><br />' +
                'Forfatter: ' + document['author_name_ssi'] + '<br />' +
                'Titel: ' + document['work_title_tesim'].first + '<br />' +
