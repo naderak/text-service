@@ -38,8 +38,6 @@ class CatalogController < ApplicationController
     config.index.title_field = 'work_title_tesim'
     config.index.display_type_field = 'cat_ssi'
 
-    blacklight_config.index.partials += [:index_work_search]
-
     # solr field configuration for document/show views
     #config.show.title_field = 'title_display'
     #config.show.display_type_field = 'format'
@@ -375,4 +373,10 @@ class CatalogController < ApplicationController
     ['Alt','phrase'].include? params['search_field']
   end
   helper_method :search_field_fritekst?
+
+  def search_present?
+    params['q'].present?
+  end
+  helper_method :search_present?
+
 end
