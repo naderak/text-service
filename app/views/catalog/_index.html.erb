@@ -11,6 +11,10 @@
     <% end -%>
   <% end -%>
 
+  <% if search_present? %>
+  <%= render 'index_work_search', document: document %>
+  <% end%>
+
   <dt class="col-md-3"><%= t('text_service.search.list.format') %></dt>
   <dd class="col-md-9">
     <% if has_text %>
@@ -22,5 +26,4 @@
       <span class="dlFaks"><%= t('text_service.search.list.facsimile') %></span>
     <% end %>
   </dd>
-
 </dl>
