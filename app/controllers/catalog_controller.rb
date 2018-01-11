@@ -327,11 +327,16 @@ class CatalogController < ApplicationController
                     spacing: 5},
            margin: {top: 15, # default 10 (mm)
                     bottom: 15},
-           cover:  Rails.root.join('app', 'views', 'shared', 'pdf_cover.html')
+           encoding: 'utf8', # needed here to encode danish characters
+           cover: 'Tekst fra Arkiv for Dansk Litteratur (adl.dk) <br /> <hr> <br /><br />' +
+               'Forfatter: ' + document['author_name_ssi'] + '<br />' +
+               'Titel: ' + document['work_title_tesim'].first + '<br />' +
+               'Anvendt udgave: ' + document['volume_title_tesim'].first + '<br /><br /><br /><br /><br />'+
+               'Det Danske Sprog- og Litteraturselskab (dsl.dk)<br />'+
+               'Det Kongelige Bibliotek (kb.dk)'
   end
 
-
-  def facsimile
+   def facsimile
     @response, @document = search_service.fetch(params[:id])
     respond_to do |format|
       format.html { setup_next_and_previous_documents }
