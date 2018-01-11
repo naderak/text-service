@@ -19,7 +19,13 @@
     <i class="fa fa-paint-brush"></i> <%= t('text_service.text_toolbar.highlight') %>
   </a>
   <%= render :partial => 'show_tools_work' %>
+  <i id="hide_facsimile" class="fa fa-chevron-right fa-large hidden" title="<%= t('text_service.text_toolbar.hide_facsimile') %>"></i>
+  <i id="show_facsimile" class="fa fa-chevron-left fa-large" title="<%= t('text_service.text_toolbar.show_facsimile') %>"></i>
+
+
   <i id="ocrFullscreenButton" class="fa fa-expand fa-lg" title="<%= t('text_service.text_toolbar.fullscreen') %>"></i>
+
+
   <% if @document['cat_ssi'] == 'author' %>
 
       <a class="icon-list" href="<%= "/?utf8=✓&search_field=author&q=#{@document['work_title_tesim'].try(:join)}" %>">
