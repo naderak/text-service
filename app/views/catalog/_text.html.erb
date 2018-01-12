@@ -14,15 +14,15 @@
 <% end %>
 <div class="textToolbar">
   <%= link_to(solr_document_path(@document, format: :pdf), :target => "_blank") do %>
-      <i class="fa fa-lg fa-download" aria-hidden="true"></i> <%= t('text_service.text_toolbar.text') %>
+      <i class="fa fa-lg fa-download" aria-hidden="true"></i> <span class="d-none d-lg-inline"><%= t('text_service.text_toolbar.text') %></span>
   <% end %>
   <a href="javascript:toggleHighlight()">
-    <i class="fa fa-paint-brush"></i> <%= t('text_service.text_toolbar.highlight') %>
+    <i class="fa fa-paint-brush"></i><span class="d-none d-lg-inline"><%= t('text_service.text_toolbar.highlight') %></span>
   </a>
   <%= render :partial => 'show_tools_work' %>
   <% if has_facs %>
-      <i id="hide_facsimile" class="fa fa-chevron-right fa-large hidden" title="<%= t('text_service.text_toolbar.hide_facsimile') %>"></i>
-      <i id="show_facsimile" class="fa fa-chevron-left fa-large" title="<%= t('text_service.text_toolbar.show_facsimile') %>"></i>
+      <a id="hide_facsimile" class="hidden"><i class="fa fa-chevron-right fa-large" title="<%= t('text_service.text_toolbar.hide_facsimile') %>"></i><span class="d-none d-xl-inline"><%= t('text_service.text_toolbar.hide_facsimile') %></span></a>
+      <a id="show_facsimile"><i class="fa fa-chevron-left fa-large" title="<%= t('text_service.text_toolbar.show_facsimile') %>"></i><span><%= t('text_service.text_toolbar.show_facsimile') %></span></a>
   <% end %>
 
   <i id="ocrFullscreenButton" class="fa fa-expand fa-lg" title="<%= t('text_service.text_toolbar.fullscreen') %>"></i>
