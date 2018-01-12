@@ -93,11 +93,22 @@ window.dkBreve = (function (window, $, undefined) {
                 contentHeight = windowHeight - headerFooterHeight - 10;
             dkBreve.setContentHeight(contentHeight);
 
-            // Collapse/Expand metadata column
-            $('.collapseMetadata').click(function (e) {
-                $(this).closest('.contentContainer').toggleClass('nometa');
-            });
+            // Collapse/Expand facsimile column
+            $('#hide_facsimile').click(function (e) {
+                $(this).closest('.lpTextContainer').removeClass('col-sm-6 border-right');
+                $(this).closest('.lpTextContainer').addClass('col-sm-12');
+                $(this).hide();
+                $('#show_facsimile').show();
+                $('.lpFacsContainer').hide();
 
+            });
+            $('#show_facsimile').click(function (e) {
+                $(this).closest('.lpTextContainer').addClass('col-sm-6 border-right');
+                $(this).closest('.lpTextContainer').removeClass('col-sm-12');
+                $(this).hide();
+                $('#hide_facsimile').show();
+                $('.lpFacsContainer').show();
+            });
 
             $(window).resize(function () {
                 dkBreve.onWindowResize.call(dkBreve);

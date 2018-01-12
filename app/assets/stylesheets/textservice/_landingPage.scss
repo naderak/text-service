@@ -94,7 +94,7 @@
 
 }
 
-#ocrFullscreenButton{
+#ocrFullscreenButton, #show_facsimile, #hide_facsimile{
   float:right;
 }
 
@@ -134,7 +134,7 @@
   border-radius: 10px;
 }
 
-.lpTextContainer {
+.border-right{
   border-right: 1px solid $primary;
 }
 
