@@ -379,9 +379,4 @@ class CatalogController < ApplicationController
   end
   helper_method :search_field_fritekst?
 
-  def search_present?
-    params['q'].present?
-  end
-  helper_method :search_present?
-
 end
