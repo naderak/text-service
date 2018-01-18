@@ -320,7 +320,7 @@ class CatalogController < ApplicationController
  # perhaps using the Solr document modified field
   def send_pdf(document, type)
     name = document['work_title_tesim'].first.strip rescue document.id
-
+    # citation= helpers.citation args
     render pdf: name,
            footer: {right: '[page] af [topage] sider'},
            header: {html: {template: 'shared/pdf_header.pdf.erb'},
