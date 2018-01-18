@@ -179,7 +179,7 @@ a[name]{
   padding-left: 1em;
 }
 
-.tableOfContent:hover {
+.tableOfContent:hover, #hide_facsimile:hover, #show_facsimile:hover {
   cursor: pointer;
 }
 
