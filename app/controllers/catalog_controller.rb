@@ -328,11 +328,15 @@ class CatalogController < ApplicationController
            margin: {top: 15, # default 10 (mm)
                     bottom: 15},
            encoding: 'utf8', # needed here to encode danish characters
-           cover: 'Tekst fra Arkiv for Dansk Litteratur (adl.dk) <br /> <hr> <br /><br />' +
-               'Forfatter: ' + document['author_name_ssi'] + '<br />' +
-               'Titel: ' + document['work_title_tesim'].first + '<br />' +
-               'Citation: ' + helpers.citation(@document.instance_values)  + '<br/>' +
-               'Anvendt udgave: ' + document['volume_title_tesim'].first + '<br /><br /><br /><br /><br />'+
+           cover: '<style>dl > dt {float: left; width: 160px; clear: left; text-align: right; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;} dl > dd{margin-top: 0; margin-bottom: 20px; margin-left: 180px;}</style>'+
+               'Tekst fra Arkiv for Dansk Litteratur (adl.dk) <br /> <hr> <br /><br />' +
+               '<dl>'+
+               '<dt>Forfatter:</dt><dd>' + document['author_name_ssi'] + '</dd>' +
+               '<dt>Titel:</dt><dd>' + document['work_title_tesim'].first + '</dd>' +
+               '<dt>Citation:</dt><dd style="">' + helpers.citation(@document.instance_values)  + '</dd>' +
+               '<dt>Anvendt udgave:</dt><dd>' + document['volume_title_tesim'].first + '</dd>'+
+               '</dl>'+
+               '<br /><br /><br /><br /><br />'+
                'Det Danske Sprog- og Litteraturselskab (dsl.dk)<br />'+
                'Det Kongelige Bibliotek (kb.dk)'
   end
