@@ -20,7 +20,7 @@ module ApplicationHelper
     end
     title = ""
     if args[:document]['volume_title_tesim'].present?
-      title = args[:document]['volume_title_tesim'].try(:first).to_s
+      title = content_tag(:em, args[:document]['volume_title_tesim'].try(:first).to_s).html_safe
     end
     # Add author and value as one string so they don't get separated by comma
     label << author + title
