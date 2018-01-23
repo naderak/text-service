@@ -14,6 +14,7 @@ module ApplicationHelper
   def construct_citation args
     label = []
     author = ""
+
     if args[:document]['author_name_ssi'].present?
       author = args[:document]['author_name_ssi'] + ": " if args[:document]['author_name_ssi'].present?
     end
@@ -39,6 +40,7 @@ module ApplicationHelper
   end
 
   def citation args
+    args[:document] = @document
     # Construct the first part and add the anvendt udgave and the page number
     cite = ""
     cite += args[:document]['author_name_ssi'] + ": " if(args[:document]['author_name_ssi'].present?  && args[:document][:id] != args[:document]['volume_id_ssi'])
