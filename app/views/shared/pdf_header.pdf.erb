@@ -7,8 +7,8 @@
 
     <% if @document['cat_ssi'] == 'author' %>
         <i><%= @document['volume_title_tesim'].first unless @document['volume_title_tesim'].blank? %></i>
-        <% unless @document['author_name_tesim'].first.blank? %>
-          <%= ' - ' + t('text_service.author.author_potrait_written_by') + " "+ @document['author_name_tesim'].first%>
+        <% if @document['author_name_tesim'].present? %>
+            <%= ' - ' + t('text_service.author.author_potrait_written_by') + " "+ @document['author_name_tesim'].first%>
         <% end %>
   <% elsif @document['cat_ssi'] == 'period' %>
         <i><%= @document['work_title_tesim'].first+' - ' unless @document['volume_title_tesim'].blank? %></i>
