@@ -23,12 +23,12 @@ module ApplicationHelper
     end
     # Add author and value as one string so they don't get separated by comma
     label << author + title
-    label << "udg. af #{args[:document]['editor_ssi']}" if args[:document]['editor_ssi'].present?
+    label << "udg. af #{args[:document]['editor_ssi']}"         if args[:document]['editor_ssi'].present?
     label << "#{args[:document]['publisher_tesim'].join(', ')}" if args[:document]['publisher_tesim'].present?
-    label << "#{args[:document]['date_published_ssi']}" if args[:document]['date_published_ssi'].present?
+    label << "#{args[:document]['date_published_ssi']}"         if args[:document]['date_published_ssi'].present?
     # Remove empty string from the array
     label = label.reject { |c| c.empty? }
-    return label.to_sentence(last_word_connector: ", ")
+    return label.join(', ')   #to_sentence(words_connector: '### ', last_word_connector: '--- ')
   end
 
   def show_volume args
