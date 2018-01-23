@@ -22,7 +22,11 @@ module ApplicationHelper
       title = args[:document]['volume_title_tesim'].try(:first).to_s
     end
     # Add author and value as one string so they don't get separated by comma
-    label << author + title
+    if args[:omit_author].present?
+      label << title
+    else
+      label << author + title
+    end
     label << "udg. af #{args[:document]['editor_ssi']}"         if args[:document]['editor_ssi'].present?
     label << "#{args[:document]['publisher_tesim'].join(', ')}" if args[:document]['publisher_tesim'].present?
     label << "#{args[:document]['date_published_ssi']}"         if args[:document]['date_published_ssi'].present?
@@ -40,6 +44,7 @@ module ApplicationHelper
 
   def citation args
     # Construct the first part and add the anvendt udgave and the page number
+    args[:omit_author] = true
     cite = ""
     cite += args[:document]['author_name_ssi'] + ": " if(args[:document]['author_name_ssi'].present?  && args[:document][:id] != args[:document]['volume_id_ssi'])
     cite += "”" + args[:document]['work_title_tesim'].first + "”, i " if(args[:document]['work_title_tesim'].present? && args[:document][:id] != args[:document]['volume_id_ssi'])
