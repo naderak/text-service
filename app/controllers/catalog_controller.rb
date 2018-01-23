@@ -320,7 +320,10 @@ class CatalogController < ApplicationController
  # perhaps using the Solr document modified field
   def send_pdf(document, type)
     name = document['work_title_tesim'].first.strip rescue document.id
-
+    edition = ""
+    if document['cat_ssi'] != 'author' and document['cat_ssi'] != 'period' 
+    edition = '<dt>Anvendt udgave:</dt><dd>' + document['volume_title_tesim'].first + '</dd>'
+    end
     render pdf: name,
            footer: {right: '[page] af [topage] sider'},
            header: {html: {template: 'shared/pdf_header.pdf.erb'},
@@ -334,7 +337,7 @@ class CatalogController < ApplicationController
                '<dt>Forfatter:</dt><dd>' + document['author_name_ssi'] + '</dd>' +
                '<dt>Titel:</dt><dd>' + document['work_title_tesim'].first + '</dd>' +
                '<dt>Citation:</dt><dd style="">' + helpers.citation(@document.instance_values)  + '</dd>' +
-               '<dt>Anvendt udgave:</dt><dd>' + document['volume_title_tesim'].first + '</dd>'+
+               edition +
                '</dl>'+
                '<br /><br /><br /><br /><br />'+
                'Det Danske Sprog- og Litteraturselskab (dsl.dk)<br />'+
