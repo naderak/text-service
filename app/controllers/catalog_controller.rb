@@ -126,8 +126,8 @@ class CatalogController < ApplicationController
     config.add_search_field('Alt',label: I18n.t('text_service.config.search.all_filters')) do |field|
       field.solr_parameters = {
           :fq => ['cat_ssi:work'],
-          :qf => 'author_name_tesim^5 work_title_tesim^5 text_tesim',
-          :pf => 'text_tesim'
+          :qf => 'author_name_tesim^5 work_title_tesim^5 text_tsim',
+          :pf => 'text_tsim'
       }
       field.solr_local_parameters = {
       }
@@ -177,8 +177,8 @@ class CatalogController < ApplicationController
       field.include_in_simple_select = false
       field.solr_parameters = {
           :fq => 'type_ssi:leaf',
-          :qf => 'text_tesim',
-          :pf => 'text_tesim',
+          :qf => 'text_tsim',
+          :pf => 'text_tsim',
           :hl => 'true',
       }
       field.solr_local_parameters = {
