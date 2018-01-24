@@ -62,7 +62,7 @@ class SearchBuilder < Blacklight::SearchBuilder
     # this is not the optimal way of doing phrase search, but i have not find the right solr params
     if blacklight_params['match'] == 'phrase'
       solr_params['q'] = "\"#{solr_params['q']}\""
-      solr_params['qf'] = solr_params['qf'].gsub('text_tesim','text_tsim')
+      solr_params['qs'] = 0
     end
     if blacklight_params['match'] == 'all'
       solr_params[:mm] = '100%'

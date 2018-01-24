@@ -126,8 +126,8 @@ class CatalogController < ApplicationController
     config.add_search_field('Alt',label: I18n.t('text_service.config.search.all_filters')) do |field|
       field.solr_parameters = {
           :fq => ['cat_ssi:work'],
-          :qf => 'author_name_tesim^5 work_title_tesim^5 text_tesim',
-          :pf => 'text_tesim'
+          :qf => 'author_name_tesim^5 work_title_tesim^5 text_tsim',
+          :pf => 'text_tsim'
       }
       field.solr_local_parameters = {
       }
@@ -177,8 +177,8 @@ class CatalogController < ApplicationController
       field.include_in_simple_select = false
       field.solr_parameters = {
           :fq => 'type_ssi:leaf',
-          :qf => 'text_tesim',
-          :pf => 'text_tesim',
+          :qf => 'text_tsim',
+          :pf => 'text_tsim',
           :hl => 'true',
       }
       field.solr_local_parameters = {
@@ -320,7 +320,10 @@ class CatalogController < ApplicationController
  # perhaps using the Solr document modified field
   def send_pdf(document, type)
     name = document['work_title_tesim'].first.strip rescue document.id
-
+    edition = ""
+    if document['cat_ssi'] != 'author' and document['cat_ssi'] != 'period' 
+    edition = '<dt>Anvendt udgave:</dt><dd>' + document['volume_title_tesim'].first + '</dd>'
+    end
     render pdf: name,
            footer: {right: '[page] af [topage] sider'},
            header: {html: {template: 'shared/pdf_header.pdf.erb'},
@@ -334,7 +337,7 @@ class CatalogController < ApplicationController
                '<dt>Forfatter:</dt><dd>' + document['author_name_ssi'] + '</dd>' +
                '<dt>Titel:</dt><dd>' + document['work_title_tesim'].first + '</dd>' +
                '<dt>Citation:</dt><dd style="">' + helpers.citation(@document.instance_values)  + '</dd>' +
-               '<dt>Anvendt udgave:</dt><dd>' + document['volume_title_tesim'].first + '</dd>'+
+               edition +
                '</dl>'+
                '<br /><br /><br /><br /><br />'+
                'Det Danske Sprog- og Litteraturselskab (dsl.dk)<br />'+
