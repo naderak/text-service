@@ -36,7 +36,7 @@ module ApplicationHelper
     id = args[:document]['volume_id_ssi']
     return unless id.present?
     udgave = construct_citation(args)+"."
-    link_to udgave, solr_document_path(id)
+    link_to udgave.html_safe, solr_document_path(id)
   end
 
   def citation args
