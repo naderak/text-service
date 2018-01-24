@@ -20,7 +20,7 @@ module ApplicationHelper
     end
     title = ""
     if args[:document]['volume_title_tesim'].present?
-      title = args[:document]['volume_title_tesim'].try(:first).to_s
+      title = content_tag(:em, args[:document]['volume_title_tesim'].try(:first).to_s)
     end
     # Add author and value as one string so they don't get separated by comma
     if args[:omit_author].present?
@@ -40,7 +40,7 @@ module ApplicationHelper
     id = args[:document]['volume_id_ssi']
     return unless id.present?
     udgave = construct_citation(args)+"."
-    link_to udgave, solr_document_path(id)
+    link_to udgave.html_safe, solr_document_path(id)
   end
 
   def citation args
