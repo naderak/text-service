@@ -1,7 +1,8 @@
 // Styling about and politik pages
 #main-content {
   min-height: 500px;
-  margin-top: $top-header-size + $blue-bar-height+$top-space;
+  //margin-top: $top-header-size + $blue-bar-height+$top-space; // In case of using fixed header navbar
+  margin-top: $blue-bar-height+$top-space;
   .header-container {
     position: relative;
   }
