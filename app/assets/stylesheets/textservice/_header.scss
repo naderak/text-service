@@ -1,5 +1,6 @@
 #main-container {
-  padding: $top-header-size 0 0 0 ;
+  //padding: $top-header-size 0 0 0 ; // In case of having a fixed navbar
+  padding: 0;
 }
 
 #header-navbar {
