@@ -159,37 +159,38 @@
 }
 
 // Page breake styling in small devices
-@media screen and (max-width: 1000px) {
-  .pageBreak2{
-    display: block;
-    margin:$grid-gutter-width/2 0px 0px 0px;
-    padding:$grid-gutter-width/2 0px ;
-    font-size: $font-size-lg;
-    line-height: $line-height-base;
-    border-top: 1px dotted $gray-500;
-    text-align: center;
-    a{
-
-      &:after{
-        font-family: 'FontAwesome';
-        content:'\f0f6';
-        margin-left: 5px;
-
-      }
-    }
-  }
-}
+//@media screen and (max-width: 1000px) {
+//  .pageBreak{
+//    display: block;
+//    margin:$grid-gutter-width/2 0px 0px 0px;
+//    padding:$grid-gutter-width/2 0px ;
+//    font-size: $font-size-lg;
+//    line-height: $line-height-base;
+//    border-top: 1px dotted $gray-500;
+//    text-align: center;
+//    a{
+//
+//      &:after{
+//        font-family: 'FontAwesome';
+//        content:'\f0f6';
+//        margin-left: 5px;
+//
+//      }
+//    }
+//  }
+//}
 
 // Page breake styling in desktop devices
 //@media screen and (min-width: 1000px){
-    .ocr .text  {
+    .ocr {
       position: relative;
     }
+
     .pageBreak {
       a > small {
         visibility: visible;
         position: absolute;
-        left: -28px;
+        left: 5px;
       }
 
       a {
