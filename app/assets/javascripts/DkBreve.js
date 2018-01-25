@@ -32,7 +32,11 @@ window.dkBreve = (function (window, $, undefined) {
         gotoOcrPage: function (page, skipAnimation) {
             var that = this,
                 ocrElem = $('.ocr').first(),
+                citationPageNumber = document.getElementById('pageNumber'),
                 pageCount = $('.pageBreak', ocrElem).length + 1;
+
+                citationPageNumber.innerText =  ($('.ocr .pageBreak a small')[page - 2]).textContent;
+
             if (page < 1 || page > pageCount) {
                 throw('DkBreve.gotoOcrPage: page "' + page + '" out of bounds.');
             }
@@ -66,10 +70,14 @@ window.dkBreve = (function (window, $, undefined) {
         },
         onOcrScroll: function () {
             var that = dkBreve;
+
             if (!that.animInProgress) {
                 // this is a genuine scroll event, not something that origins from a kbOSD event
                 var currentOcrPage = that.getOcrCurrentPage(),
+                    citationPageNumber = document.getElementById('pageNumber'),
                     kbosd = KbOSD.prototype.instances[0]; // The dkBreve object should have a kbosd property set to the KbOSD it uses!
+
+                citationPageNumber.innerText =  ($('.ocr .pageBreak a small')[currentOcrPage - 2]).textContent;
                 if (kbosd.getCurrentPage() !== currentOcrPage) {
                     that.scrollingInProgress = true;
                     kbosd.setCurrentPage(currentOcrPage, function () {

@@ -51,7 +51,7 @@ module ApplicationHelper
     cite += args[:document]['author_name_ssi'] + ": " if(args[:document]['author_name_ssi'].present?  && args[:document][:id] != args[:document]['volume_id_ssi'])
     cite += "”" + args[:document]['work_title_tesim'].first + "”, i " if(args[:document]['work_title_tesim'].present? && args[:document][:id] != args[:document]['volume_id_ssi'])
     cite += construct_citation(args)
-    cite += ", s. "+args[:document]['page_ssi'] if args[:document]['page_ssi'].present?
+    cite += ", s. <span id='pageNumber'>"+args[:document]['page_ssi']+"</span>" if args[:document]['page_ssi'].present?
     cite += ". "
     # Add the URL and the date in the string
     cite += 'Online udgave fra "Arkiv for Dansk Litteratur (ADL)": ' + request.original_url
