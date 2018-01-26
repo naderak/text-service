@@ -1,28 +1,38 @@
 /* global $,window, jQuery, dkBreve, KbOSD */
+
 window.dkBreve = (function (window, $, undefined) {
     'use strict';
     var DkBreve = function () {
     };
 
     DkBreve.prototype = {
+
+        has_text: function(){
+            var ocrElem = $('.ocr');
+            if (ocrElem[0]){
+                return true;
+            }else{
+                return false;
+            }
+        },
         /**
          * Get current page in ocr pane
          */
         getOcrCurrentPage: function () {
-            var ocrElem = $('.ocr'),
-                ocrScrollTop = ocrElem[0].scrollTop,
-                ocrScrollTopOffset = ocrScrollTop + 9, // Magic number 9 is 1 px less than the margin added when setting pages
-                ocrBreaks = $('.pageBreak', ocrElem);
+                var ocrElem = $('.ocr'),
+                    ocrScrollTop = ocrElem[0].scrollTop,
+                    ocrScrollTopOffset = ocrScrollTop + 9, // Magic number 9 is 1 px less than the margin added when setting pages
+                    ocrBreaks = $('.pageBreak', ocrElem);
 
-            // TODO: Optimization: Split on length so letters with more than 10 pages uses a binary search approach to figure out the correct page!
-            var i = 0;
-            if ($(ocrBreaks[0]).position().top + ocrScrollTopOffset > ocrScrollTop) {
-                return 1; // user are before the very first pageBreak => page 1
-            }
-            while (i < ocrBreaks.length && $(ocrBreaks[i]).position().top + ocrScrollTopOffset <= ocrScrollTop) {
-                i++;
-            }
-            return i + 1;
+                // TODO: Optimization: Split on length so letters with more than 10 pages uses a binary search approach to figure out the correct page!
+                var i = 0;
+                if ($(ocrBreaks[0]).position().top + ocrScrollTopOffset > ocrScrollTop) {
+                    return 1; // user are before the very first pageBreak => page 1
+                }
+                while (i < ocrBreaks.length && $(ocrBreaks[i]).position().top + ocrScrollTopOffset <= ocrScrollTop) {
+                    i++;
+                }
+                return i + 1;
         },
 
         /**
@@ -34,8 +44,12 @@ window.dkBreve = (function (window, $, undefined) {
                 ocrElem = $('.ocr').first(),
                 citationPageNumber = document.getElementById('pageNumber'),
                 pageCount = $('.pageBreak', ocrElem).length + 1;
-
-                citationPageNumber.innerText =  ($('.ocr .pageBreak a small')[page - 2]).textContent;
+                if (page>1) {
+                    citationPageNumber.innerText = ($('.ocr .pageBreak a small')[page - 2]).textContent;
+                }
+                else{
+                    citationPageNumber.innerText = first_page;// first_page is a global variable defined in the text.html view containing page_ssi from solr
+                }
 
             if (page < 1 || page > pageCount) {
                 throw('DkBreve.gotoOcrPage: page "' + page + '" out of bounds.');
@@ -71,18 +85,23 @@ window.dkBreve = (function (window, $, undefined) {
         onOcrScroll: function () {
             var that = dkBreve;
 
-            if (!that.animInProgress) {
-                // this is a genuine scroll event, not something that origins from a kbOSD event
-                var currentOcrPage = that.getOcrCurrentPage(),
-                    citationPageNumber = document.getElementById('pageNumber'),
-                    kbosd = KbOSD.prototype.instances[0]; // The dkBreve object should have a kbosd property set to the KbOSD it uses!
-
-                citationPageNumber.innerText =  ($('.ocr .pageBreak a small')[currentOcrPage - 2]).textContent;
-                if (kbosd.getCurrentPage() !== currentOcrPage) {
-                    that.scrollingInProgress = true;
-                    kbosd.setCurrentPage(currentOcrPage, function () {
-                        that.scrollingInProgress = false; // This is ALMOST enough ... but it
-                    });
+            if(that.has_text()) {
+                if (!that.animInProgress) {
+                    // this is a genuine scroll event, not something that origins from a kbOSD event
+                    var currentOcrPage = that.getOcrCurrentPage(),
+                        citationPageNumber = document.getElementById('pageNumber'),
+                        kbosd = KbOSD.prototype.instances[0]; // The dkBreve object should have a kbosd property set to the KbOSD it uses!
+                    if (currentOcrPage > 1) {
+                        citationPageNumber.innerText = ($('.ocr .pageBreak a small')[currentOcrPage - 2]).textContent;
+                    } else {
+                        citationPageNumber.innerText = first_page;// first_page is a global variable defined in the text.html view containing page_ssi from solr
+                    }
+                    if (kbosd.getCurrentPage() !== currentOcrPage) {
+                        that.scrollingInProgress = true;
+                        kbosd.setCurrentPage(currentOcrPage, function () {
+                            that.scrollingInProgress = false; // This is ALMOST enough ... but it
+                        });
+                    }
                 }
             }
         },
@@ -96,6 +115,7 @@ window.dkBreve = (function (window, $, undefined) {
             }
         },
         onDocumentReady: function () {
+
             var headerFooterHeight = dkBreve.getFooterAndHeaderHeight(),
                 windowHeight = $(window).innerHeight(),
                 contentHeight = windowHeight - headerFooterHeight - 10;
@@ -125,7 +145,7 @@ window.dkBreve = (function (window, $, undefined) {
         onKbOSDReady: function (kbosd) {
             var that = this;
             that.kbosd = kbosd;
-            if (kbosd.pageCount > 1) { // if there isn't more than one page, no synchronization between the panes are needed.
+            if ((kbosd.pageCount > 1)&&(that.has_text())) { // if there isn't more than one page, no synchronization between the panes are needed.
                 //currentOcrpage is more than 1 if readed by the URL
                 var currentOcrPage = that.getOcrCurrentPage();
                 if (currentOcrPage > 1) {
@@ -185,4 +205,77 @@ window.dkBreve = (function (window, $, undefined) {
 
 $(document).on('kbosdready', function (e) {
     dkBreve.onKbOSDReady(e.detail.kbosd);
+});
+
+//////////////////////////////////////////////////////
+
+$(document).ready(function () {
+
+// set up handler for ocr fullscreen
+    $('#ocrFullscreenButton').click(function (e) {
+        // Copy/Pasted from http://stackoverflow.com/questions/7130397/how-do-i-make-a-div-full-screen /HAFE
+        // if already full screen; exit
+        // else go fullscreen
+        if (
+            document.fullscreenElement ||
+            document.webkitFullscreenElement ||
+            document.mozFullScreenElement ||
+            document.msFullscreenElement
+        ) {
+            if (document.exitFullscreen) {
+                document.exitFullscreen();
+            } else if (document.mozCancelFullScreen) {
+                document.mozCancelFullScreen();
+            } else if (document.webkitExitFullscreen) {
+                document.webkitExitFullscreen();
+            } else if (document.msExitFullscreen) {
+                document.msExitFullscreen();
+            }
+        } else {
+            var element = $('.ocr').get(0);
+            if (element.requestFullscreen) {
+                element.requestFullscreen();
+            } else if (element.mozRequestFullScreen) {
+                element.mozRequestFullScreen();
+            } else if (element.webkitRequestFullscreen) {
+                element.webkitRequestFullscreen(Element.ALLOW_KEYBOARD_INPUT);
+            } else if (element.msRequestFullscreen) {
+                element.msRequestFullscreen();
+            }
+        }
+    });
+
+// Close on fullscreen
+    $('.escFullScreenButton').click(dkBreve.closeFullScreen);
+
+ // If there is no OSD in the page so there is no pagination
+// The following code checks if there is no pagination then 'on scroll' changes the page number on citation
+    if (!(has_facs)){
+        document.getElementsByClassName('ocr')[0].addEventListener("scroll",function() {
+            var currentOcrPage = getOcrCurrentPage();
+            citationPageNumber = document.getElementById('pageNumber');
+            if(citationPageNumber) {
+                if (currentOcrPage > 1) {
+                    citationPageNumber.innerText = ($('.ocr .pageBreak a small')[currentOcrPage - 2]).textContent;
+                } else {
+                    citationPageNumber.innerText = first_page;// first_page is a global variable defined in the text.html view containing page_ssi from solr
+                }
+            }
+            function getOcrCurrentPage() {
+                var ocrElem = $('.ocr'),
+                    ocrScrollTop = ocrElem[0].scrollTop,
+                    ocrScrollTopOffset = ocrScrollTop + 9, // Magic number 9 is 1 px less than the margin added when setting pages
+                    ocrBreaks = $('.pageBreak', ocrElem);
+                var i = 0;
+                if ($(ocrBreaks[0]).position().top + ocrScrollTopOffset > ocrScrollTop) {
+                    return 1; // user are before the very first pageBreak => page 1
+                }
+                while (i < ocrBreaks.length && $(ocrBreaks[i]).position().top + ocrScrollTopOffset <= ocrScrollTop) {
+                    i++;
+                }
+                return i + 1;
+            }
+        }
+    );
+    }
 });
