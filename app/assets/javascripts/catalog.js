@@ -14,7 +14,8 @@ function index_work_search(id, modal_selector, modal_body_selector, target_selec
             success: function (data) {
                 $(target_selector).empty();
                 docs = data.data;
-                hl_field = (match == 'phrase') ? 'text_tsim' : 'text_tesim';
+                //hl_field = (match == 'phrase') ? 'text_tsim' : 'text_tesim';
+                hl_field = 'text_tsim';
                 matches_num = data.meta.pages.total_count;
                 if (matches_num > 0) {
                     $(target_selector).append('<div id="results-header"><p>' + matches_num + ' match</p></div>');
