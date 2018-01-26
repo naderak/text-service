@@ -33,7 +33,7 @@ module ApplicationHelper
     label << "#{args[:document]['date_published_ssi']}"         if args[:document]['date_published_ssi'].present?
     # Remove empty string from the array
     label = label.reject { |c| c.empty? }
-    return label.join(', ')   #to_sentence(words_connector: '### ', last_word_connector: '--- ')
+    return label.join(', ')  
   end
 
   def show_volume args
@@ -46,10 +46,11 @@ module ApplicationHelper
   def citation args
     args[:document] = @document
     # Construct the first part and add the anvendt udgave and the page number
-    args[:omit_author] = true
+    not_monograph = args[:document]['is_monograph_ssi']=='no'
+    args[:omit_author] = true if not_monograph
     cite = ""
     cite += args[:document]['author_name_ssi'] + ": " if(args[:document]['author_name_ssi'].present?  && args[:document][:id] != args[:document]['volume_id_ssi'])
-    cite += "”" + args[:document]['work_title_tesim'].first + "”, i " if(args[:document]['work_title_tesim'].present? && args[:document][:id] != args[:document]['volume_id_ssi'])
+    cite += "”" + args[:document]['work_title_tesim'].first + "”, i " if(not_monograph && args[:document]['work_title_tesim'].present? && args[:document][:id] != args[:document]['volume_id_ssi'])
     cite += construct_citation(args)
     cite += ", s. "+args[:document]['page_ssi'] if args[:document]['page_ssi'].present?
     cite += ". "
