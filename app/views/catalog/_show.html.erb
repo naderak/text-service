@@ -1,23 +1,16 @@
 <% has_text = document['has_text_ssi'].present? && document['has_text_ssi'] == 'yes' %>
 <% has_facs = document['has_facs_ssi'].present? && document['has_facs_ssi'] == 'yes' %>
 
-<script src="FullScreen.js"></script>
 <script type="text/javascript">
-<% if has_facs %>
-    $(document).ready(function () {
-        dkBreve.onDocumentReady();
-    });
-<% else%>
-    var target = window.location.hash;
-    $( window ).load(function(){
-      if (target) {
-        $('article.ocr').animate({
-          scrollTop: $("#" + target).offset().top-$('article.ocr').offset().top
-        }, 500, 'swing', function () {});
-      }
-    });
-<% end %>
+// this variables are used in DkBreve.js
+  first_page = '<%= @document['page_ssi'] %>';
+  has_facs = <%= has_facs%>
+
+  $(document).ready(function () {
+      dkBreve.onDocumentReady();
+  });
 </script>
+
 <% if @search_context && current_search_session %>
 <%= render 'previous_next_doc'  %>
 <%# if current_search_session %>
@@ -52,3 +45,4 @@
       </div>
   <% end %>
 </div>
+
