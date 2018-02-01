@@ -54,7 +54,7 @@ module ApplicationHelper
     cite += ", s. <span id='pageNumber'>"+args[:document]['page_ssi']+"</span>" if args[:document]['page_ssi'].present?
     cite += ". "
     # Add the URL and the date in the string
-    cite += 'Online udgave fra "Arkiv for Dansk Litteratur (ADL)": ' + request.original_url
+    cite += 'Online udgave fra "Arkiv for Dansk Litteratur (ADL)": ' + request.original_url + "<span id='hashTagInURI'></span>"
     # Add the translated current date
     cite += " (tilgået " + I18n.l(Time.now, format: "%d. %B %Y") +")"
   end

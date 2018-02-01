@@ -90,11 +90,14 @@ window.dkBreve = (function (window, $, undefined) {
                     // this is a genuine scroll event, not something that origins from a kbOSD event
                     var currentOcrPage = that.getOcrCurrentPage(),
                         citationPageNumber = document.getElementById('pageNumber'),
+                        hashTagInURI = document.getElementById('hashTagInURI'),
                         kbosd = KbOSD.prototype.instances[0]; // The dkBreve object should have a kbosd property set to the KbOSD it uses!
                     if (currentOcrPage > 1) {
                         citationPageNumber.innerText = ($('.ocr .pageBreak a small')[currentOcrPage - 2]).textContent;
+                        hashTagInURI.innerText = "#"+($('.ocr .pageBreak')[currentOcrPage - 2]).id;
                     } else {
                         citationPageNumber.innerText = first_page;// first_page is a global variable defined in the text.html view containing page_ssi from solr
+                        hashTagInURI.innerText = "";
                     }
                     if (kbosd.getCurrentPage() !== currentOcrPage) {
                         that.scrollingInProgress = true;
@@ -254,11 +257,14 @@ $(document).ready(function () {
         document.getElementsByClassName('ocr')[0].addEventListener("scroll",function() {
             var currentOcrPage = getOcrCurrentPage();
             citationPageNumber = document.getElementById('pageNumber');
+            hashTagInURI = document.getElementById('hashTagInURI');
             if(citationPageNumber) {
                 if (currentOcrPage > 1) {
                     citationPageNumber.innerText = ($('.ocr .pageBreak a small')[currentOcrPage - 2]).textContent;
+                    hashTagInURI.innerText = "#"+($('.ocr .pageBreak')[currentOcrPage - 2]).id;
                 } else {
                     citationPageNumber.innerText = first_page;// first_page is a global variable defined in the text.html view containing page_ssi from solr
+                    hashTagInURI.innerText = ""
                 }
             }
             function getOcrCurrentPage() {
