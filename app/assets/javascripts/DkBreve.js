@@ -253,35 +253,37 @@ $(document).ready(function () {
 
  // If there is no OSD in the page so there is no pagination
 // The following code checks if there is no pagination then 'on scroll' changes the page number on citation
-    if (!(has_facs)){
-        document.getElementsByClassName('ocr')[0].addEventListener("scroll",function() {
-            var currentOcrPage = getOcrCurrentPage();
-            citationPageNumber = document.getElementById('pageNumber');
-            hashTagInURI = document.getElementById('hashTagInURI');
-            if(citationPageNumber) {
-                if (currentOcrPage > 1) {
-                    citationPageNumber.innerText = ($('.ocr .pageBreak a small')[currentOcrPage - 2]).textContent;
-                    hashTagInURI.innerText = "#"+($('.ocr .pageBreak')[currentOcrPage - 2]).id;
-                } else {
-                    citationPageNumber.innerText = first_page;// first_page is a global variable defined in the text.html view containing page_ssi from solr
-                    hashTagInURI.innerText = ""
+    if(typeof (has_facs)!== 'undefined') {
+        if (!(has_facs)) {
+            document.getElementsByClassName('ocr')[0].addEventListener("scroll", function () {
+                    var currentOcrPage = getOcrCurrentPage();
+                    citationPageNumber = document.getElementById('pageNumber');
+                    hashTagInURI = document.getElementById('hashTagInURI');
+                    if (citationPageNumber) {
+                        if (currentOcrPage > 1) {
+                            citationPageNumber.innerText = ($('.ocr .pageBreak a small')[currentOcrPage - 2]).textContent;
+                            hashTagInURI.innerText = "#" + ($('.ocr .pageBreak')[currentOcrPage - 2]).id;
+                        } else {
+                            citationPageNumber.innerText = first_page;// first_page is a global variable defined in the text.html view containing page_ssi from solr
+                            hashTagInURI.innerText = ""
+                        }
+                    }
+                    function getOcrCurrentPage() {
+                        var ocrElem = $('.ocr'),
+                            ocrScrollTop = ocrElem[0].scrollTop,
+                            ocrScrollTopOffset = ocrScrollTop + 9, // Magic number 9 is 1 px less than the margin added when setting pages
+                            ocrBreaks = $('.pageBreak', ocrElem);
+                        var i = 0;
+                        if ($(ocrBreaks[0]).position().top + ocrScrollTopOffset > ocrScrollTop) {
+                            return 1; // user are before the very first pageBreak => page 1
+                        }
+                        while (i < ocrBreaks.length && $(ocrBreaks[i]).position().top + ocrScrollTopOffset <= ocrScrollTop) {
+                            i++;
+                        }
+                        return i + 1;
+                    }
                 }
-            }
-            function getOcrCurrentPage() {
-                var ocrElem = $('.ocr'),
-                    ocrScrollTop = ocrElem[0].scrollTop,
-                    ocrScrollTopOffset = ocrScrollTop + 9, // Magic number 9 is 1 px less than the margin added when setting pages
-                    ocrBreaks = $('.pageBreak', ocrElem);
-                var i = 0;
-                if ($(ocrBreaks[0]).position().top + ocrScrollTopOffset > ocrScrollTop) {
-                    return 1; // user are before the very first pageBreak => page 1
-                }
-                while (i < ocrBreaks.length && $(ocrBreaks[i]).position().top + ocrScrollTopOffset <= ocrScrollTop) {
-                    i++;
-                }
-                return i + 1;
-            }
+            );
         }
-    );
     }
 });
