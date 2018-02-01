@@ -81,7 +81,7 @@ class CatalogController < ApplicationController
     ## if we have no author_id_ssi (link to author portrait, just show the author name)
     config.add_index_field 'author_name_tesim', :label => 'Forfatter',  short_form: true, itemprop: :author, unless: proc {|_context, _field_config, doc| doc['author_id_ssi'].present?}
     config.add_index_field 'volume_title_tesim', :label => 'Anvendt udgave', helper_method: :show_volume, short_form: true, itemprop: :isPartOf, unless: proc { |_context, _field_config, doc | doc.id == doc['volume_id_ssi'] }
-    config.add_index_field 'editor_ssi', :label => 'Redaktør', itemprop: :editor
+    #config.add_index_field 'editor_ssi', :label => 'Redaktør', itemprop: :editor
 
 
     # solr fields to be displayed in the show (single result) view
