@@ -1,0 +1,28 @@
+<footer class="pageFooter">
+  <div class="row divider-space">
+    <div class="col-md-12">
+      <div class="divider clearfix">
+        <div class="left"></div>
+        <div class="midt"></div>
+        <div class="right"></div>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <div>
+      <div class="text-center">
+        <%= link_to t('text_service.footer.about_ADL'), page_path('about'), class: '' %>
+      </div>
+      <div class="text-center footer">
+        <span>&copy; </span>
+        <a href="http://www.dsl.dk" target="_blank"><%= t('text_service.footer.dsl')%></a>
+        <span> & </span>
+        <a href="http://www.kb.dk" target="_blank"><%= t('text_service.footer.kb')%></a>
+        <span> * </span>
+        <%= link_to 'Cookie- og Privatlivspolitik', page_path('politik'), class: '' %>
+        <span> * </span>
+        <a href="mailto:sekretariat@dsl.dk"><%= t('text_service.footer.contact_us')%></a>
+      </div>
+    </div>
+  </div>
+</footer>

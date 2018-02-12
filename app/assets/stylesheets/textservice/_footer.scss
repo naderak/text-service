@@ -1,0 +1,31 @@
+footer.pageFooter {
+  background-color: white;
+  padding: 0 0 10px 0 !important;
+  .footer {
+    font-size: 12px;
+  }
+}
+
+// Classes needed for the line above the footer
+.divider-space {
+  padding: 18px 0 18px 0;
+}
+.divider .left,
+.divider .midt,
+.divider .right {
+  position: relative;
+  float: left;
+  height: 2px;
+}
+.divider .left {
+  width: 25%;
+  background: url(asset-path('divider-left.png')) no-repeat;
+}
+.divider .midt {
+  width: 50%;
+  background: url(asset-path('divider-repeat.png')) repeat-x;
+}
+.divider .right {
+  width: 25%;
+  background: url(asset-path('divider-right.png')) no-repeat;
+}

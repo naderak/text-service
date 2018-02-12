@@ -58,6 +58,9 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'jettywrapper'
 gem 'devise'
 gem 'devise-guests'
+gem 'devise_cas_authenticatable'
+# enable link to static pages
+gem 'high_voltage', '~> 3.0.0'
 group :development, :test do
   gem 'solr_wrapper', '>= 0.3'
 end
@@ -67,5 +70,8 @@ group :development, :test do
 end
 
 gem 'jquery-rails'
+gem 'font-awesome-rails'
+gem 'kbcookie', '=0.0.2', :git => 'https://github.com/Det-Kongelige-Bibliotek/kbcookie.git'
+gem 'wicked_pdf'
+gem 'wkhtmltopdf-binary'
 
-gem 'kbcookie', '>=0.0.0', :git => 'https://github.com/Det-Kongelige-Bibliotek/kbcookie.git'

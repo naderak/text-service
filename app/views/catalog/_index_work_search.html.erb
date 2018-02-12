@@ -1,0 +1,39 @@
+<!-- Modal Table of content  -->
+<% matches_id = "matches-ModalBody-#{document['id']}" %>
+<% text_label_id = "matces-text-label-#{document['id'].gsub("#", "")}" %>
+<% modal_body_id = "matches-modal-body-#{document['id']}" %>
+<% modal_id = "matches-#{document['id']}" %>
+
+<% if search_field_fritekst? %>
+    <dt class="col-md-3" id=<%= text_label_id %>><%= t('text_service.search.list.in_text') %></dt>
+    <dd class="search-results col-md-9" id=<%= matches_id %>></dd>
+<% end %>
+
+<div class="modal fade" id="<%= modal_id %>" tabindex="-1" role="dialog" aria-labelledby="textMatches">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="<%= text_label_id %>">
+          Alle forekomster
+        </h4>
+      </div>
+      <div class="modal-body" id="<%= modal_body_id %>">
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Luk</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<% if search_field_fritekst? %>
+    <%= javascript_tag do %>
+        $(document).ready(
+        function () {
+        index_work_search("<%= document['id'] %>",$('#<%= modal_id %>'),$('#<%= modal_body_id %>'), $('#<%= matches_id %>'), $('#<%= text_label_id %>'), '<%= params[:q] %>', '<%= params[:match].present? ? params[:match] : "one" %>');
+        });
+    <% end %>
+<% end %>

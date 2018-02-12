@@ -1,0 +1,48 @@
+<div class="downloadLinkContainer">
+  <%= link_to(facsimile_catalog_path(@document.id, format: :pdf,), :target => "_blank", :target => "_blank") do %>
+      <i class="fa fa-lg fa-download" aria-hidden="true"></i><span class="d-none d-lg-inline"><%= I18n.t('text_service.landing_page.facsimile') %></span>
+  <% end %>
+</div>
+
+<div id="kbOSDInstance">
+  <div class="kbOSDViewer">
+    <div class="kbOSDToolbar"></div>
+    <div class="kbOSDContent"></div>
+  </div>
+</div>
+
+<script type="text/javascript">
+    var kbOSDconfig = [<%= FileServer.render_snippet(@document['id'],{op: "osd"}) %>];
+
+
+    //Hide the rotation and flip option
+    kbOSDconfig[0].showTransformationControl = false;
+    // Configure OSD not to be right to left
+    kbOSDconfig[0].rtl = false;
+    // Configured the zoom level in OSD at start
+    kbOSDconfig[0].defaultZoomLevel=.7;
+
+    // Conver  This ought to be done serverside, but until we get a better serializer, it's easier to do clientside.
+    // NOTE: If there are more than one kbOSD instance on this page (I don't think there ever will be?), we need to do the following alterations on all config objects!
+    if ('string' === typeof kbOSDconfig[0].initialPage) {
+        kbOSDconfig[0].initialPage = parseInt(kbOSDconfig[0].initialPage, 10);
+    }
+    if ('string' === typeof kbOSDconfig[0].defaultZoomLevel) {
+        kbOSDconfig[0].defaultZoomLevel = parseInt(kbOSDconfig[0].defaultZoomLevel, 10);
+    }
+    if (kbOSDconfig[0].indexPage.length < 2) { // if there is only one element in the index, then don't show any index
+        delete kbOSDconfig[0].indexPage;
+    } else {
+        $.each(kbOSDconfig[0].indexPage, function (index, indexPage) {
+            if ('string' === typeof indexPage.page) {
+                index.page = parseInt(index.page, 10);
+            }
+        });
+    }
+    //The index is a bit buggy so disabled it completely for now.
+    delete kbOSDconfig[0].indexPage;
+
+
+</script>
+<script src="http://static.kb.dk/kbOpenSeadragon/2.3.0/js/KbOSD_bundle_min.js"></script>
+

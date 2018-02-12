@@ -1,0 +1,282 @@
+.lpContainer, .kbOSDViewer {
+  min-height: 620px;
+}
+
+.ocr, .kbOSDViewer {
+  height: 620px;
+  overflow-y: scroll;
+  margin: 10px;
+}
+
+
+.ocr {
+  padding: 10px;
+
+  .escFullScreenButton{
+    display:none;
+    position:fixed;
+    top:30px;
+    right:30px;
+    opacity:0.8;
+  }
+  .showOnFullscreen{
+    display:none;
+    position:fixed;
+    top:30px;
+    right:80px;
+    opacity:0.8;
+  }
+  &:-webkit-full-screen{
+    padding:0 10%;
+    max-width:57em;
+    background-color:white;
+    font-family:$font-family-serif;
+    width: 100%;
+    height: 100%;
+    margin-top: 60px;
+    .escFullScreenButton,.showOnFullscreen{
+      display:block;
+    }
+  }
+  &:-moz-full-screen{
+    padding:0 10%;
+    max-width:57em;
+    background-color:white;
+    font-family:$font-family-serif;
+    width: 100%;
+    height: 100%;
+    margin-top: 60px;
+    div.text.snippetRoot {
+      width: 60em;
+      margin: auto;
+    }
+    .escFullScreenButton,.showOnFullscreen{
+      display:block;
+    }
+  }
+  &:-ms-fullscreen{
+    padding:0 10%;
+    max-width:57em;
+    background-color:white;
+    font-family:$font-family-serif;
+    width: 100%;
+    height: 100%;
+    margin:auto;
+    margin-top: 60px;
+    .escFullScreenButton,.showOnFullscreen{
+      display:block;
+    }
+  }
+  &:fullscreen{
+    padding:20px 10%;
+    max-width:57em;
+    background-color:white;
+    font-family:$font-family-serif;
+    width: 100%;
+    height: 100%;
+    margin-top: 60px;
+    .escFullScreenButton,.showOnFullscreen{
+      display:block;
+    }
+  }
+}
+
+.kbOSDViewer {
+  top: -30px; //to align with the downlaod facsimile button
+}
+
+.openseadragon-canvas{
+  margin: 10px !important;
+}
+
+#kbOSDInstance {
+  height: 100% ;
+
+}
+
+#ocrFullscreenButton, #show_facsimile, #hide_facsimile{
+  float:right;
+}
+
+.textToolbar, .kbOSDToolbar, .downloadLinkContainer, .ocr{
+  a:not([href]):not([tabindex]){
+    color: $primary !important;
+  }
+  .fa {
+    color: $primary !important;
+    &:hover {
+      color: $primary !important;
+    }
+  }
+}
+.kbOSDToolbar i:hover {
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.transparentBackground{
+  background-color: transparent !important;
+}
+
+
+.textToolbar{
+  border-bottom: 1px solid $primary !important;
+  margin-left:10px;
+  margin-right:10px;
+  padding-top: 5px;
+  padding-bottom: 10px;
+  i {
+    padding-left: 10px;
+  }
+}
+.downloadLinkContainer i{
+  padding-left: 10px;
+}
+.downloadLinkContainer span{
+  padding-left: 2px;
+}
+
+
+.lpContainer{
+  border: 1px solid $primary;
+  margin: 10px 0;
+  padding: 10px 0;
+  border-radius: 10px;
+}
+
+.border-right{
+  border-right: 1px solid $primary;
+}
+
+.kbOSDToolbar {
+  border-bottom: 1px solid $primary !important;
+  padding-bottom: 5px;
+}
+
+.document-metadata{
+  padding-left:15px;
+}
+.lpTextContainer, .lpFacsContainer, .kbOSDViewer{
+  padding-left: 0;
+  padding-right: 0;
+}
+.ocr{
+  margin-right: 0;
+  margin-left: 0;
+  padding:30px;
+}
+
+// Page breake styling in small devices
+//@media screen and (max-width: 1000px) {
+//  .pageBreak{
+//    display: block;
+//    margin:$grid-gutter-width/2 0px 0px 0px;
+//    padding:$grid-gutter-width/2 0px ;
+//    font-size: $font-size-lg;
+//    line-height: $line-height-base;
+//    border-top: 1px dotted $gray-500;
+//    text-align: center;
+//    a{
+//
+//      &:after{
+//        font-family: 'FontAwesome';
+//        content:'\f0f6';
+//        margin-left: 5px;
+//
+//      }
+//    }
+//  }
+//}
+
+// Page breake styling in desktop devices
+//@media screen and (min-width: 1000px){
+    .ocr {
+      position: relative;
+    }
+
+    .pageBreak {
+      a > small {
+        visibility: visible;
+        position: absolute;
+        left: 5px;
+      }
+
+      a {
+        visibility: hidden;
+        margin-left: 0;
+        width: 0;
+        height: 0;
+        padding: 0;
+      }
+      &:after {
+        content: "\007C";
+        color: $secondary;
+      }
+  }
+//}
+// End of page breake styling
+
+a[name]{
+  display: block;
+  content: " ";
+  margin-top: -100px;
+  height: 100px;
+  visibility: hidden;
+}
+
+.sort-pagination, .pagination-search-widgets {
+  padding-left: 1em;
+}
+
+.tableOfContent:hover, #hide_facsimile:hover, #show_facsimile:hover {
+  cursor: pointer;
+}
+
+.downloadLinkContainer{
+  position: relative;
+  z-index: 1029;
+  width: 150px;
+}
+.ocr{
+  .fa-link{
+    padding-left: 10px;
+  }
+}
+
+h1.head-in-work{
+  font-size: 2em;
+}
+h2.head-in-text{
+  font-size: 1.5em;
+}
+#ocrFullscreenButton{
+  cursor: pointer;
+}
+
+#period {
+  .dl-horizontal dt {
+    float: left;
+    width: 160px;
+    clear: left;
+    text-align: right;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .dl-horizontal dd {
+    margin-left: 180px;
+  }
+  .text {
+    padding: 30px;
+  }
+}
+
+#om-adl {
+  width: 100%;
+}
+article > div, #om-adl > div, #period .text {
+  max-width: 50em;
+  margin: auto;
+}
+.period-writers-list .icon-list {
+  padding: 40px 20px 20px 20px;
+}

@@ -1,0 +1,81 @@
+<% has_facs = @document['has_facs_ssi'].present? && @document['has_facs_ssi'] == 'yes' %>
+<!--Retrieve the query-->
+<% query_params = current_search_session.try(:query_params) %>
+<% search_field = query_params[:search_field] %>
+<% doc_presenter = show_presenter(@document) %>
+
+<%# If the search field is fritekst, get the last query and remove " %>
+<%# If not, the the q parameter will be left empty and the render_snippet will not highlight the text %>
+<% if ["Alt", "phrase"].include? search_field %>
+    <% query_params = current_search_session.try(:query_params)
+       query = query_params[:q] if query_params.present?
+       query = query.gsub!(/^\"|\"?$/, '').strip if query.present?
+    %>
+<% end %>
+<div class="textToolbar">
+  <%= link_to(solr_document_path(@document, format: :pdf), :target => "_blank") do %>
+      <i class="fa fa-lg fa-download" aria-hidden="true"></i> <span class="d-none d-lg-inline"><%= t('text_service.text_toolbar.text') %></span>
+  <% end %>
+  <a href="javascript:toggleHighlight()">
+    <i class="fa fa-paint-brush"></i><span class="d-none d-lg-inline"><%= t('text_service.text_toolbar.highlight') %></span>
+  </a>
+  <%= render :partial => 'show_tools_work' %>
+  <% if has_facs %>
+      <a id="hide_facsimile" class="hidden"><i class="fa fa-chevron-right fa-large" title="<%= t('text_service.text_toolbar.hide_facsimile') %>"></i><span class="d-none d-xl-inline"><%= t('text_service.text_toolbar.hide_facsimile') %></span></a>
+      <a id="show_facsimile"><i class="fa fa-chevron-left fa-large" title="<%= t('text_service.text_toolbar.show_facsimile') %>"></i><span><%= t('text_service.text_toolbar.show_facsimile') %></span></a>
+  <% end %>
+
+  <i id="ocrFullscreenButton" class="fa fa-expand fa-lg" title="<%= t('text_service.text_toolbar.fullscreen') %>"></i>
+
+
+  <% if @document['cat_ssi'] == 'author' %>
+
+      <a class="icon-list" href="<%= "/?utf8=✓&search_field=author&q=#{@document['work_title_tesim'].try(:join)}" %>">
+        <i class="fa fa-list" aria-hidden="true"></i> Værkliste i ADL
+      </a>
+  <% end %>
+  <!-- <%= @document[:id] %> -->
+  <% if @document[:id].match(/sks-/) %>
+      <%
+        txt_id = @document['id'].gsub(/(txt)|(txr)|(kom)/, 'txt-root').gsub(/-root.*$/, '-root')
+        txr_id = @document['id'].gsub(/(txt)|(txr)|(kom)/, 'txr-root').gsub(/-root.*$/, '-root')
+        kom_id = @document['id'].gsub(/(txt)|(txr)|(kom)/, 'kom-root').gsub(/-root.*$/, '-root')
+      %>
+
+      <%= link_to("/text/" + txt_id) do %>
+          <i class="fa fa-file-text" aria-hidden="true"></i>
+          Tekst
+      <% end %>
+      <%= link_to ("/text/" + kom_id) do %>
+          <i class="fa fa-comment" aria-hidden="true"></i>
+          Kommentar
+      <% end %>
+      <%= link_to ("/text/" + txr_id) do %>
+          <i class="fa fa-file-text-o" aria-hidden="true"></i>
+          Tekstredegørelse
+      <% end %>
+
+  <% end %>
+
+</div>
+<article class="ocr">
+  <%= render partial: 'fullscreen_buttons' %>
+
+  <% if @document['cat_ssi'] == 'author' %>
+      <% unless doc_presenter.field_value("author_name_tesim").empty? %>
+          <div class="dl-horizontal  dl-invert pull-left">
+            <strong><span class="blacklight-author_name_tesim text-left-important"><%= t('text_service.author.author_potrait_written_by') %> </span></strong>
+            <span class="blacklight-author_name_tesim">&nbsp;<%= doc_presenter.field_value "author_name_tesim" %></span>
+          </div>
+      <% end %>
+      <div class="pull-right thumbnail">
+        <%= image_tag get_author_image(@document.id) %>
+      </div>
+      <div><br/><br/><br/></div>
+  <% end %>
+
+  <%= FileServer.render_snippet(@document['id'],
+                                {q: query, op: "render"}) %>
+</article>
+
+

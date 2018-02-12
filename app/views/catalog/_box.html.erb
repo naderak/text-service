@@ -1,0 +1,23 @@
+<%
+  # titles is a link to search for all titles
+  # otherwise get the path to the special author/periods searches
+  if (type == 'titles')
+    url = "/?q=&search_field=Alt&sort=work_title_ssi+asc"
+  else
+    url = send("#{type}_path")
+  end
+%>
+<div class="col-md-4">
+  <a href="<%= url %>">
+    <div class="box-shadow">
+      <div class="image <%= type %> img-thumbnail">
+      </div>
+      <div class="text">
+        <h3 class="btn btn-link btn-lg">
+          <%= t("text_service.home.boxes.#{type}.title") %>
+        </h3>
+        <p><%= t("text_service.home.boxes.#{type}.description")%></p>
+      </div>
+    </div>
+  </a>
+</div>

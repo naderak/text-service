@@ -1,0 +1,27 @@
+<% doc_presenter = index_presenter(document) %>
+<% has_text  = document['has_text_ssi'].present? && document['has_text_ssi'] == 'yes' %>
+<% has_facs  = document['has_facs_ssi'].present? && document['has_facs_ssi'] == 'yes' %>
+<%# default partial to display solr document fields in catalog index view -%>
+<dl class="document-metadata dl-invert row">
+  
+  <% index_fields(document).each do |field_name, field| -%>
+    <% if should_render_index_field? document, field %>
+	    <dt class="blacklight-<%= field_name.parameterize %> col-md-3"><%= render_index_field_label document, field: field_name %></dt>
+	    <dd class="blacklight-<%= field_name.parameterize %> col-md-9"><%= doc_presenter.field_value field_name %></dd>
+    <% end -%>
+  <% end -%>
+
+  <%= render 'index_work_search', document: document %>
+
+  <dt class="col-md-3"><%= t('text_service.search.list.format') %></dt>
+  <dd class="col-md-9">
+    <% if has_text %>
+        <i class="fa fa-file-text-o" aria-hidden="true"></i>
+        <span class="dlTxt"><%= t('text_service.search.list.text') %></span>
+    <% end %>
+    <% if has_facs %>
+      <i class="fa fa-file-image-o" aria-hidden="true"></i>
+      <span class="dlFaks"><%= t('text_service.search.list.facsimile') %></span>
+    <% end %>
+  </dd>
+</dl>
